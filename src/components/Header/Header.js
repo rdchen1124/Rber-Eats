@@ -87,7 +87,6 @@ const Header = () => {
           <TitleContainer to='/'>
             Rber Eats
           </TitleContainer>
-          <Nav to='/'>首頁</Nav>
         </LeftContainer>
         <RightContainer>
           <HeaderCartButton>
