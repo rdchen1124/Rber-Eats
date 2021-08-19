@@ -5,17 +5,17 @@ const HeaderContainer = styled.div`
   width: 100%;
   margin: 0 auto;
   background: green;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
+  box-sizing: border-box;
 `;
 const HeaderWrapper = styled.div`
   width: 90%;
   margin: 0 auto;
-  height: 90px;
+  height: 80px;
   padding: 10px;
-  border: 1px solid black;
   display: flex;
   justify-content: space-between;
 `;

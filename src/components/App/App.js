@@ -7,9 +7,7 @@ import {
 import styled from 'styled-components';
 import Header from '../Header';
 import Home from '../../pages/Home';
-const Root = styled.div`
-  margin-top: 90px;
-`
+const Root = styled.div``
 function App() {
   return (
     <Root>
