@@ -19,11 +19,12 @@ const Backdrop = (props) => {
 const ModalOverleyContainer = styled.div`
   background: white;
   position: fixed;
-  width: 30%;
+  width: 25%;
   top: 0;
   left: 0;
   bottom: 0;
   z-index: 40;
+  padding: 15px 20px;
 `
 const ModalOverley = (props) => {
   return (
