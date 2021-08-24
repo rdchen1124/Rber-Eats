@@ -7,12 +7,14 @@ import {
 import styled from 'styled-components';
 import Header from '../Header';
 import Home from '../../pages/Home';
+import UserCard from '../UserCard';
 const Root = styled.div``
 function App() {
   return (
     <Root>
       <Router>
         <Header />
+        <UserCard />
         <Switch>
           <Route exact path='/'>
             <Home />
