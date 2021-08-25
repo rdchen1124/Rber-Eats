@@ -13,6 +13,7 @@ const Button = styled.div`
   align-items: center;
   justify-content: center;
   margin-left: 10px;
+  cursor: pointer;
 `
 const UserButton = () => {
   const dispatch = useDispatch();
