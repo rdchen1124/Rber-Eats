@@ -3,7 +3,12 @@ import styled from 'styled-components';
 // import { store } from '../../redux/store';
 import { useDispatch } from 'react-redux';
 import { showUserCard } from '../../redux/reducers/userReducer';
+import { UserIcon } from '../UI/Icons'; 
 
+const UserButtonSpan = styled.span`
+  width: 50%;
+  height: 50%;
+`;
 const Button = styled.div`
   height: 50px;
   width: 50px;
@@ -22,7 +27,11 @@ const UserButton = () => {
   }
   // const isUserCardShowing = useSelector(store => store.user.isUserCardShowing)
   return (
-    <Button onClick={handleShowUserCard}>User</Button>
+    <Button onClick={handleShowUserCard}>
+      <UserButtonSpan>
+        <UserIcon />
+      </UserButtonSpan>
+    </Button>
   )
 }
 
