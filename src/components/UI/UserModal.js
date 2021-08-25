@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components';
-// import { store } from '../../redux/store';
-import { useDispatch } from 'react-redux';
+import styled, { keyframes } from 'styled-components';
+import { store } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
 import { hideUserCard } from '../../redux/reducers/userReducer';
 const BackdropContainer = styled.div`
   background: rgba(0, 0, 0, 0.7);
@@ -19,6 +19,18 @@ const Backdrop = (props) => {
     <BackdropContainer onClick={props.onClose} />
   )
 }
+
+const slideRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
 const ModalOverleyContainer = styled.div`
   background: white;
   position: fixed;
@@ -28,15 +40,18 @@ const ModalOverleyContainer = styled.div`
   bottom: 0;
   z-index: 40;
   padding: 15px 20px;
-`
+  animation: 300ms ${slideRight} ease-out;
+`;
+
 const ModalOverley = (props) => {
   return (
-    <ModalOverleyContainer>{props.children}</ModalOverleyContainer>
+    <ModalOverleyContainer open={props.isShow}>{props.children}</ModalOverleyContainer>
   )
 }
+
 const portalElement = document.getElementById('userOverlays');
 const UserModal = (props) => {
-  // const isUserCardShowing = useSelector(store => store.user.isUserCardShowing)
+  const isUserCardShowing = useSelector(store => store.user.isUserCardShowing)
   const dispatch = useDispatch();
   const handleClose = () => {
     dispatch(hideUserCard())
@@ -45,7 +60,7 @@ const UserModal = (props) => {
     <Fragment>
       {ReactDOM.createPortal(<Backdrop onClose={handleClose} />, portalElement)}
       {ReactDOM.createPortal(
-        <ModalOverley>{props.children}</ModalOverley>,
+        <ModalOverley isShow={isUserCardShowing}>{props.children}</ModalOverley>,
         portalElement
       )}
     </Fragment>
