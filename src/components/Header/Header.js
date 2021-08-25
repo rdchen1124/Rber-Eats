@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import UserButton from './UserButton';
 const HeaderContainer = styled.div`
   width: 100%;
   margin: 0 auto;
@@ -32,21 +33,11 @@ const Nav = styled(Link)`
   background: white;
   border-radius: 15px;
   margin-left: 15px;
-`
+`;
 const LeftContainer = styled.div`
   // border: 1px solid black;
   display: flex;
   align-items: center;
-`;
-const UserButton = styled.div`
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 10px;
 `;
 const TitleContainer = styled(Link)`
   font-size: 32px;
@@ -81,9 +72,7 @@ const Header = () => {
     <HeaderContainer>
       <HeaderWrapper>
         <LeftContainer>
-          <UserButton>
-            Ryan
-          </UserButton>
+          <UserButton />
           <TitleContainer to='/'>
             Rber Eats
           </TitleContainer>
