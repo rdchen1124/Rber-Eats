@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import UserButton from './UserButton';
+import HeaderCartButton from './HeaderCartButton';
 const HeaderContainer = styled.div`
   width: 100%;
   margin: 0 auto;
@@ -25,7 +26,7 @@ const Nav = styled(Link)`
   justify-content: center;
   align-items: center;
   padding: 5px;
-  height: 50px;
+  height: 40px;
   width: 60px;
   cursor: pointer;
   color: black;
@@ -58,15 +59,7 @@ const RightContainer = styled.div`
   align-items: center;
   padding: 0 15px;
 `;
-const HeaderCartButton = styled.div`
-  width: 100px;
-  height: 50px;
-  background: white;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+
 const Header = () => {
   return (
     <HeaderContainer>
@@ -78,9 +71,7 @@ const Header = () => {
           </TitleContainer>
         </LeftContainer>
         <RightContainer>
-          <HeaderCartButton>
-            購物車。1
-          </HeaderCartButton>
+          <HeaderCartButton />
           <Nav to='/login'>登入</Nav>
         </RightContainer>
       </HeaderWrapper>
