@@ -1,6 +1,7 @@
-import React, {Portal} from 'react';
+import React from 'react';
 import { UserModal } from '../UI';
 const UserCard = (props) => {
+  
   return (
     <UserModal>
       UserCard

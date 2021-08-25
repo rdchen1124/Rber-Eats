@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+// import { store } from '../../redux/store';
+import { useDispatch } from 'react-redux';
+import { hideUserCard } from '../../redux/reducers/userReducer';
 const BackdropContainer = styled.div`
   background: rgba(0, 0, 0, 0.7);
   position: fixed;
@@ -33,9 +36,14 @@ const ModalOverley = (props) => {
 }
 const portalElement = document.getElementById('userOverlays');
 const UserModal = (props) => {
+  // const isUserCardShowing = useSelector(store => store.user.isUserCardShowing)
+  const dispatch = useDispatch();
+  const handleClose = () => {
+    dispatch(hideUserCard())
+  }
   return (
     <Fragment>
-      {ReactDOM.createPortal(<Backdrop onClose={props.onClose} />, portalElement)}
+      {ReactDOM.createPortal(<Backdrop onClose={handleClose} />, portalElement)}
       {ReactDOM.createPortal(
         <ModalOverley>{props.children}</ModalOverley>,
         portalElement

@@ -8,13 +8,18 @@ import styled from 'styled-components';
 import Header from '../Header';
 import Home from '../../pages/Home';
 import UserCard from '../UserCard';
-const Root = styled.div``
+import { useSelector } from 'react-redux';
+const Root = styled.div`
+  overflow: auto;
+`
+
 function App() {
+  const isUserCardShowing = useSelector(store => store.user.isUserCardShowing)
   return (
-    <Root>
+    <Root isTop={isUserCardShowing}>
       <Router>
         <Header />
-        <UserCard />
+        { isUserCardShowing && <UserCard />}
         <Switch>
           <Route exact path='/'>
             <Home />
