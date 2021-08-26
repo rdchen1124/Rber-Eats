@@ -1,5 +1,8 @@
 import { CartModal } from "../UI";
 import styled from "styled-components"; 
+import { useDispatch } from "react-redux";
+import { hideCart } from "../../redux/reducers/cartReducer";
+
 const CloseButton = styled.div`
   border-radius: 5px;
   background: #f44336;
@@ -11,9 +14,10 @@ const CloseButton = styled.div`
   justify-content: center;
   align-items: center;
 `
-const Cart = (props) => {
+const Cart = () => {
+  const dispatch = useDispatch();
   const handleClose = () => {
-    console.log('Cart Close!!');
+    dispatch(hideCart());
   }
   return (
     <CartModal>
