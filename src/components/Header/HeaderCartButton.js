@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useDispatch } from 'react-redux';
+import { showCart } from "../../redux/reducers/cartReducer";
 import { CartIcon } from "../UI/Icons";
 const CartButtonWrapper = styled.div`
   width: 140px;
@@ -26,8 +28,12 @@ const CartBadgeSpan = styled(CartButtonSpan)`
   font-weight: bold;
 `
 const HeaderCartButton = () => {
+  const dispatch = useDispatch();
+  const handleShowCart = () => {
+    dispatch(showCart());
+  }
   return (
-    <CartButtonWrapper>
+    <CartButtonWrapper onClick={handleShowCart}>
       <CartIconSpan>
         <CartIcon />
       </CartIconSpan>
