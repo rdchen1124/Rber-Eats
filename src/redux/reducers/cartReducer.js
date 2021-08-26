@@ -13,11 +13,14 @@ export const cartSlice = createSlice({
     },
     hideCart: (state) => {
       state.isCartShowing = false;
+    },
+    toggleCartButton: (state) => {
+      state.isCartShowing = !state.isCartShowing;
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { showCart, hideCart } = cartSlice.actions
+export const { showCart, hideCart, toggleCartButton } = cartSlice.actions
 
 export default cartSlice.reducer
