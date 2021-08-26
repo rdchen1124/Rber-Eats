@@ -8,7 +8,9 @@ import styled from 'styled-components';
 import Header from '../Header';
 import Home from '../../pages/Home';
 import UserCard from '../UserCard';
+import Cart from '../Cart';
 import { useSelector } from 'react-redux';
+
 const Root = styled.div`
   overflow: auto;
 `
@@ -20,6 +22,7 @@ function App() {
       <Router>
         <Header />
         { isUserCardShowing && <UserCard />}
+        <Cart />
         <Switch>
           <Route exact path='/'>
             <Home />
