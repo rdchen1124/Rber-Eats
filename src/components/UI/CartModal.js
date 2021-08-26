@@ -20,13 +20,16 @@ const slideDown = keyframes`
 const ModalOverleyContainer = styled.div`
   background: white;
   position: fixed;
-  width: 25%;
-  top: 0;
-  left: 0;
-  bottom: 0;
+  width: 30%;
+  height: 30%;
+  top: 6rem;
+  right: 10rem;
   z-index: 20;
   padding: 15px 20px;
-  animation: 300ms ${slideDown} ease-out;
+  box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  // overflow-y: scroll;
+  animation: 300ms ${slideDown} ease-in-out;
 `;
 
 const ModalOverley = (props) => {
