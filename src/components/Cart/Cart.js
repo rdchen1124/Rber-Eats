@@ -14,13 +14,13 @@ const CloseButton = styled.div`
   justify-content: center;
   align-items: center;
 `
-const Cart = () => {
+const Cart = (props) => {
   const dispatch = useDispatch();
   const handleClose = () => {
     dispatch(hideCart());
   }
   return (
-    <CartModal>
+    <CartModal className={props.className}>
       <CloseButton onClick={handleClose}>
         Close
       </CloseButton>
