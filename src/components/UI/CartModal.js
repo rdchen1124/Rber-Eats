@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+// import { useDispatch } from 'react-redux';
+// import { hideCart } from '../../redux/reducers/cartReducer';
 
 const ModalOverleyContainer = styled.div`
   background: white;
@@ -11,7 +13,7 @@ const ModalOverleyContainer = styled.div`
   right: 10rem;
   z-index: 20;
   padding: 15px 20px;
-  box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   border-radius: 3px;
   /* For Transition */
   transition: 300ms;
@@ -32,7 +34,7 @@ const ModalOverleyContainer = styled.div`
 
 const ModalOverley = (props) => {
   return (
-    <ModalOverleyContainer className={props.className} isShowCart={props.isShowCart}>
+    <ModalOverleyContainer className={props.className}>
       {props.children}
     </ModalOverleyContainer>
   )
@@ -45,7 +47,6 @@ const CartModal = (props) => {
       {ReactDOM.createPortal(
         <ModalOverley
           className={props.className}
-          isShowCart={true}
         >
           {props.children}
         </ModalOverley>,
