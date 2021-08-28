@@ -3,14 +3,13 @@ import styled from 'styled-components';
 import { useParams } from 'react-router';
 import Root from '../../components/Root';
 import Stores from '../../components/Stores';
+import StoreOverview from './StoreOverview';
 
 const Store = () => {
   let { id } = useParams();
   return (
     <Root>
-      <div>
-        Store_Image_{id}
-      </div>
+      <StoreOverview id={id} />
       <main>
         <Stores />
       </main>
