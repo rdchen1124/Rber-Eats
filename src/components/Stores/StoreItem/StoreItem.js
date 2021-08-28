@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 const ListItem = styled.li`
   margin-bottom: 20px;
   box-sizing: border-box;
@@ -7,6 +8,10 @@ const ListItem = styled.li`
   margin: 10px;
   cursor: pointer;
 `
+const StoreLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+`;
 const StoreWrapper = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px;
@@ -62,23 +67,25 @@ const Heart = styled(ScoreContainer)`
   color: white;
   font-size: 20px;
 `
-const StoreItem = ({img, name, score}) => {
+const StoreItem = ({id, img, name, score}) => {
   return (
     <ListItem>
-      <StoreWrapper>
-        <ImageContainer>
-          <Heart>&lt;3</Heart>
-          {img}
-        </ImageContainer>
-        <DescriptionContainer>
-          <NameContainer>
-            {name}
-          </NameContainer>
-          <ScoreContainer>
-            {score}
-          </ScoreContainer>
-        </DescriptionContainer>
-      </StoreWrapper>
+      <StoreLink to={`/store/${id}`}>
+        <StoreWrapper>
+          <ImageContainer>
+            <Heart>&lt;3</Heart>
+            {img}
+          </ImageContainer>
+          <DescriptionContainer>
+            <NameContainer>
+              {name}
+            </NameContainer>
+            <ScoreContainer>
+              {score}
+            </ScoreContainer>
+          </DescriptionContainer>
+        </StoreWrapper>
+      </StoreLink>
     </ListItem>
   )
 }
