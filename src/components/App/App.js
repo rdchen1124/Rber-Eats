@@ -10,6 +10,7 @@ import { hideCart } from '../../redux/reducers/cartReducer';
 import { Transition } from "react-transition-group";
 import Header from '../Header';
 import Home from '../../pages/Home';
+import Store from '../../pages/Store';
 import UserCard from '../UserCard';
 import Cart from '../Cart';
 
@@ -52,12 +53,10 @@ function App() {
           <Route exact path='/'>
             <Home />
           </Route>
-          <Route exact path='/store/:id'>
-            <div>
-              餐廳頁面
-            </div>
+          <Route path='/store/:id'>
+            <Store />
           </Route>
-          <Route exact path='/login'>
+          <Route path='/login'>
             <div>
               登入
             </div>
