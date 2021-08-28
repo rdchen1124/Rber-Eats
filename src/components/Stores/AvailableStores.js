@@ -10,6 +10,7 @@ const AvailableStores = () => {
         <UnorderedList>
           {StoreList.map(store => (
             <StoreItem
+              key={store.id}
               id={store.id}
               img={store.image}
               name={store.name}
