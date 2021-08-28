@@ -29,12 +29,12 @@ const StoreInfo = styled.div`
   color: white;
   font-size: 28px;
 `
-const StoreOverview = ({id}) => {
+const StoreOverview = ({id, name, score}) => {
   return (
     <StoreOverviewWrapper>
       <StoreOverviewContainer>
-        <StoreName>Store_{id}</StoreName>
-        <StoreInfo>評分: 4.7</StoreInfo>
+        <StoreName>{name}</StoreName>
+        <StoreInfo>評分: {score}</StoreInfo>
       </StoreOverviewContainer>
     </StoreOverviewWrapper>
   )
