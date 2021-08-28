@@ -1,5 +1,4 @@
-import Card from './Card';
-import UnorderedList from './UnorderedList'
+import StoresCard from './StoresCard';
 import UserModal from './UserModal'
 import CartModal from './CartModal';
-export { Card, UnorderedList, UserModal, CartModal }
+export { StoresCard, UserModal, CartModal }

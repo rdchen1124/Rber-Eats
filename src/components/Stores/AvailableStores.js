@@ -1,13 +1,12 @@
 import React from 'react';
-import { Card, UnorderedList} from '../UI';
+import { StoresCard } from '../UI';
 import StoreItem from './StoreItem';
 import DUMMY_STORES from '../../DUMMY_STORES';
 const AvailableStores = () => {
   const StoreList = DUMMY_STORES;
   return (
     <section>
-      <Card>
-        <UnorderedList>
+      <StoresCard>
           {StoreList.map(store => (
             <StoreItem
               key={store.id}
@@ -15,9 +14,9 @@ const AvailableStores = () => {
               img={store.image}
               name={store.name}
               score={store.score}
-          />))}
-        </UnorderedList>
-      </Card>
+            />))
+          }
+      </StoresCard>
     </section>
   )
 }
