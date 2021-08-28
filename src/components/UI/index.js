@@ -1,4 +1,5 @@
 import StoresCard from './StoresCard';
-import UserModal from './UserModal'
+import UserModal from './UserModal';
 import CartModal from './CartModal';
-export { StoresCard, UserModal, CartModal }
+import MenuCard from './MenuCard';
+export { StoresCard, MenuCard, UserModal, CartModal }
