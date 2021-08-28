@@ -81,7 +81,7 @@ const StoreItem = ({id, img, name, score}) => {
               {name}
             </NameContainer>
             <ScoreContainer>
-              {score}
+              {score.toFixed(1)}
             </ScoreContainer>
           </DescriptionContainer>
         </StoreWrapper>
