@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 const StoreOverviewWrapper = styled.div`
-  width: 90%;
-  height: 200px;
+  width: 100%;
+  height: 250px;
   margin: 0 auto;
   padding: 25px 10px;
 `
