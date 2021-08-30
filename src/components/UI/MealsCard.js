@@ -8,7 +8,7 @@ const StyledUl = styled.ul`
   padding: 0;
   justify-content:center;
 `
-const MenuCard = (props) => {
+const MealsCard = (props) => {
   return (
     <div>
       <StyledUl>
@@ -17,4 +17,4 @@ const MenuCard = (props) => {
     </div>
   )
 }
-export default MenuCard;
+export default MealsCard;
