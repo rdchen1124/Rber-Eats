@@ -2,51 +2,54 @@ import React from "react"
 import styled from "styled-components"
 
 const ListItem = styled.li`
-  margin-bottom: 20px;
   box-sizing: border-box;
   flex: 0 0 30%;
-  margin: 10px;
+  margin: 20px 10px;
   cursor: pointer;
 `
 const MealWrapper = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-  padding: 10px 15px;
+  padding-left: 15px;
   display: flex;
-  // flex-direction: column;
+  &:hover {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+  }
 `
-const ImageContainer = styled.div`
-  position: relative;
-  width: 50%;
-  height: 250px;
-  background: gray;
-  // margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  color: black;
-  font-size: 28px;
-`
-const DescriptionContainer = styled.div`
+const MealInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-around;
+  align-items: flex-start;
   height: auto;
-  width: 50%;
+  width: 60%;
 `
 const NameContainer = styled.div`
-  height: 100%;
-  width: 80%;
+  height: fit-content;
+  width: 100%;
   background: #4CAF50;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
   font-weight: bold;
-  color: white;
-  font-size:22px;
+  color: black;
+  font-size: 24px;
+  margin-bottom: 10px;
+`
+const DescriptionContainer = styled.div`
+  height: fit-content;
+  width: 100%;
+  background: #F44336;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  color: #555555;
+  font-size: 18px;
+`
+const NonePriceContainer = styled.div`
+  width: 100%;
 `
 const PriceContainer = styled.div`
   height: 50px;
@@ -57,19 +60,37 @@ const PriceContainer = styled.div`
   justify-content: center;
   align-items: center;
 `
+const ImageContainer = styled.div`
+  border-left: 1px solid rgba(0, 0, 0, 0.3);
+  width: 40%;
+  height: 150px;
+  background: gray;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: black;
+  font-size: 22px;
+`
 
 const MealItem = ({id, name, img, price, description}) => {
   return (
     <ListItem>
       <MealWrapper>
-        <DescriptionContainer>
+        <MealInfoContainer>
+          <NonePriceContainer>
             <NameContainer>
               {name}
             </NameContainer>
-            <PriceContainer>
-              NT{price}
-            </PriceContainer>
-          </DescriptionContainer>
+            <DescriptionContainer>
+              {description}
+            </DescriptionContainer>
+          </NonePriceContainer>
+          <PriceContainer>
+            NT{price}
+          </PriceContainer>
+        </MealInfoContainer>
         <ImageContainer>
           {img}
         </ImageContainer>
