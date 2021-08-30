@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 const MealsNavWrapper = styled.div`
-  width: 90%;
+  width: 100%;
   padding: 0 10px;
   margin: 10px auto;
   height: 90px;
