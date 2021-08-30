@@ -16,11 +16,11 @@ const MealsNavBar = styled.div`
   justify-content: center;
   align-items: center;
 `
-const MealsNav = () => {
+const MealsNav = ({id}) => {
   return (
     <MealsNavWrapper>
       <MealsNavBar>
-        MealsNav
+        MealsNav_{id}
       </MealsNavBar>
     </MealsNavWrapper>
   )

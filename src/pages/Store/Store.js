@@ -17,7 +17,7 @@ const Store = () => {
       { store && 
         <StoreOverview id={id} name={store.name} score={store.score} />}
       <main>
-        <Meals />
+        <Meals id={id}/>
       </main>
     </Root>
   )
