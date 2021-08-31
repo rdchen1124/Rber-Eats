@@ -2,7 +2,7 @@ import { MealsCard } from "../UI";
 import MealItem from "./MealItem";
 const AvailableMeals = (props) => {
   return (
-    <session>
+    <section>
       <MealsCard>
         <MealItem id="m0001" name="meal_0001" img="img_0001" price="10" description="test_1" />
         <MealItem id="m0002" name="meal_0002" img="img_0002" price="20" description="test_2" />
@@ -14,7 +14,7 @@ const AvailableMeals = (props) => {
         <MealItem id="m0008" name="meal_0008" img="img_0008" price="80" description="test_8" />
         <MealItem id="m0009" name="meal_0009" img="img_0009" price="90" description="test_9" />
       </MealsCard>
-    </session>
+    </section>
   )
 }
 export default AvailableMeals;
