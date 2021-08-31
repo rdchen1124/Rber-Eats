@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  isCartShowing: false
+  isCartShowing: false,
+  isMenuShowing: false,
 }
 
 export const cartSlice = createSlice({
@@ -16,11 +17,17 @@ export const cartSlice = createSlice({
     },
     toggleCartButton: (state) => {
       state.isCartShowing = !state.isCartShowing;
-    }
+    },
+    showMenu: (state) => {
+      state.isMenuShowing = true;
+    },
+    hideMenu: (state) => {
+      state.isMenuShowing = false;
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { showCart, hideCart, toggleCartButton } = cartSlice.actions
+export const { showCart, hideCart, toggleCartButton, showMenu, hideMenu } = cartSlice.actions
 
 export default cartSlice.reducer
