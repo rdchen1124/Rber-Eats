@@ -36,8 +36,8 @@ const ModalOverleyContainer = styled.div`
   position: fixed;
   width: auto;
   top: 10%;
-  left: 20%;
-  right: 20%;
+  left: 30%;
+  right: 30%;
   bottom: 5%;
   z-index: 40;
   animation: 300ms ${slideUp} ease-out;
