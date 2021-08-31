@@ -6,6 +6,7 @@ import Root from '../../components/Root';
 import StoreOverview from './StoreOverview';
 import DUMMY_STORES from '../../DUMMY_STORES';
 import Meals from '../../components/Meals';
+import MealCard from '../../components/MealCard';
 const Store = () => {
   let { id } = useParams();
   const [store, setStore] = useState({});
@@ -17,6 +18,7 @@ const Store = () => {
       { store && 
         <StoreOverview id={id} name={store.name} score={store.score} />}
       <main>
+        <MealCard />
         <Meals id={id}/>
       </main>
     </Root>
