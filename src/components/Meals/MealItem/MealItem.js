@@ -1,5 +1,7 @@
 import React from "react"
 import styled from "styled-components"
+import { useDispatch } from "react-redux"
+import { showMenu } from "../../../redux/reducers/cartReducer"
 
 const ListItem = styled.li`
   box-sizing: border-box;
@@ -75,8 +77,12 @@ const ImageContainer = styled.div`
 `
 
 const MealItem = ({id, name, img, price, description}) => {
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(showMenu());
+  }
   return (
-    <ListItem>
+    <ListItem onClick={handleClick}>
       <MealWrapper>
         <MealInfoContainer>
           <NonePriceContainer>
