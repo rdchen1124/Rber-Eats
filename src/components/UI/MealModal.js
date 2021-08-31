@@ -34,10 +34,11 @@ const slideUp = keyframes`
 const ModalOverleyContainer = styled.div`
   background: white;
   position: fixed;
-  width: 90%;
-  top: 0;
-  left: 5%;
-  bottom: 0;
+  width: auto;
+  top: 10%;
+  left: 20%;
+  right: 20%;
+  bottom: 5%;
   z-index: 40;
   padding: 15px 20px;
   animation: 300ms ${slideUp} ease-out;
@@ -53,12 +54,12 @@ const portalElement = document.getElementById('userOverlays');
 const MealModal = (props) => {
   // const isUserCardShowing = useSelector(store => store.user.isUserCardShowing)
   // const dispatch = useDispatch();
-  const handleClose = () => {
-    // dispatch(hideUserCard())
-  }
+  // const handleClose = () => {
+  //   dispatch(hideUserCard())
+  // }
   return (
     <Fragment>
-      {ReactDOM.createPortal(<Backdrop onClose={handleClose} />, portalElement)}
+      {ReactDOM.createPortal(<Backdrop onClose={props.onClose} />, portalElement)}
       {ReactDOM.createPortal(
         <ModalOverley isShow={true}>{props.children}</ModalOverley>,
         portalElement
