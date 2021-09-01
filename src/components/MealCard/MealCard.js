@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { MealModal } from "../UI";
 import { hideMenu } from "../../redux/reducers/cartReducer";
+import MealCardForm from "./MealCardForm";
 
 const MealContainer = styled.div`
   position: relative;
@@ -63,6 +64,14 @@ const MealDesctiption = styled.div`
   color: grey;
   margin-bottom: 10px;
 `
+const MealFormContainer = styled.div`
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 10px 20px;
+  box-sizing: border-box;
+`
 const MealCard = () => {
   const meal = useSelector(store => store.menu.meal);
   const dispatch = useDispatch();
@@ -71,6 +80,10 @@ const MealCard = () => {
   // }, [])
   const handleClose = () => {
     dispatch(hideMenu());
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Submitted!!');
   }
   return (
     <MealModal onClose={handleClose}>
@@ -82,6 +95,9 @@ const MealCard = () => {
           <MealDesctiption>{meal.description}</MealDesctiption>
           <div>{meal.price}</div>
         </MealInfoContainer>
+        <MealFormContainer>
+          <MealCardForm onSubmit={handleSubmit} />
+        </MealFormContainer>
       </MealContainer>
     </MealModal>
   )
