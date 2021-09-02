@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { MealModal } from "../UI";
-import { hideMenu } from "../../redux/reducers/cartReducer";
+import { hideMenu } from "../../redux/reducers/menuReducer";
 import MealCardForm from "./MealCardForm";
 
 const MealContainer = styled.div`

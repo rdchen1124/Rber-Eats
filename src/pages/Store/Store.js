@@ -9,7 +9,7 @@ import DUMMY_STORES from '../../DUMMY_STORES';
 import Meals from '../../components/Meals';
 import MealCard from '../../components/MealCard';
 const Store = () => {
-  const isMenuShowing = useSelector(store => store.cart.isMenuShowing);
+  const isMenuShowing = useSelector(store => store.menu.isMenuShowing);
   let { id } = useParams();
   const [store, setStore] = useState({});
   useEffect(()=>{

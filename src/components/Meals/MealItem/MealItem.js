@@ -1,8 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { useDispatch } from "react-redux"
-import { showMenu } from "../../../redux/reducers/cartReducer"
-import { setMeal } from "../../../redux/reducers/menuReducer"
+import { showMenu, setMeal } from "../../../redux/reducers/menuReducer"
 
 const ListItem = styled.li`
   box-sizing: border-box;
