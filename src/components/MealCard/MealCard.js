@@ -83,7 +83,7 @@ const MealCard = () => {
   }
   const handleAddToCart = (amount) => {
     // e.preventDefault();
-    console.log('Add To Cart!!');
+    console.log(`Add ${amount} items To Cart!!`);
   }
   return (
     <MealModal onClose={handleClose}>
@@ -96,7 +96,7 @@ const MealCard = () => {
           <div>{meal.price}</div>
         </MealInfoContainer>
         <MealFormContainer>
-          <MealCardForm onAddToCart={handleAddToCart} />
+          <MealCardForm price={meal.price} onAddToCart={handleAddToCart} />
         </MealFormContainer>
       </MealContainer>
     </MealModal>
