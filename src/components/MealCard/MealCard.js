@@ -81,9 +81,9 @@ const MealCard = () => {
   const handleClose = () => {
     dispatch(hideMenu());
   }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Submitted!!');
+  const handleAddToCart = (amount) => {
+    // e.preventDefault();
+    console.log('Add To Cart!!');
   }
   return (
     <MealModal onClose={handleClose}>
@@ -96,7 +96,7 @@ const MealCard = () => {
           <div>{meal.price}</div>
         </MealInfoContainer>
         <MealFormContainer>
-          <MealCardForm onSubmit={handleSubmit} />
+          <MealCardForm onAddToCart={handleAddToCart} />
         </MealFormContainer>
       </MealContainer>
     </MealModal>
