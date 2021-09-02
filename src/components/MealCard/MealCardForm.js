@@ -42,7 +42,7 @@ const MealCardForm = ({price, onAddToCart}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddToCart(amountInput);
+    onAddToCart(Number(amountInput));
   }
 
   const handleAmountChange = (e) => {
