@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { MealModal } from "../UI";
 import { hideMenu } from "../../redux/reducers/menuReducer";
+import { addToCart } from "../../redux/reducers/cartReducer";
 import MealCardForm from "./MealCardForm";
 
 const MealContainer = styled.div`
@@ -83,6 +84,13 @@ const MealCard = () => {
   }
   const handleAddToCart = (amount) => {
     // e.preventDefault();
+    const order = {
+      id: meal.id,
+      name: meal.name,
+      price: meal.price,
+      amount
+    }
+    dispatch(addToCart(order));
     console.log(`Add ${amount} items To Cart!!`);
   }
   return (
