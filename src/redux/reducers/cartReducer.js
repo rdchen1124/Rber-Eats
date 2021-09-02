@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   isCartShowing: false,
+  items: [],
+  totalAmount: 0
 }
 
 export const cartSlice = createSlice({
@@ -17,10 +19,18 @@ export const cartSlice = createSlice({
     toggleCartButton: (state) => {
       state.isCartShowing = !state.isCartShowing;
     },
+    addToCart: (state, action) => {
+      state.items = [...state.items, action.payload];
+      state.totalAmount = state.totalAmount + action.payload.amount * action.payload.price;
+    },
+    clearCart: (state) => {
+      state.items = [];
+      state.totalAmount = 0;
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { showCart, hideCart, toggleCartButton } = cartSlice.actions
+export const { showCart, hideCart, toggleCartButton, addToCart, clearCart } = cartSlice.actions
 
 export default cartSlice.reducer
