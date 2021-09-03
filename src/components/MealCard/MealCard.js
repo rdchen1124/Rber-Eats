@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { MealModal } from "../UI";
@@ -75,17 +75,16 @@ const MealFormContainer = styled.div`
 `
 const MealCard = () => {
   const meal = useSelector(store => store.menu.meal);
+  const items = useSelector(store => store.cart.items);
   const dispatch = useDispatch();
-  // useEffect(()=>{
-  //   console.log(meal);
-  // }, [])
   const handleClose = () => {
     dispatch(hideMenu());
   }
   const handleAddToCart = (amount) => {
-    // e.preventDefault();
+    const newId = items.length ? (items[items.length-1]['id']+1):1;
     const order = {
-      id: meal.id,
+      id: newId,
+      mealId : meal.id,
       name: meal.name,
       price: meal.price,
       amount
