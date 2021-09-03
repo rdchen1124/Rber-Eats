@@ -8,11 +8,11 @@ const ModalOverleyContainer = styled.div`
   background: white;
   position: fixed;
   width: 30%;
-  height: 30%;
+  height: 45%;
   top: 6rem;
   right: 10rem;
   z-index: 20;
-  padding: 15px 20px;
+  padding: 10px 10px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   border-radius: 3px;
   /* For Transition */
