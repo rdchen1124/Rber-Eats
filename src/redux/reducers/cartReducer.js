@@ -4,7 +4,9 @@ const initialState = {
   isCartShowing: false,
   items: [],
   totalAmount: 0,
-  cartStore: {}
+  cartStore: {},
+  tempStore: {},
+  tempOrder: {}
 }
 
 export const cartSlice = createSlice({
@@ -30,6 +32,12 @@ export const cartSlice = createSlice({
     },
     setCartStore: (state, action) => {
       state.cartStore = {...action.payload};
+    },
+    setTempStore: (state, action) => {
+      state.tempStore = {...action.payload};
+    },
+    setTempOrder : (state, action) => {
+      state.tempOrder = {...action.payload}
     }
   },
 })
@@ -37,7 +45,7 @@ export const cartSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { 
   showCart, hideCart, toggleCartButton,
-  addToCart, clearCart, setCartStore 
+  addToCart, clearCart, setCartStore, setTempStore, setTempOrder
 } = cartSlice.actions
 
 export default cartSlice.reducer
