@@ -2,7 +2,8 @@ import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import styled, { keyframes } from 'styled-components';
 // import { store } from '../../redux/store';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import OrderCheckModal from './OrderCheckModal';
 // import { hideUserCard } from '../../redux/reducers/userReducer';
 const BackdropContainer = styled.div`
   background: rgba(0, 0, 0, 0.7);
@@ -45,24 +46,24 @@ const ModalOverleyContainer = styled.div`
 
 const ModalOverley = (props) => {
   return (
-    <ModalOverleyContainer open={props.isShow}>{props.children}</ModalOverleyContainer>
+    <ModalOverleyContainer>{props.children}</ModalOverleyContainer>
   )
 }
 
 const portalElement = document.getElementById('userOverlays');
 const MealModal = (props) => {
-  // const isUserCardShowing = useSelector(store => store.user.isUserCardShowing)
+  const isOrderChecking = useSelector(store => store.menu.isOrderChecking);
   // const dispatch = useDispatch();
   // const handleClose = () => {
   //   dispatch(hideUserCard())
   // }
+  const modalOverley = (<ModalOverley >{props.children}</ModalOverley>);
+  const orderCheckModal = (<OrderCheckModal onClose={props.onClose}/>)
+  const modalContent = isOrderChecking ? orderCheckModal : modalOverley;
   return (
     <Fragment>
       {ReactDOM.createPortal(<Backdrop onClose={props.onClose} />, portalElement)}
-      {ReactDOM.createPortal(
-        <ModalOverley isShow={true}>{props.children}</ModalOverley>,
-        portalElement
-      )}
+      {ReactDOM.createPortal( modalContent, portalElement)}
     </Fragment>
   )
 }
