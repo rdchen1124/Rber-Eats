@@ -14,6 +14,7 @@ const SubmitButton = styled.button`
   border-radius: 3px;
   height: 30px;
   box-sizing: border-box;
+  cursor: pointer;
 `
 const AddToCartButton = ({amount, price})=>{
   return (
