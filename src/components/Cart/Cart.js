@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { CartModal } from "../UI";
 import styled from "styled-components"; 
 import { useDispatch } from "react-redux";
@@ -33,9 +34,17 @@ const CheckoutButton = styled.div`
   height: 35px;
   cursor: ${props => props.$empty ? "not-allowed":"pointer"};
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   box-sizing: border-box;
+`
+const TotalNumberSpan = styled.div`
+  border: 1px solid white;
+  padding: 5px;
+`
+const CheckoutSpan = styled.div`
+`
+const TotalAmountSpan = styled.div`
 `
 const CartBodyWrapper = styled.div`
   box-sizing: border-box;
@@ -68,6 +77,10 @@ const CartStoreTitle = styled.span`
 const CartStoreName = styled.span`
   color: #4CAF50;
 `
+const StoreLink = styled(Link)`
+  text-decoration: underline;
+  color: #4CAF50;
+`;
 const CartBodyContent = styled.div`
   box-sizing: border-box;  
   height: 75%;
@@ -97,6 +110,11 @@ const EmptyCartBody = styled.div`
 `
 const Cart = (props) => {
   const items = useSelector(store => store.cart.items);
+  const totalAmount = useSelector(store => store.cart.totalAmount);
+  const cartStore = useSelector(store => store.cart.cartStore);
+  const numberOfItems = items.reduce((total, item)=>{
+    return total + item.amount;
+  },0)
   const dispatch = useDispatch();
   const handleClose = () => {
     dispatch(hideCart());
@@ -114,7 +132,11 @@ const Cart = (props) => {
         <CartBodyTitle>您的訂單</CartBodyTitle>
         <CartBodyInfo>
           <CartStoreTitle>訂餐餐廳:</CartStoreTitle>
-          <CartStoreName>StoreName</CartStoreName>
+          <CartStoreName>
+            <StoreLink to={`/store/${cartStore.id}`} target="_top">
+              {cartStore.name}
+            </StoreLink>
+          </CartStoreName>
         </CartBodyInfo>
       </CartBodyHeader>
       <CartBodyContent> 
@@ -137,6 +159,16 @@ const Cart = (props) => {
       您的購物車空空空空空如也
     </EmptyCartBody>
   )
+  const checkoutButton = (
+    <CheckoutButton 
+      onClick={handleCheckoutClick}
+      $empty={!items.length}
+    >
+      <TotalNumberSpan>{numberOfItems}</TotalNumberSpan>
+      <CheckoutSpan>結帳</CheckoutSpan>
+      <TotalAmountSpan>NT.{totalAmount}</TotalAmountSpan>
+    </CheckoutButton>
+  )
   return (
     <CartModal className={props.className}>
       <CartBodyWrapper>
@@ -144,11 +176,8 @@ const Cart = (props) => {
           x
         </CloseButton>
         {!items.length && emptyCart}
-        {items.length!==0 && cartContent}
-        <CheckoutButton 
-          onClick={handleCheckoutClick}
-          $empty={!items.length}
-        >結帳</CheckoutButton>
+        {items.length !== 0 && cartContent}
+        {items.length !== 0 && checkoutButton}
       </CartBodyWrapper>
     </CartModal>
   )
