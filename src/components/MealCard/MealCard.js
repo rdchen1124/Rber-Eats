@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { MealModal } from "../UI";
 import { hideMenu, showCheckModal, hideCheckModal } from "../../redux/reducers/menuReducer";
 import { 
-  addToCart,
+  showCart, addToCart, createNewOrder,
   setCartStore, setTempStore, setTempOrder
 } from "../../redux/reducers/cartReducer";
 import MealCardForm from "./MealCardForm";
@@ -82,6 +82,8 @@ const MealCard = () => {
   const store = useSelector(store => store.store.store);
   const cartStore = useSelector(store => store.cart.cartStore);
   const isOrderChecking = useSelector(store => store.menu.isOrderChecking);
+  const tempStore = useSelector(store => store.cart.tempStore);
+  const tempOrder = useSelector(store => store.cart.tempOrder);
   const dispatch = useDispatch();
   const handleClose = () => {
     dispatch(hideMenu());
@@ -93,10 +95,16 @@ const MealCard = () => {
   }
   const handleCreateNewOrder = () => {
     // 新訂單鈕(點選開新訂單):
-    // 1. 新增店家 dispatch(setCartStore(tempCartStore));
-    // 2. 加入商品 dispatch(addToCart(tempOrder));
-    // 3. 關閉 CheckOrderModal
-    // 4. 開啟購物車
+    // 1. 新增店家 dispatch(setCartStore(tempStore));
+    dispatch(setCartStore(tempStore));
+    // 2. 建立新訂單 dispatch(createNewOrder(tempOrder));
+    dispatch(createNewOrder(tempOrder));
+    // 3. 關閉 Menu & CheckOrderModal
+    dispatch(hideMenu());
+    dispatch(hideCheckModal());
+    // 4. 開啟購物車 showCart
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    dispatch(showCart());
   }
   const handleAddToCart = (amount) => {
     const newId = items.length ? (items[items.length-1]['id']+1):1;
@@ -124,7 +132,7 @@ const MealCard = () => {
     dispatch(addToCart(order));
   }
   return (
-    <MealModal onClose={handleClose}>
+    <MealModal onClose={handleClose} onCreate={handleCreateNewOrder}>
       <MealContainer>
         <Close onClose={handleClose} />
         <ImageContainer>{meal.img}</ImageContainer>

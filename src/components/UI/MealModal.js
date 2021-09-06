@@ -57,8 +57,13 @@ const MealModal = (props) => {
   // const handleClose = () => {
   //   dispatch(hideUserCard())
   // }
-  const modalOverley = (<ModalOverley >{props.children}</ModalOverley>);
-  const orderCheckModal = (<OrderCheckModal onClose={props.onClose}/>)
+  const modalOverley = <ModalOverley >{props.children}</ModalOverley>;
+  const orderCheckModal = (
+    <OrderCheckModal
+      onCreate={props.onCreate}
+      onClose={props.onClose}
+    />
+  )
   const modalContent = isOrderChecking ? orderCheckModal : modalOverley;
   return (
     <Fragment>

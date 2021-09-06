@@ -17,7 +17,7 @@ const OrderCheckModal = (props) => {
       <div>您的購物車已有來自不同商店的商品，請先清空或結帳</div>
       <div>
         <button onClick={props.onClose}>取消</button>
-        <button>新訂單</button>
+        <button onClick={props.onCreate}>新訂單</button>
       </div>
     </OrderCheckModalWrapper>
   )
