@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { toggleCartButton } from "../../redux/reducers/cartReducer";
 import { CartIcon } from "../UI/Icons";
 const CartButtonWrapper = styled.div`
@@ -26,19 +26,27 @@ const CartBadgeSpan = styled(CartButtonSpan)`
   padding: 0.2rem 1.0rem;
   border-radius: 25px;
   font-weight: bold;
+  display: flex;
+  align-items: center;
 `
 const HeaderCartButton = () => {
   const dispatch = useDispatch();
+  const items = useSelector(store => store.cart.items)
   const handleShowCart = () => {
     dispatch(toggleCartButton());
   }
+  const numberOfCartItems = items.reduce((total, item) => {
+    return total + item.amount
+  }, 0)
   return (
     <CartButtonWrapper onClick={handleShowCart}>
       <CartIconSpan>
         <CartIcon />
       </CartIconSpan>
       <CartButtonSpan>購物車</CartButtonSpan>
-      <CartBadgeSpan>1</CartBadgeSpan>
+      <CartBadgeSpan>
+        { numberOfCartItems }
+      </CartBadgeSpan>
     </CartButtonWrapper>
   )
 }
