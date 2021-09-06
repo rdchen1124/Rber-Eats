@@ -2,8 +2,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { MealModal } from "../UI";
-import { hideMenu } from "../../redux/reducers/menuReducer";
-import { addToCart, setCartStore } from "../../redux/reducers/cartReducer";
+import { hideMenu, showCheckModal, hideCheckModal } from "../../redux/reducers/menuReducer";
+import { 
+  addToCart,
+  setCartStore, setTempStore, setTempOrder
+} from "../../redux/reducers/cartReducer";
 import MealCardForm from "./MealCardForm";
 
 const MealContainer = styled.div`
@@ -78,9 +81,22 @@ const MealCard = () => {
   const items = useSelector(store => store.cart.items);
   const store = useSelector(store => store.store.store);
   const cartStore = useSelector(store => store.cart.cartStore);
+  const isOrderChecking = useSelector(store => store.menu.isOrderChecking);
   const dispatch = useDispatch();
   const handleClose = () => {
     dispatch(hideMenu());
+    if(isOrderChecking){
+      // 取消鈕(點選取消加入購物車):
+      // 關閉 CheckOrderModal
+      dispatch(hideCheckModal());
+    }
+  }
+  const handleCreateNewOrder = () => {
+    // 新訂單鈕(點選開新訂單):
+    // 1. 新增店家 dispatch(setCartStore(tempCartStore));
+    // 2. 加入商品 dispatch(addToCart(tempOrder));
+    // 3. 關閉 CheckOrderModal
+    // 4. 開啟購物車
   }
   const handleAddToCart = (amount) => {
     const newId = items.length ? (items[items.length-1]['id']+1):1;
@@ -92,29 +108,20 @@ const MealCard = () => {
       amount
     }
     if(!cartStore.id){// 購物車為空
-      dispatch(setCartStore({...store}));
+      dispatch(setCartStore(store));
     }else{// 購物車有商品
       if(cartStore.id !== store.id){// 新增的商品為不同店家
-        alert('您的購物車已有來自不同商店的商品，請先清空或結帳!');
-        // 1. 儲存目前 cartStore & order 為 tempCartStore & tempOrder
-        // const tempOrder = {...order, id: 1};
-        // 2. 關閉 Cart ( dispatch(hideCart))
-        // 3. 讓 CheckOrderModal 顯示 (isCheckOrderModal = true)
+        // 1. 儲存目前 cartStore & order
+        dispatch(setTempStore(store));
+        const tempOrder = {...order, id: 1};
+        dispatch(setTempOrder(tempOrder));
+        // 2. 顯示 CheckOrderModal 顯示
+        dispatch(showCheckModal());
         return;
-        
-        // CheckOrderModal 的部分
-        // 新訂單鈕(點選開新訂單):
-        // 1. 新增店家 dispatch(setCartStore({...tempCartStore}));
-        // 2. 加入商品 dispatch(addToCart(tempOrder));
-        // 3. 關閉 CheckOrderModal
-        // 取消鈕(點選取消加入購物車):
-        // 1. 清空 tempCartStore & tempOrder
-        // 2. 關閉 CheckOrderModal
       }
     }
     // 購物車為空 或 新增商品為同店家
     dispatch(addToCart(order));
-    console.log(`Add ${amount} items To Cart!!`);
   }
   return (
     <MealModal onClose={handleClose}>
