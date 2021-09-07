@@ -132,7 +132,12 @@ const MealCard = () => {
     dispatch(addToCart(order));
   }
   return (
-    <MealModal onClose={handleClose} onCreate={handleCreateNewOrder}>
+    <MealModal
+      cartStore={cartStore.name}
+      tempStore={tempStore.name}
+      onClose={handleClose}
+      onCreate={handleCreateNewOrder}
+    >
       <MealContainer>
         <Close onClose={handleClose} />
         <ImageContainer>{meal.img}</ImageContainer>

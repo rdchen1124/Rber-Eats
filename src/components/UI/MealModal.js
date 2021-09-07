@@ -60,6 +60,8 @@ const MealModal = (props) => {
   const modalOverley = <ModalOverley >{props.children}</ModalOverley>;
   const orderCheckModal = (
     <OrderCheckModal
+      cartStore={props.cartStore}
+      tempStore={props.tempStore}
       onCreate={props.onCreate}
       onClose={props.onClose}
     />
