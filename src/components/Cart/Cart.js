@@ -75,11 +75,11 @@ const CartStoreTitle = styled.span`
   color: #555555;
 `
 const CartStoreName = styled.span`
-  color: #4CAF50;
+
 `
 const StoreLink = styled(Link)`
   text-decoration: underline;
-  color: #4CAF50;
+  color: #008CBA;
 `;
 const CartBodyContent = styled.div`
   box-sizing: border-box;  
@@ -121,9 +121,6 @@ const Cart = (props) => {
   }
   const handleCheckoutClick = (e) => {
     e.preventDefault();
-    if(!items.length){
-      return;
-    }
     console.log('Go Checkout!!');
   }
   const cartContent = (
