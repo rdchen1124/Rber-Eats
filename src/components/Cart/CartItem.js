@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { plusItemInCart, minusItemInCart } from "../../redux/reducers/cartReducer";
 const CartItemWrapper = styled.div`
   height: 50px;
   display: flex;
@@ -42,8 +44,8 @@ const AmountContainer = styled(AmountItem)`
 const MinusButton = styled(AmountItem)`
   width: 30%;
   background: rgba(0, 0, 0, 0.1);
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
   &:hover {
     background: rgba(0, 0, 0, 0.2);
   }
@@ -51,19 +53,26 @@ const MinusButton = styled(AmountItem)`
 const PlusButton = styled(AmountItem)`
   width: 30%;
   background: rgba(0, 0, 0, 0.1);
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
   &:hover {
     background: rgba(0, 0, 0, 0.2);
   }
 `;
-const CartItem = ({amount, name, price}) => {
+const CartItem = ({id, amount, name, price}) => {
+  const dispatch = useDispatch();
+  const handlePlusCartItem = () => {
+    dispatch(plusItemInCart({id, amount: 1}));
+  }
+  const handleMinusCartItem = () => {
+    dispatch(minusItemInCart({id, amount:1}));
+  }
   return (
     <CartItemWrapper>
       <Amount>
-        <MinusButton>-</MinusButton>
+        <PlusButton onClick={handlePlusCartItem}>+</PlusButton>
         <AmountContainer>{amount}</AmountContainer>
-        <PlusButton>+</PlusButton>
+        <MinusButton onClick={handleMinusCartItem}>-</MinusButton>
       </Amount>
       <Name>{name}</Name>
       <Price>${amount*price}</Price>
