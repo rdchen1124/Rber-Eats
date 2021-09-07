@@ -130,6 +130,11 @@ const MealCard = () => {
     }
     // 購物車為空 或 新增商品為同店家
     dispatch(addToCart(order));
+    // 3. 關閉 Menu
+    dispatch(hideMenu());
+    // 4. 開啟購物車 showCart
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    dispatch(showCart());
   }
   return (
     <MealModal
