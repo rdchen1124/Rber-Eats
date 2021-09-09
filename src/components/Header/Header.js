@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import UserButton from './UserButton';
 import HeaderCartButton from './HeaderCartButton';
 const HeaderContainer = styled.div`
@@ -28,12 +28,13 @@ const Nav = styled(Link)`
   padding: 5px;
   height: 40px;
   width: 60px;
-  cursor: pointer;
+  cursor: ${props => props.$active ? 'not-allowed':'pointer'};
   color: black;
   text-decoration: none;
-  background: white;
+  background:  ${props => props.$active ? '#E7E7E7':'white'};
   border-radius: 15px;
   margin-left: 15px;
+  pointer-events: ${props => props.$active ? 'none':'auto'};
 `;
 const LeftContainer = styled.div`
   // border: 1px solid black;
@@ -61,6 +62,7 @@ const RightContainer = styled.div`
 `;
 
 const Header = () => {
+  const loaction = useLocation();
   return (
     <HeaderContainer>
       <HeaderWrapper>
@@ -72,7 +74,7 @@ const Header = () => {
         </LeftContainer>
         <RightContainer>
           <HeaderCartButton />
-          <Nav to='/login'>登入</Nav>
+          <Nav to='/login' $active={loaction.pathname === '/login'}>登入</Nav>
         </RightContainer>
       </HeaderWrapper>
     </HeaderContainer>
