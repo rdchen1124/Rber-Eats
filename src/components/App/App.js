@@ -11,6 +11,7 @@ import { Transition } from "react-transition-group";
 import Header from '../Header';
 import Home from '../../pages/Home';
 import Store from '../../pages/Store';
+import Login from '../../pages/Login';
 import UserCard from '../UserCard';
 import Cart from '../Cart';
 
@@ -57,9 +58,7 @@ function App() {
             <Store />
           </Route>
           <Route path='/login'>
-            <div>
-              登入
-            </div>
+            <Login />
           </Route>
           <Route exact path='/register'>
             <div>
