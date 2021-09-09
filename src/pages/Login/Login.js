@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useRef, useState, useEffect } from 'react';
+import useInput from '../../hooks/useInput';
 const Root = styled.div`
   margin: 100px auto 0;
   height: 600px;
@@ -36,7 +37,6 @@ const LoginFormLabel = styled.label`
 `
 const LoginFormErrorLabel = styled.label`
   visibility : ${props => props.$show ? 'visible':'hidden'};
-  // visibility: visible;
   color: #F44336;
 `
 const LoginFormButtonWrapper = styled.div`
@@ -52,36 +52,64 @@ const isEMail = (value) => {
   const pattern = new RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
   return pattern.test(value);
 }
+const isEmpty = (value) => value.trim() !== "";
 const Login = () => {
-  const [IsEMailError, setIsEMailError] = useState(false);
-  const eMailRef = useRef();
+  const {
+    inputRef: emailRef,
+    isValid: isEmailValid,
+    hasError: emailHasError,
+    handleInputBlur: handleEmailBlur,
+    reset: resetEmail
+  } = useInput(isEMail);
+  const {
+    inputRef: passwordRef,
+    isValid: isPasswordValid,
+    hasError: passwordHasError,
+    handleInputBlur: handlePasswordBlur,
+    reset: resetPassword
+  } = useInput(isEmpty);
+  let isFormValid = false;
+  isFormValid = isEmailValid && isPasswordValid;
   const handleSubmit = (e) => {
     e.preventDefault();
-    const eMail = eMailRef.current.value;
-    const isEMailValid = isEMail(eMail);
-    setIsEMailError(!isEMailValid);
-    console.log('e-mail:', eMail);
-    console.log('e-mail validility:', isEMailValid);
+    if(!isEmailValid){
+      return;
+    }
+    console.log('Form Submitted!!');
+    const email = emailRef.current.value;
+    console.log('e-mail:', email);
+    resetEmail();
+    const password = passwordRef.current.value;
+    console.log('password:', password);
+    resetPassword();
   }
   return <Root>
-    <LoginForm onSubmit={handleSubmit}>
+    <LoginForm onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} onSubmit={handleSubmit}>
       <LoginFormTitle>很高興看到你，朋友</LoginFormTitle>
       <LoginFormInputWrapper>
         <LoginFormLabel htmlFor='name'>使用您的電子郵件登入</LoginFormLabel>
-        <LoginFormInput ref={eMailRef} type='text' id='name' placeholder='請輸入電子郵件' />
-        <LoginFormErrorLabel $show={IsEMailError}>電子郵件格式錯誤</LoginFormErrorLabel>
+        <LoginFormInput
+          ref={emailRef}
+          type='text'
+          id='name'
+          onBlur={handleEmailBlur}
+          placeholder='請輸入電子郵件'
+        />
+        <LoginFormErrorLabel $show={emailHasError}>電子郵件格式錯誤</LoginFormErrorLabel>
       </LoginFormInputWrapper>
       <LoginFormInputWrapper>
         <LoginFormLabel htmlFor='password'>請輸入密碼以登入</LoginFormLabel>
-        <LoginFormInput 
+        <LoginFormInput
+          ref={passwordRef}
           type='password'
           id='password'
+          onBlur={handlePasswordBlur}
           placeholder='請輸入 6-12 碼英數混合的密碼'
         />
-        <LoginFormErrorLabel $show={IsEMailError}>密碼不能為空</LoginFormErrorLabel>
+        <LoginFormErrorLabel $show={passwordHasError}>密碼不能為空</LoginFormErrorLabel>
       </LoginFormInputWrapper>
       <LoginFormButtonWrapper>
-        <LoginFormButton>登入</LoginFormButton>
+        <LoginFormButton disabled={!isFormValid}>登入</LoginFormButton>
       </LoginFormButtonWrapper>
     </LoginForm>
   </Root>

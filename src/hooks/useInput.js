@@ -1,15 +1,17 @@
 import { useState, useRef } from "react";
 const useInput = (validityFunc) => {
   const [isTouched, setIsTouched] = useState(false);
-  const inputRef = useRef();
-  const isValueValid = validityFunc(inputRef.current.value ? inputRef.current.value : false );
+  const [isValueValid , setIsValueValid] = useState(false);
+  const inputRef = useRef("");
   const hasError = !isValueValid && isTouched;
   const handleInputBlur = () => {
     setIsTouched(true);
+    setIsValueValid(validityFunc(inputRef.current.value));
   }
   const reset = () => {
-    inputRef.current.value = "";
     setIsTouched(false);
+    setIsValueValid(false);
+    inputRef.current.value = "";
   }
   return {
     inputRef,
