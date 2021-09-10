@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, useLocation, useHistory  } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../redux/reducers/userReducer';
 import UserButton from './UserButton';
@@ -65,14 +65,10 @@ const RightContainer = styled.div`
 
 const Header = () => {
   const loaction = useLocation();
-  const history = useHistory();
   const user = useSelector(store => store.user.user);
   const dispatch = useDispatch();
   const handleLogOut = () => {
     dispatch(setUser(''));
-    if(loaction.pathname !== '/'){
-      history.push('/');
-    }   
   }
   return (
     <HeaderContainer>
