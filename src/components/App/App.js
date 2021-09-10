@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {
   HashRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
@@ -25,6 +26,7 @@ const RootContainer = (props) => {
 function App() {
   const isUserCardShowing = useSelector(store => store.user.isUserCardShowing)
   const isCartShowing = useSelector(store => store.cart.isCartShowing);
+  const user = useSelector(store => store.user.user);
   const [isScroll, setIsScroll] = useState(false);
   const dispatch = useDispatch();
   useEffect(()=>{
@@ -58,7 +60,7 @@ function App() {
             <Store />
           </Route>
           <Route path='/login'>
-            <Login />
+            {user ? <Redirect to='/' /> : <Login />}
           </Route>
           <Route exact path='/register'>
             <div>

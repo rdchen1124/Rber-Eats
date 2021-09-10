@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-// import { useRef, useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useLayoutEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../redux/reducers/userReducer';
 import { useHistory } from 'react-router';
 import useInput from '../../hooks/useInput';
@@ -59,6 +59,12 @@ const isEmpty = (value) => value.trim() !== "";
 const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  // const user = useSelector(store => store.user.user);
+  // useLayoutEffect(()=>{
+  //   if(user){
+  //     history.goBack();
+  //   }
+  // }, [])
   const {
     inputRef: emailRef,
     isValid: isEmailValid,
