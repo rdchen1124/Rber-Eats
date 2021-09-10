@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+  user: '',
   isUserCardShowing: false
 }
 
@@ -13,11 +14,14 @@ export const userSlice = createSlice({
     },
     hideUserCard: (state) => {
       state.isUserCardShowing = false;
+    },
+    setUser: (state, action) => {
+      state.user = action.payload;
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { showUserCard, hideUserCard } = userSlice.actions
+export const { showUserCard, hideUserCard, setUser } = userSlice.actions
 
 export default userSlice.reducer
