@@ -75,7 +75,6 @@ const Login = () => {
     if(!isEmailValid){
       return;
     }
-    console.log('Form Submitted!!');
     const email = emailRef.current.value;
     console.log('e-mail:', email);
     resetEmail();
