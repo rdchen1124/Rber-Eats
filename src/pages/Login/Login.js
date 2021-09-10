@@ -2,6 +2,7 @@ import styled from 'styled-components';
 // import { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/reducers/userReducer';
+import { useHistory } from 'react-router';
 import useInput from '../../hooks/useInput';
 const Root = styled.div`
   margin: 100px auto 0;
@@ -57,6 +58,7 @@ const isEMail = (value) => {
 const isEmpty = (value) => value.trim() !== "";
 const Login = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const {
     inputRef: emailRef,
     isValid: isEmailValid,
@@ -78,13 +80,10 @@ const Login = () => {
     if(!isEmailValid){
       return;
     }
-    const email = emailRef.current.value;
-    console.log('e-mail:', email);
     resetEmail();
-    const password = passwordRef.current.value;
-    console.log('password:', password);
-    dispatch(setUser('Ryan'));
     resetPassword();
+    dispatch(setUser('Ryan'));
+    history.goBack();
   }
   return <Root>
     <LoginForm onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} onSubmit={handleSubmit}>
