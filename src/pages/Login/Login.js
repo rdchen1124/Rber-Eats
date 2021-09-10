@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { useRef, useState, useEffect } from 'react';
+// import { useRef, useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/reducers/userReducer';
 import useInput from '../../hooks/useInput';
 const Root = styled.div`
   margin: 100px auto 0;
@@ -54,6 +56,7 @@ const isEMail = (value) => {
 }
 const isEmpty = (value) => value.trim() !== "";
 const Login = () => {
+  const dispatch = useDispatch();
   const {
     inputRef: emailRef,
     isValid: isEmailValid,
@@ -80,6 +83,7 @@ const Login = () => {
     resetEmail();
     const password = passwordRef.current.value;
     console.log('password:', password);
+    dispatch(setUser('Ryan'));
     resetPassword();
   }
   return <Root>
