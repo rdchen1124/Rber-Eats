@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useLayoutEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import {
   HashRouter as Router,
   Switch,
@@ -16,7 +16,7 @@ import Store from '../../pages/Store';
 import Login from '../../pages/Login';
 import UserCard from '../UserCard';
 import Cart from '../Cart';
-import { getAuthUser, setAuthUser } from '../../utils';
+import { setAuthUser } from '../../utils';
 
 const Root = styled.div`
   overflow: auto;
@@ -31,12 +31,7 @@ function App() {
   const user = useSelector(store => store.user.user);
   const [isScroll, setIsScroll] = useState(false);
   const dispatch = useDispatch();
-  useLayoutEffect(()=>{
-    const localUser = getAuthUser();
-    if(localUser){
-      dispatch(setUser(localUser));
-    }
-  }, [dispatch])
+
   useEffect(()=>{
     const onScroll = (e) => {
       setIsScroll(e.target.documentElement.scrollTop > 1);
