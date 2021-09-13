@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { hideCart } from "../../redux/reducers/cartReducer";
 import CartItem from "./CartItem";
+import { setCart } from "../../utils";
 
 const CloseButton = styled.div`
   position: absolute;
@@ -123,6 +124,13 @@ const Cart = (props) => {
     e.preventDefault();
     console.log('Go Checkout!!');
   }
+  useEffect(()=>{
+    const cart = {
+      items,
+      cartStore
+    }
+    setCart(cart);
+  }, [items, cartStore]);
   const cartContent = (
     <CartBody>
       <CartBodyHeader>

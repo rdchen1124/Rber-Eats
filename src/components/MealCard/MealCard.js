@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { MealModal } from "../UI";
@@ -8,7 +8,7 @@ import {
   setCartStore, setTempStore, setTempOrder
 } from "../../redux/reducers/cartReducer";
 import MealCardForm from "./MealCardForm";
-
+import { setCart } from "../../utils";
 const MealContainer = styled.div`
   position: relative;
   width: 100%;
@@ -95,14 +95,13 @@ const MealCard = () => {
   }
   const handleCreateNewOrder = () => {
     // 新訂單鈕(點選開新訂單):
-    // 1. 新增店家 dispatch(setCartStore(tempStore));
+    // 1. 新增店家 & 建立新訂單
     dispatch(setCartStore(tempStore));
-    // 2. 建立新訂單 dispatch(createNewOrder(tempOrder));
     dispatch(createNewOrder(tempOrder));
-    // 3. 關閉 Menu & CheckOrderModal
+    // 2. 關閉 Menu & CheckOrderModal
     dispatch(hideMenu());
     dispatch(hideCheckModal());
-    // 4. 開啟購物車 showCart
+    // 3. 開啟購物車 showCart
     window.scrollTo({top: 0, behavior: 'smooth'});
     dispatch(showCart());
   }
@@ -116,6 +115,7 @@ const MealCard = () => {
       amount
     }
     if(!cartStore.id){// 購物車為空
+      // 1. 儲存目前 cartStore
       dispatch(setCartStore(store));
     }else{// 購物車有商品
       if(cartStore.id !== store.id){// 新增的商品為不同店家
@@ -129,6 +129,7 @@ const MealCard = () => {
       }
     }
     // 購物車為空 或 新增商品為同店家
+    // 2. 新增此項目至目前 items
     dispatch(addToCart(order));
     // 3. 關閉 Menu
     dispatch(hideMenu());

@@ -3,10 +3,16 @@ import userReducer from './reducers/userReducer'
 import cartReducer from './reducers/cartReducer'
 import menuReducer from './reducers/menuReducer'
 import storeReducer from './reducers/storeReducer'
-import { getAuthUser } from '../utils'
+import { getAuthUser, getCart } from '../utils'
 
 const loaclUser = getAuthUser();
 const lastUser = loaclUser ? loaclUser : '';
+const localCart = getCart();
+const lastItems = localCart ? localCart.items : [];
+const lastCartStore = localCart ? localCart.cartStore : {};
+const lastTotal = lastItems.reduce((total, item)=>{
+  return total + item.amount * item.price;
+},0)
 const preloadedState = {
   user: {
     user: lastUser,
@@ -14,9 +20,9 @@ const preloadedState = {
   },
   cart: {
     isCartShowing: false,
-    items: [],
-    totalAmount: 0,
-    cartStore: {},
+    items: lastItems,
+    totalAmount: lastTotal,
+    cartStore: lastCartStore,
     tempStore: {},
     tempOrder: {}
   },

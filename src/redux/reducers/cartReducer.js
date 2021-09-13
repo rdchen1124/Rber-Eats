@@ -68,6 +68,7 @@ export const cartSlice = createSlice({
     clearCart: (state) => {
       state.items = [];
       state.totalAmount = 0;
+      state.cartStore = {};
     },
     setCartStore: (state, action) => {
       state.cartStore = {...action.payload};
