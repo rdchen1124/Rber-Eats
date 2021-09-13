@@ -48,6 +48,7 @@ export const cartSlice = createSlice({
       if(targetItem.amount === 1){
         state.items = state.items.filter(item => item.id !== action.payload.id)
         extraCharges = action.payload.amount * targetItem.price;
+        state.cartStore = {};
       }
       else{
         state.items = state.items.map(item => {
