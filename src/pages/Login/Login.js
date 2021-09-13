@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { useLayoutEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/reducers/userReducer';
 import { useHistory } from 'react-router';
 import useInput from '../../hooks/useInput';
+import { setAuthUser } from '../../utils';
 const Root = styled.div`
   margin: 100px auto 0;
   height: 600px;
@@ -59,12 +59,6 @@ const isEmpty = (value) => value.trim() !== "";
 const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  // const user = useSelector(store => store.user.user);
-  // useLayoutEffect(()=>{
-  //   if(user){
-  //     history.goBack();
-  //   }
-  // }, [])
   const {
     inputRef: emailRef,
     isValid: isEmailValid,
@@ -89,10 +83,14 @@ const Login = () => {
     resetEmail();
     resetPassword();
     dispatch(setUser('Ryan'));
+    setAuthUser('Ryan');
     history.goBack();
   }
+  const handleClickEnter = (e) => {
+    e.key === 'Enter' && e.preventDefault();
+  }
   return <Root>
-    <LoginForm onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }} onSubmit={handleSubmit}>
+    <LoginForm onKeyDown={handleClickEnter} onSubmit={handleSubmit}>
       <LoginFormTitle>很高興看到你，朋友</LoginFormTitle>
       <LoginFormInputWrapper>
         <LoginFormLabel htmlFor='name'>使用您的電子郵件登入</LoginFormLabel>

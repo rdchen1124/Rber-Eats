@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect } from 'react';
 import {
   HashRouter as Router,
   Switch,
@@ -8,6 +8,7 @@ import {
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { hideCart } from '../../redux/reducers/cartReducer';
+import { setUser } from '../../redux/reducers/userReducer';
 import { Transition } from "react-transition-group";
 import Header from '../Header';
 import Home from '../../pages/Home';
@@ -15,6 +16,7 @@ import Store from '../../pages/Store';
 import Login from '../../pages/Login';
 import UserCard from '../UserCard';
 import Cart from '../Cart';
+import { getAuthUser, setAuthUser } from '../../utils';
 
 const Root = styled.div`
   overflow: auto;
@@ -29,6 +31,12 @@ function App() {
   const user = useSelector(store => store.user.user);
   const [isScroll, setIsScroll] = useState(false);
   const dispatch = useDispatch();
+  useLayoutEffect(()=>{
+    const localUser = getAuthUser();
+    if(localUser){
+      dispatch(setUser(localUser));
+    }
+  }, [dispatch])
   useEffect(()=>{
     const onScroll = (e) => {
       setIsScroll(e.target.documentElement.scrollTop > 1);
@@ -41,10 +49,14 @@ function App() {
       dispatch(hideCart());
     }
   }, [isScroll, dispatch]);
+  const handleLogOut = () => {
+    setAuthUser('');
+    dispatch(setUser(''));
+  }
   return (
     <RootContainer>
       <Router>
-        <Header />
+        <Header onLogOut={handleLogOut} />
         { isUserCardShowing && <UserCard />}
         <Transition mountOnEnter unmountOnExit timeout={200} in={isCartShowing}>
         {(state) => {

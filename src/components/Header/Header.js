@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from '../../redux/reducers/userReducer';
+import { useSelector } from 'react-redux';
 import UserButton from './UserButton';
 import HeaderCartButton from './HeaderCartButton';
 const HeaderContainer = styled.div`
@@ -63,13 +62,10 @@ const RightContainer = styled.div`
   padding: 0 15px;
 `;
 
-const Header = () => {
+const Header = ({onLogOut}) => {
   const loaction = useLocation();
   const user = useSelector(store => store.user.user);
-  const dispatch = useDispatch();
-  const handleLogOut = () => {
-    dispatch(setUser(''));
-  }
+
   return (
     <HeaderContainer>
       <HeaderWrapper>
@@ -82,7 +78,7 @@ const Header = () => {
         <RightContainer>
           <HeaderCartButton />
           {!user && <Nav to='/login' $active={loaction.pathname === '/login'}>登入</Nav>}
-          {user && <Nav as='div' onClick={handleLogOut}>登出</Nav>}
+          {user && <Nav as='div' onClick={onLogOut}>登出</Nav>}
         </RightContainer>
       </HeaderWrapper>
     </HeaderContainer>
