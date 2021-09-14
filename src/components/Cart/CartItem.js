@@ -41,7 +41,7 @@ const AmountContainer = styled(AmountItem)`
   width: 40%;
   cursor: default;
 `;
-const MinusButton = styled(AmountItem)`
+const PlusButton = styled(AmountItem)`
   width: 30%;
   background: rgba(0, 0, 0, 0.1);
   border-top-right-radius: 20px;
@@ -50,7 +50,7 @@ const MinusButton = styled(AmountItem)`
     background: rgba(0, 0, 0, 0.2);
   }
 `;
-const PlusButton = styled(AmountItem)`
+const MinusButton = styled(AmountItem)`
   width: 30%;
   background: rgba(0, 0, 0, 0.1);
   border-top-left-radius: 20px;
@@ -65,14 +65,14 @@ const CartItem = ({id, amount, name, price}) => {
     dispatch(plusItemInCart({id, amount: 1}));
   }
   const handleMinusCartItem = () => {
-    dispatch(minusItemInCart({id, amount:1}));
+    dispatch(minusItemInCart({id, amount: 1}));
   }
   return (
     <CartItemWrapper>
       <Amount>
-        <PlusButton onClick={handlePlusCartItem}>+</PlusButton>
-        <AmountContainer>{amount}</AmountContainer>
         <MinusButton onClick={handleMinusCartItem}>-</MinusButton>
+        <AmountContainer>{amount}</AmountContainer>
+        <PlusButton onClick={handlePlusCartItem}>+</PlusButton>
       </Amount>
       <Name>{name}</Name>
       <Price>${amount*price}</Price>
