@@ -30,10 +30,10 @@ const CheckoutButton = styled.div`
   bottom: 5px;
   left: 5%;
   right: 5%;
-  background: ${props => props.$empty ? "grey":"black"};
+  background: black;
   color: white;
   height: 35px;
-  cursor: ${props => props.$empty ? "not-allowed":"pointer"};
+  cursor: pointer;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -127,7 +127,10 @@ const Cart = (props) => {
     if(user){
       history.push('/checkout');
     }else{
-      history.push('/login');
+      history.push({
+        pathname: '/login',
+        state: { from: '/checkout' }
+      });
     }
     dispatch(hideCart());
   }
@@ -175,7 +178,6 @@ const Cart = (props) => {
   const checkoutButton = (
     <CheckoutButton 
       onClick={handleCheckoutClick}
-      $empty={!items.length}
     >
       <TotalNumberSpan>{numberOfItems}</TotalNumberSpan>
       <CheckoutSpan>結帳</CheckoutSpan>

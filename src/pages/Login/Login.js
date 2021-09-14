@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/reducers/userReducer';
@@ -56,9 +57,16 @@ const isEMail = (value) => {
   return pattern.test(value);
 }
 const isEmpty = (value) => value.trim() !== "";
-const Login = () => {
+const Login = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  useEffect(()=>{
+    if(history.location.state && history.location.state.from){
+    }else{
+      let state = { ...history.location.state, from: '/' };
+      history.replace({ ...history.location, state });
+    }
+  }, [history])
   const {
     inputRef: emailRef,
     isValid: isEmailValid,
@@ -84,7 +92,7 @@ const Login = () => {
     resetPassword();
     dispatch(setUser('Ryan'));
     setAuthUser('Ryan');
-    history.goBack();
+    history.push(history.location.state.from);
   }
   const handleClickEnter = (e) => {
     e.key === 'Enter' && e.preventDefault();

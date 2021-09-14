@@ -66,7 +66,8 @@ const RightContainer = styled.div`
 const Header = ({onLogOut}) => {
   const loaction = useLocation();
   const user = useSelector(store => store.user.user);
-
+  const pathname = loaction.pathname;
+  const linkLoginObj = {pathname: '/login', state: {from: pathname}}
   return (
     <HeaderContainer>
       <HeaderWrapper>
@@ -78,7 +79,7 @@ const Header = ({onLogOut}) => {
         </LeftContainer>
         <RightContainer>
           <HeaderCartButton $hidden={loaction.pathname === '/checkout'} />
-          {!user && <Nav to='/login' $active={loaction.pathname === '/login'}>登入</Nav>}
+          {!user && <Nav to={linkLoginObj} $active={loaction.pathname === '/login'}>登入</Nav>}
           {user && <Nav as='div' $hidden={loaction.pathname === '/checkout'} onClick={onLogOut}>登出</Nav>}
         </RightContainer>
       </HeaderWrapper>
