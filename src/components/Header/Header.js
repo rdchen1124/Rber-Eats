@@ -36,6 +36,7 @@ const Nav = styled(Link)`
   border-radius: 15px;
   margin-left: 15px;
   pointer-events: ${props => props.$active ? 'none':'auto'};
+  visibility: ${props=>props.$hidden ? 'hidden':'visible'};
 `;
 const LeftContainer = styled.div`
   // border: 1px solid black;
@@ -76,9 +77,9 @@ const Header = ({onLogOut}) => {
           </TitleContainer>
         </LeftContainer>
         <RightContainer>
-          <HeaderCartButton />
+          <HeaderCartButton $hidden={loaction.pathname === '/checkout'} />
           {!user && <Nav to='/login' $active={loaction.pathname === '/login'}>登入</Nav>}
-          {user && <Nav as='div' onClick={onLogOut}>登出</Nav>}
+          {user && <Nav as='div' $hidden={loaction.pathname === '/checkout'} onClick={onLogOut}>登出</Nav>}
         </RightContainer>
       </HeaderWrapper>
     </HeaderContainer>

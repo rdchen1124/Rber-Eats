@@ -13,6 +13,7 @@ const CartButtonWrapper = styled.div`
   align-items: center;
   justify-content: space-evenly;
   cursor: pointer;
+  visibility: ${props => props.$hidden ? 'hidden':'visible'}
 `;
 const CartButtonSpan = styled.span`
   height: 1.35rem;
@@ -29,7 +30,7 @@ const CartBadgeSpan = styled(CartButtonSpan)`
   display: flex;
   align-items: center;
 `
-const HeaderCartButton = () => {
+const HeaderCartButton = (props) => {
   const dispatch = useDispatch();
   const items = useSelector(store => store.cart.items)
   const handleShowCart = () => {
@@ -39,7 +40,7 @@ const HeaderCartButton = () => {
     return total + item.amount
   }, 0)
   return (
-    <CartButtonWrapper onClick={handleShowCart}>
+    <CartButtonWrapper $hidden={props.$hidden} onClick={handleShowCart}>
       <CartIconSpan>
         <CartIcon />
       </CartIconSpan>
