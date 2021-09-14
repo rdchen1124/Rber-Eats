@@ -127,7 +127,7 @@ const Cart = (props) => {
     if(user){
       history.push('/checkout');
     }else{
-      console.log('Go Login!!');
+      history.push('/login');
     }
     dispatch(hideCart());
   }
