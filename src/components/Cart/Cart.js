@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { CartModal } from "../UI";
 import styled from "styled-components"; 
 import { useDispatch } from "react-redux";
@@ -110,9 +110,11 @@ const EmptyCartBody = styled.div`
   flex-wrap: wrap;
 `
 const Cart = (props) => {
+  const history = useHistory();
   const items = useSelector(store => store.cart.items);
   const totalAmount = useSelector(store => store.cart.totalAmount);
   const cartStore = useSelector(store => store.cart.cartStore);
+  const user = useSelector(store => store.user.user);
   const numberOfItems = items.reduce((total, item)=>{
     return total + item.amount;
   },0)
@@ -122,7 +124,12 @@ const Cart = (props) => {
   }
   const handleCheckoutClick = (e) => {
     e.preventDefault();
-    console.log('Go Checkout!!');
+    if(user){
+      history.push('/checkout');
+    }else{
+      console.log('Go Login!!');
+    }
+    dispatch(hideCart());
   }
   useEffect(()=>{
     const cart = {

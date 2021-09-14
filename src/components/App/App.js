@@ -74,6 +74,11 @@ function App() {
               註冊
             </div>
           </Route>
+          <Route exact path='/checkout'>
+            <div>
+              結帳
+            </div>
+          </Route>
         </Switch>
       </Router>
     </RootContainer>
