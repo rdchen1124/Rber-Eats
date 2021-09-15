@@ -14,6 +14,7 @@ import Header from '../Header';
 import Home from '../../pages/Home';
 import Store from '../../pages/Store';
 import Login from '../../pages/Login';
+import Checkout from '../../pages/Checkout';
 import UserCard from '../UserCard';
 import Cart from '../Cart';
 import { setAuthUser } from '../../utils';
@@ -75,9 +76,7 @@ function App() {
             </div>
           </Route>
           <Route exact path='/checkout'>
-            <div>
-              結帳
-            </div>
+            <Checkout />
           </Route>
         </Switch>
       </Router>
