@@ -98,6 +98,7 @@ const OrderFormLabel = styled.label`
 const OrderFormErrorLabel = styled.label`
   visibility : ${props => props.$show ? 'visible':'hidden'};
   color: #F44336;
+  margin-bottom: 5px;
 `
 const OrderFormButtonWrapper = styled.div`
   display: flex;
@@ -175,6 +176,9 @@ const Checkout = () => {
     resetAddress();
     resetPhone();
   }
+  const handleClickEnter = (e) => {
+    e.key === 'Enter' && e.preventDefault();
+  }
   const orderContent = (
     <Container>
       <Title>
@@ -199,7 +203,7 @@ const Checkout = () => {
       </TotalAmountWrapper>
       <hr />
       <OrderTitle>您的資訊</OrderTitle>
-      <OrderForm onSubmit={handleSubmitOrder}>
+      <OrderForm onKeyDown={handleClickEnter} onSubmit={handleSubmitOrder}>
         <OrderFormInputWrapper>
           <OrderFormLabel htmlFor='name'>取餐者姓名:</OrderFormLabel>
           <OrderFormInput 
