@@ -85,6 +85,12 @@ const MealCard = () => {
   const tempStore = useSelector(store => store.cart.tempStore);
   const tempOrder = useSelector(store => store.cart.tempOrder);
   const dispatch = useDispatch();
+  useEffect(()=>{
+    document.body.style.overflowY = 'hidden';
+    return ()=>{
+      document.body.style.overflowY = 'auto';
+    }
+  }, []);
   const handleClose = () => {
     dispatch(hideMenu());
     if(isOrderChecking){
