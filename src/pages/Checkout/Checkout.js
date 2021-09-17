@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -11,12 +11,17 @@ const Root = styled.div`
   margin-top: 100px;
 `
 const Container = styled.div`
+  position: absolute;
   width: 540px;
-  min-height: 360px;
+  max-height: 710px;
+  top: calc(50% - 305px);
+  left: calc(50% - 270px);
   margin: 0 auto;
-  padding: 10px 15px 0px;
+  padding: 10px 15px;
   background: white;
-  border: 1px solid black;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 3px 3px 10px;
 `
 const WarnningContainer = styled.div`
   position: absolute;
@@ -27,7 +32,9 @@ const WarnningContainer = styled.div`
   margin: 0 auto;
   padding: 10px 15px;
   background: white;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,14 +65,7 @@ const StoreLink = styled(Link)`
   align-items: center;
   width: 80px;
 `
-const HomeLink = styled(StoreLink)`
-  color: white;
-  background: black;
-  border-radius: 0;
-  padding: 5px 0;
-  width: 150px;
-`
-const GoBackButton = styled.div`
+const LinkButton = styled.div`
   color: white;
   background: black;
   padding: 5px 0;
@@ -74,6 +74,9 @@ const GoBackButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  & + & {
+    margin-top: 10px;
+  }
 `
 const OrderForm = styled.form`
   box-sizing: border-box;
@@ -91,12 +94,13 @@ const OrderTitle = styled.div`
 `
 const OrderItemContainer = styled.div`
   box-sizing: border-box;
-  width: 540px;
+  width: 520px;
   margin: 0 auto;
   padding: 0 20px;
   min-height: 150px;
-  max-height: 220px;
+  max-height: 160px;
   overflow-y: scroll;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 `
 const TotalAmountWrapper = styled.div`
   height: 40px;
@@ -217,11 +221,21 @@ const Checkout = () => {
     e.preventDefault();
     history.goBack();
   }
+  const handleGoHome = (e) => {
+    e.preventDefault();
+    history.push('/');
+  }
   useEffect(()=>{
     return ()=>{
       dispatch(setIsSubmitted(false));
     }
   }, [dispatch])
+  useLayoutEffect(()=>{
+    document.body.style.background = 'rgba(0, 0, 0, 0.2)';
+    return ()=>{
+      document.body.style.background = 'white';
+    }
+  }, [])
   const orderContent = (
     <Container>
       <Title>
@@ -289,8 +303,8 @@ const Checkout = () => {
   const emptyCartContent = (
     <WarnningContainer>
       <div>您的購物車沒有物品</div>
-      <GoBackButton onClick={handleGoBack}>回前頁</GoBackButton>
-      <HomeLink to="/" target="_top">回首頁</HomeLink>
+      <LinkButton onClick={handleGoBack}>回前頁</LinkButton>
+      <LinkButton onClick={handleGoHome}>回首頁</LinkButton>
     </WarnningContainer>
   )
   const submittingContent = (
@@ -299,7 +313,7 @@ const Checkout = () => {
   const submittedContent = (
     <WarnningContainer>
       <div>您的訂單已送出</div>
-      <HomeLink to="/" target="_top">回首頁</HomeLink>
+      <LinkButton onClick={handleGoHome}>回首頁</LinkButton>
     </WarnningContainer>
   )
   return (<Root>
@@ -307,10 +321,6 @@ const Checkout = () => {
     {!isSubmitted && !items.length && !isSubmitting && emptyCartContent}
     {isSubmitting && submittingContent}
     {isSubmitted && !isSubmitting && submittedContent}
-    {/* {<WarnningContainer>
-      <div>您的訂單已送出</div>
-      <HomeLink to="/" target="_top">回首頁</HomeLink>
-    </WarnningContainer>} */}
   </Root>)
 }
 export default Checkout;
