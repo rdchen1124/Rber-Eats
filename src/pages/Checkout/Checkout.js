@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { CartItem } from "../../components/Cart";
 import useInput from "../../hooks/useInput";
-import { addOrder } from "../../WebApi";
-import { clearCart } from "../../redux/reducers/cartReducer"
+import { addOrder, setIsSubmitted, setSubmitError, clearCart } from "../../redux/reducers/cartReducer"
 const Root = styled.div`
   width: 90%;
   margin: 0 auto;
@@ -18,6 +17,24 @@ const Container = styled.div`
   padding: 10px 15px 0px;
   background: white;
   border: 1px solid black;
+`
+const WarnningContainer = styled.div`
+  position: absolute;
+  width: 540px;
+  height: 360px;
+  top: calc(50% - 180px);
+  left: calc(50% - 270px);
+  margin: 0 auto;
+  padding: 10px 15px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: grey;
+  font-size: 22px;
+  font-weight: bold;
 `
 const Title = styled.div`
   padding: 0 20px;
@@ -40,6 +57,23 @@ const StoreLink = styled(Link)`
   justify-content: center;
   align-items: center;
   width: 80px;
+`
+const HomeLink = styled(StoreLink)`
+  color: white;
+  background: black;
+  border-radius: 0;
+  padding: 5px 0;
+  width: 150px;
+`
+const GoBackButton = styled.div`
+  color: white;
+  background: black;
+  padding: 5px 0;
+  width: 150px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 const OrderForm = styled.form`
   box-sizing: border-box;
@@ -118,8 +152,10 @@ const Checkout = () => {
   const cartStore = useSelector(store => store.cart.cartStore);
   const totalAmount = useSelector(store => store.cart.totalAmount);
   const user = useSelector(store => store.user.user);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const isSubmitted = useSelector(store => store.cart.isSubmitted);
+  const isSubmitting = useSelector(store => store.cart.isSubmitting);
   const dispatch = useDispatch();
+  const history = useHistory();
   const isEmpty = (value) => value.trim() !== '';
   const {
     inputRef: nameRef,
@@ -148,26 +184,24 @@ const Checkout = () => {
   const isValid = isNameValid && isAddressValid && isPhoneValid;
   const handleSubmitOrder = (e) => {
     e.preventDefault();
+    dispatch(setSubmitError(''));
     if(!isValid){
       return;
     }
     console.log('name', nameRef.current.value);
     console.log('address', addressRef.current.value);
     console.log('phone', phoneRef.current.value);
-    // addOrder({
-    //   order: [...items],
-    //   user: {
-    //     user: user,
-    //     name: nameRef.current.value,
-    //     address: addressRef.current.value,
-    //     phone: Number(phoneRef.current.value)
-    //   }
-    // }).then(res => {
-    //   if(res.ok === 0){
-    //     console.log('error', res.message);
-    //     return;
-    //   }
-    //   console.log('Order submitted!');
+    dispatch(addOrder({
+      order: [...items],
+      user: {
+        user: user,
+        name: nameRef.current.value,
+        address: addressRef.current.value,
+        phone: Number(phoneRef.current.value)
+      },
+      store: {...cartStore}
+    }))
+
     // })
     // clean cartStore, state.cart.items
     dispatch(clearCart());
@@ -179,6 +213,15 @@ const Checkout = () => {
   const handleClickEnter = (e) => {
     e.key === 'Enter' && e.preventDefault();
   }
+  const handleGoBack = (e) => {
+    e.preventDefault();
+    history.goBack();
+  }
+  useEffect(()=>{
+    return ()=>{
+      dispatch(setIsSubmitted(false));
+    }
+  }, [dispatch])
   const orderContent = (
     <Container>
       <Title>
@@ -243,12 +286,31 @@ const Checkout = () => {
       </OrderForm>
     </Container>
   )
+  const emptyCartContent = (
+    <WarnningContainer>
+      <div>您的購物車沒有物品</div>
+      <GoBackButton onClick={handleGoBack}>回前頁</GoBackButton>
+      <HomeLink to="/" target="_top">回首頁</HomeLink>
+    </WarnningContainer>
+  )
+  const submittingContent = (
+    <WarnningContainer>Your order now submitting.</WarnningContainer>
+  )
   const submittedContent = (
-    <div>Your order have been already sent.</div>
+    <WarnningContainer>
+      <div>您的訂單已送出</div>
+      <HomeLink to="/" target="_top">回首頁</HomeLink>
+    </WarnningContainer>
   )
   return (<Root>
-    {!isSubmitted && items.length!==0 && orderContent}
-    {isSubmitted && submittedContent}
+    {!isSubmitted && items.length!==0 && !isSubmitting && orderContent}
+    {!isSubmitted && !items.length && !isSubmitting && emptyCartContent}
+    {isSubmitting && submittingContent}
+    {isSubmitted && !isSubmitting && submittedContent}
+    {/* {<WarnningContainer>
+      <div>您的訂單已送出</div>
+      <HomeLink to="/" target="_top">回首頁</HomeLink>
+    </WarnningContainer>} */}
   </Root>)
 }
 export default Checkout;

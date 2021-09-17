@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-
+import { addOrder as addOrderAPI } from '../../WebApi';
 const initialState = {
   isCartShowing: false,
+  isSubmitted: false,
+  isSubmitting: false,
+  submitError: '',
   items: [],
   totalAmount: 0,
   cartStore: {},
@@ -76,8 +79,17 @@ export const cartSlice = createSlice({
     setTempStore: (state, action) => {
       state.tempStore = {...action.payload};
     },
-    setTempOrder : (state, action) => {
+    setTempOrder: (state, action) => {
       state.tempOrder = {...action.payload}
+    },
+    setIsSubmitted: (state, action) => {
+      state.isSubmitted = action.payload;
+    },
+    setIsSubmitting: (state, action) => {
+      state.isSubmitting = action.payload;
+    },
+    setSubmitError: (state, action) => {
+      state.submitError = action.payload;
     }
   },
 })
@@ -86,7 +98,33 @@ export const cartSlice = createSlice({
 export const { 
   showCart, hideCart, toggleCartButton,
   addToCart, plusItemInCart, minusItemInCart, createNewOrder, clearCart,
-  setCartStore, setTempStore, setTempOrder
+  setCartStore, setTempStore, setTempOrder,
+  setIsSubmitted, setIsSubmitting, setSubmitError
 } = cartSlice.actions
+// const timeout = (ms) => {
+//   return new Promise(resolve=>{
+//     setTimeout(resolve, ms);
+//   })
+// }
+export const addOrder = (data) => (dispatch) => {
+  dispatch(setIsSubmitting(true));
+  // await timeout(3000);
+  // dispatch(setIsSubmitted(true));
+  // await timeout(3000);
+  // dispatch(setIsSubmitting(false));
+  addOrderAPI(data).then(res=>{
+    if(res.ok === 0){
+      dispatch(setSubmitError(res.message))
+      // console.log('error', res.message);
+    }else{
+      dispatch(setIsSubmitted(true));
+    }
+    dispatch(setIsSubmitting(false));
+  }).catch(error=>{
+    // console.log('error', error.toString());
+    dispatch(setSubmitError(error.toString()));
+    dispatch(setIsSubmitting(false));
+  })
+}
 
 export default cartSlice.reducer

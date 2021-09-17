@@ -20,6 +20,9 @@ const preloadedState = {
   },
   cart: {
     isCartShowing: false,
+    isSubmitted: false,
+    isSubmitting: false,
+    submitError: '',
     items: lastItems,
     totalAmount: lastTotal,
     cartStore: lastCartStore,

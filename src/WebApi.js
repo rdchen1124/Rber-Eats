@@ -4,7 +4,8 @@ export const addOrder = (data) => {
     method:'POST',
     body: JSON.stringify({
       order: data.order,
-      user: data.user
+      user: data.user,
+      store: data.store
     })
   }).then(res => res.json())
 }
