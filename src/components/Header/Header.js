@@ -26,8 +26,8 @@ const Nav = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px;
-  height: 40px;
+  padding: 0 5px;
+  height: 50px;
   width: 60px;
   cursor: ${props => props.$active ? 'not-allowed':'pointer'};
   color: black;
