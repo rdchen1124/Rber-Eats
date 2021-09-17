@@ -10,6 +10,7 @@ const ListItem = styled.li`
   cursor: pointer;
 `
 const MealWrapper = styled.div`
+  position: relative;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   padding-left: 15px;
@@ -76,7 +77,7 @@ const ImageContainer = styled.div`
   font-size: 22px;
 `
 
-const MealItem = ({id, name, img, price, description}) => {
+const MealItem = ({id, name, img, price, description, numberInCart}) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(setMeal({
@@ -101,7 +102,7 @@ const MealItem = ({id, name, img, price, description}) => {
             </DescriptionContainer>
           </NonePriceContainer>
           <PriceContainer>
-            NT{price}
+            NT{numberInCart}
           </PriceContainer>
         </MealInfoContainer>
         <ImageContainer>

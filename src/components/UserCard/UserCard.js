@@ -6,7 +6,7 @@ const UserCard = (props) => {
     return ()=>{
       document.body.style.overflowY = 'auto';
     }
-  }, [])
+  }, []);
   return (
     <UserModal>
       UserCard
