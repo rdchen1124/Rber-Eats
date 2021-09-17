@@ -5,7 +5,6 @@ const DiscountWrapper = styled.div`
   height: 200px;
   margin: 0 auto;
   padding: 25px 10px;
-
 `
 const DiscountBar = styled.div`
   width: 100%;
