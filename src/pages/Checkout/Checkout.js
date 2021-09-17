@@ -9,12 +9,15 @@ const Root = styled.div`
   width: 90%;
   margin: 0 auto;
   margin-top: 100px;
+  position: relative;
+  height: calc(710px + 30px);
+  padding: 5px;
 `
 const Container = styled.div`
   position: absolute;
   width: 540px;
   max-height: 710px;
-  top: calc(50% - 305px);
+  top: 20px;
   left: calc(50% - 270px);
   margin: 0 auto;
   padding: 10px 15px;
