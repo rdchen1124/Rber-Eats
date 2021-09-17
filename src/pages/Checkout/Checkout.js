@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { CartItem } from "../../components/Cart";
 import useInput from "../../hooks/useInput";
 import { addOrder, setIsSubmitted, setSubmitError, clearCart } from "../../redux/reducers/cartReducer"
+import { setCart } from "../../utils";
 const Root = styled.div`
   width: 90%;
   margin: 0 auto;
@@ -67,6 +68,9 @@ const StoreLink = styled(Link)`
   justify-content: center;
   align-items: center;
   width: 80px;
+  &:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
 `
 const LinkButton = styled.div`
   color: white;
@@ -233,6 +237,13 @@ const Checkout = () => {
       dispatch(setIsSubmitted(false));
     }
   }, [dispatch])
+  useEffect(()=>{
+    const cart = {
+      items,
+      cartStore
+    }
+    setCart(cart);
+  }, [items, cartStore]);
   useLayoutEffect(()=>{
     document.body.style.background = 'rgba(0, 0, 0, 0.2)';
     return ()=>{
