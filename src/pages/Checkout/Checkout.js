@@ -208,15 +208,12 @@ const Checkout = () => {
         user: user,
         name: nameRef.current.value,
         address: addressRef.current.value,
-        phone: Number(phoneRef.current.value)
+        phone: phoneRef.current.value
       },
       store: {...cartStore}
     }))
-
-    // })
     // clean cartStore, state.cart.items
-    dispatch(clearCart());
-    setIsSubmitted(true);
+    // dispatch(clearCart());
     resetName();
     resetAddress();
     resetPhone();
@@ -234,9 +231,11 @@ const Checkout = () => {
   }
   useEffect(()=>{
     return ()=>{
-      dispatch(setIsSubmitted(false));
+      if(isSubmitted){
+        dispatch(setIsSubmitted(false));
+      }
     }
-  }, [dispatch])
+  }, [dispatch, isSubmitted])
   useEffect(()=>{
     const cart = {
       items,
@@ -249,7 +248,7 @@ const Checkout = () => {
     return ()=>{
       document.body.style.background = 'white';
     }
-  }, [])
+  }, []);
   const orderContent = (
     <Container>
       <Title>

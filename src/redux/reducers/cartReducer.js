@@ -111,20 +111,15 @@ export const {
 // }
 export const addOrder = (data) => (dispatch) => {
   dispatch(setIsSubmitting(true));
-  // await timeout(3000);
-  // dispatch(setIsSubmitted(true));
-  // await timeout(3000);
-  // dispatch(setIsSubmitting(false));
   addOrderAPI(data).then(res=>{
     if(res.ok === 0){
       dispatch(setSubmitError(res.message))
-      // console.log('error', res.message);
     }else{
       dispatch(setIsSubmitted(true));
+      dispatch(clearCart());
     }
     dispatch(setIsSubmitting(false));
   }).catch(error=>{
-    // console.log('error', error.toString());
     dispatch(setSubmitError(error.toString()));
     dispatch(setIsSubmitting(false));
   })
