@@ -102,7 +102,7 @@ const MealItem = ({id, name, img, price, description, numberInCart}) => {
             </DescriptionContainer>
           </NonePriceContainer>
           <PriceContainer>
-            NT{numberInCart}
+            NT{price}
           </PriceContainer>
         </MealInfoContainer>
         <ImageContainer>
