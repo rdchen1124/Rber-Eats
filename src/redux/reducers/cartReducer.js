@@ -77,6 +77,8 @@ export const cartSlice = createSlice({
     },
     createNewOrder: (state, action) => {
       state.items = [{...action.payload}];
+      // const key = action.payload.mealId;
+      state.countedItems = {[action.payload.mealId]: action.payload.amount};
       state.totalAmount = action.payload.amount * action.payload.price;
     },
     clearCart: (state) => {
