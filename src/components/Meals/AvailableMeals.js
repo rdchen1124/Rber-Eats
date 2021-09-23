@@ -16,14 +16,9 @@ const processingFunc = (item) => {
 }
 const AvailableMeals = (props) => {
   const MealsList = DUMMY_MEALS;
-  const items = useSelector(store => store.cart.items);
+  const countedItems = useSelector(store => store.cart.countedItems);
   const cartStore = useSelector(store => store.cart.cartStore);
-  const processedItems = useRef([]);
-  useEffect(()=>{
-    if(cartStore.id === props.id){
-      processedItems.current = processingFunc(items);
-    }
-  }, [items, cartStore.id, props.id])
+
   return (
     <section>
       <MealsCard>
@@ -31,7 +26,7 @@ const AvailableMeals = (props) => {
           return  <MealItem
             key={meal.id}
             {...meal}
-            numberInCart={meal.id in processedItems.current ? processedItems.current[meal.id] : 0 }
+            numberInCart={(cartStore.id === props.id && meal.id in countedItems) ? countedItems[meal.id] : 0 }
           />
         })}
       </MealsCard>
