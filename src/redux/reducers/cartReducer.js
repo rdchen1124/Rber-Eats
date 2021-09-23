@@ -6,6 +6,7 @@ const initialState = {
   isSubmitting: false,
   submitError: '',
   items: [],
+  countedItems: {},
   totalAmount: 0,
   cartStore: {},
   tempStore: {},
@@ -28,6 +29,11 @@ export const cartSlice = createSlice({
     addToCart: (state, action) => {
       state.items = [...state.items, action.payload];
       state.totalAmount = state.totalAmount + action.payload.amount * action.payload.price;
+      if(state.countedItems[action.payload.mealId] === undefined){
+        state.countedItems[action.payload.mealId] = action.payload.amount;
+      }else{
+        state.countedItems[action.payload.mealId] += action.payload.amount;
+      }
     },
     plusItemInCart: (state, action) => {
       //action.payload = {id:1, amount: 1}
