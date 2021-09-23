@@ -59,13 +59,13 @@ const MinusButton = styled(AmountItem)`
     background: rgba(0, 0, 0, 0.2);
   }
 `;
-const CartItem = ({id, amount, name, price}) => {
+const CartItem = ({id, mealId, amount, name, price}) => {
   const dispatch = useDispatch();
   const handlePlusCartItem = () => {
-    dispatch(plusItemInCart({id, amount: 1}));
+    dispatch(plusItemInCart({id, mealId, amount: 1}));
   }
   const handleMinusCartItem = () => {
-    dispatch(minusItemInCart({id, amount: 1}));
+    dispatch(minusItemInCart({id, mealId, amount: 1}));
   }
   return (
     <CartItemWrapper>

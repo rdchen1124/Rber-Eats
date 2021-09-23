@@ -159,6 +159,7 @@ const Cart = (props) => {
           <CartItem
             key={item.id}
             id={item.id}
+            mealId={item.mealId}
             amount={item.amount}
             name={item.name}
             price={item.price} 

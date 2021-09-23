@@ -36,7 +36,7 @@ export const cartSlice = createSlice({
       }
     },
     plusItemInCart: (state, action) => {
-      //action.payload = {id:1, amount: 1}
+      //action.payload = {id:1, mealId: 'm0002', amount: 1}
       let extraCharges;
       state.items = state.items.map(item => {
         if(item.id === action.payload.id){
@@ -45,10 +45,11 @@ export const cartSlice = createSlice({
         }
         return item;
       })
+      state.countedItems[action.payload.mealId] += action.payload.amount;
       state.totalAmount += extraCharges;
     },
     minusItemInCart: (state, action) => {
-      //action.payload = {id:1, amount: 1}
+      //action.payload = {id:1, mealId: 'm0002', amount: 1}
       let extraCharges;
       const targetItemIndex = state.items.findIndex(
         (item) => item.id === action.payload.id
