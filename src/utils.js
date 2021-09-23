@@ -16,3 +16,15 @@ export const setCart = (cart) => {
 export const getCart = () => {
   return JSON.parse(localStorage.getItem(CART));
 }
+
+export const countingItems = (item) => {
+  const numOfCartItems = {};
+  for (let i = 0; i < item.length; i++) {
+    if(numOfCartItems[item[i].mealId] === undefined){
+      numOfCartItems[item[i].mealId] = item[i].amount;
+    }else{
+      numOfCartItems[item[i].mealId] += item[i].amount;
+    }
+  }
+  return numOfCartItems;
+}

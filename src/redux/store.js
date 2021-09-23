@@ -3,12 +3,13 @@ import userReducer from './reducers/userReducer'
 import cartReducer from './reducers/cartReducer'
 import menuReducer from './reducers/menuReducer'
 import storeReducer from './reducers/storeReducer'
-import { getAuthUser, getCart } from '../utils'
+import { getAuthUser, getCart, countingItems } from '../utils'
 
 const loaclUser = getAuthUser();
 const lastUser = loaclUser ? loaclUser : '';
 const localCart = getCart();
 const lastItems = localCart ? localCart.items : [];
+const lastCountedItems = localCart ? countingItems(localCart.items) : {}
 const lastCartStore = localCart ? localCart.cartStore : {};
 const lastTotal = lastItems.reduce((total, item)=>{
   return total + item.amount * item.price;
@@ -24,6 +25,7 @@ const preloadedState = {
     isSubmitting: false,
     submitError: '',
     items: lastItems,
+    countedItems: lastCountedItems,
     totalAmount: lastTotal,
     cartStore: lastCartStore,
     tempStore: {},
