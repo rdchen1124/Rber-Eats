@@ -11,14 +11,28 @@ const ListItem = styled.li`
 `
 const MealWrapper = styled.div`
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 2px solid;
+  border-color: ${props=>props.$inCart ? '#4CAF50':'rgba(0, 0, 0, 0.3)'};
   border-radius: 5px;
   padding-left: 15px;
   display: flex;
   &:hover {
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(0, 0, 0, 0.8);
   }
 `
+const CartCountContainer = styled.div`
+  position: absolute;
+  background: #4CAF50;
+  color: white;
+  height: 30px;
+  width: 30px;
+  right: 0px;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 const MealInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -89,9 +103,15 @@ const MealItem = ({id, name, img, price, description, numberInCart}) => {
     }));
     dispatch(showMenu());
   }
+  const countContainer = (
+    <CartCountContainer>
+      {numberInCart}
+    </CartCountContainer>
+  )
   return (
     <ListItem onClick={handleClick}>
-      <MealWrapper>
+      <MealWrapper $inCart={numberInCart > 0}>
+        {numberInCart > 0 && countContainer}
         <MealInfoContainer>
           <NonePriceContainer>
             <NameContainer>
