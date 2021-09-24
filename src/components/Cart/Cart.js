@@ -32,7 +32,7 @@ const CheckoutButton = styled.div`
   right: 5%;
   background: black;
   color: white;
-  height: 35px;
+  height: 50px;
   cursor: pointer;
   display: flex;
   justify-content: space-around;
@@ -92,11 +92,16 @@ const CartBodyRemark = styled.div`
   height: 50px;
   border: none;
   margin: 10px auto 0px;
-  width: 80%;
+  padding: 0 10px;
+  width: 90%;
   background: rgba(0, 0, 0, 0.15);
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  & * {
+    cursor: pointer;
+  }
 `
 const EmptyCartBody = styled.div`
   box-sizing: border-box;
@@ -166,7 +171,8 @@ const Cart = (props) => {
           />
         )}
         <CartBodyRemark>
-          索取餐具、吸管等用品
+          <label htmlFor="cutlery">索取餐具、吸管等用品</label>
+          <input type="checkbox" id="cutlery" />
         </CartBodyRemark>
       </CartBodyContent>
     </CartBody> 
