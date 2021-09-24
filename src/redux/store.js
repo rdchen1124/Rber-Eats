@@ -23,6 +23,7 @@ const preloadedState = {
     isCartShowing: false,
     isSubmitted: false,
     isSubmitting: false,
+    isNeedCutlery: false,
     submitError: '',
     items: lastItems,
     countedItems: lastCountedItems,

@@ -4,6 +4,7 @@ const initialState = {
   isCartShowing: false,
   isSubmitted: false,
   isSubmitting: false,
+  isNeedCutlery: false,
   submitError: '',
   items: [],
   countedItems: {},
@@ -77,7 +78,6 @@ export const cartSlice = createSlice({
     },
     createNewOrder: (state, action) => {
       state.items = [{...action.payload}];
-      // const key = action.payload.mealId;
       state.countedItems = {[action.payload.mealId]: action.payload.amount};
       state.totalAmount = action.payload.amount * action.payload.price;
     },
@@ -103,6 +103,9 @@ export const cartSlice = createSlice({
     },
     setSubmitError: (state, action) => {
       state.submitError = action.payload;
+    },
+    setIsNeedCutlery: (state, action) => {
+      state.isNeedCutlery = action.payload;
     }
   },
 })
@@ -112,13 +115,9 @@ export const {
   showCart, hideCart, toggleCartButton,
   addToCart, plusItemInCart, minusItemInCart, createNewOrder, clearCart,
   setCartStore, setTempStore, setTempOrder,
-  setIsSubmitted, setIsSubmitting, setSubmitError
+  setIsSubmitted, setIsSubmitting, setSubmitError, setIsNeedCutlery
 } = cartSlice.actions
-// const timeout = (ms) => {
-//   return new Promise(resolve=>{
-//     setTimeout(resolve, ms);
-//   })
-// }
+
 export const addOrder = (data) => (dispatch) => {
   dispatch(setIsSubmitting(true));
   addOrderAPI(data).then(res=>{
