@@ -14,6 +14,7 @@ const HeaderContainer = styled.div`
   left: 0;
   right: 0;
   box-sizing: border-box;
+  background-image: radial-gradient(circle farthest-corner at 60% 40%,#07e3a1,#0b6fda);
 `;
 const HeaderWrapper = styled.div`
   width: 90%;
