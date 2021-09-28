@@ -13,6 +13,7 @@ const Button = styled.div`
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background: white;
   display: flex;
   align-items: center;
