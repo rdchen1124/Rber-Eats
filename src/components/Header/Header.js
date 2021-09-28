@@ -7,7 +7,8 @@ import HeaderCartButton from './HeaderCartButton';
 const HeaderContainer = styled.div`
   width: 100%;
   margin: 0 auto;
-  background: green;
+  background: #008CBA;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   position: absolute;
   top: 0;
   left: 0;
@@ -32,11 +33,15 @@ const Nav = styled(Link)`
   cursor: ${props => props.$active ? 'not-allowed':'pointer'};
   color: black;
   text-decoration: none;
-  background:  ${props => props.$active ? '#E7E7E7':'white'};
-  border-radius: 15px;
+  background:  ${props => props.$active ? '#E7E7E7':'rgba(250, 250, 250)'};
+  border-radius: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   margin-left: 15px;
   pointer-events: ${props => props.$active ? 'none':'auto'};
   visibility: ${props=>props.$hidden ? 'hidden':'visible'};
+  &:hover {
+    background: rgba(231, 231, 231);
+  }
 `;
 const LeftContainer = styled.div`
   // border: 1px solid black;
@@ -55,6 +60,7 @@ const TitleContainer = styled(Link)`
   cursor: pointer;
   color: black;
   padding: 10px;
+  color: white;
 `;
 const RightContainer = styled.div`
   // border: 1px solid black;
