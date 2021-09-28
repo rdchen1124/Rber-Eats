@@ -31,10 +31,10 @@ const slideRight = keyframes`
   }
 `;
 
-const ModalOverleyContainer = styled.div`
+const ModalOverlayContainer = styled.div`
   background: white;
   position: fixed;
-  width: 25%;
+  width: 20%;
   top: 0;
   left: 0;
   bottom: 0;
@@ -43,9 +43,9 @@ const ModalOverleyContainer = styled.div`
   animation: 300ms ${slideRight} ease-out;
 `;
 
-const ModalOverley = (props) => {
+const ModalOverlay = (props) => {
   return (
-    <ModalOverleyContainer open={props.isShow}>{props.children}</ModalOverleyContainer>
+    <ModalOverlayContainer open={props.isShow}>{props.children}</ModalOverlayContainer>
   )
 }
 
@@ -60,7 +60,7 @@ const UserModal = (props) => {
     <Fragment>
       {ReactDOM.createPortal(<Backdrop onClose={handleClose} />, portalElement)}
       {ReactDOM.createPortal(
-        <ModalOverley isShow={isUserCardShowing}>{props.children}</ModalOverley>,
+        <ModalOverlay isShow={isUserCardShowing}>{props.children}</ModalOverlay>,
         portalElement
       )}
     </Fragment>
