@@ -51,6 +51,13 @@ const LoginFormButtonWrapper = styled.div`
 const LoginFormButton = styled.button`
   height: 50px;
   font-size: 20px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background: #11CC17;
+  }
 `
 const isEMail = (value) => {
   const pattern = new RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
