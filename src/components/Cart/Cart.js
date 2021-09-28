@@ -103,6 +103,10 @@ const CartBodyRemark = styled.div`
     cursor: pointer;
   }
 `
+const CutleryCheckInput = styled.input`
+  width: 25px;
+  height: 25px;
+`
 const EmptyCartBody = styled.div`
   box-sizing: border-box;
   width: 100%;
@@ -176,7 +180,7 @@ const Cart = (props) => {
         )}
         <CartBodyRemark>
           <label htmlFor="cutlery">索取餐具、吸管等用品</label>
-          <input 
+          <CutleryCheckInput 
             type="checkbox"
             id="cutlery"
             defaultChecked={isNeedCutlery}
