@@ -53,7 +53,7 @@ function App() {
     <RootContainer>
       <Router>
         <Header onLogOut={handleLogOut} />
-        { isUserCardShowing && <UserCard />}
+        { isUserCardShowing && <UserCard onLogOut={handleLogOut} />}
         <Transition mountOnEnter unmountOnExit timeout={200} in={isCartShowing}>
         {(state) => {
           let className = state;
