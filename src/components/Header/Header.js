@@ -14,7 +14,7 @@ const HeaderContainer = styled.div`
   left: 0;
   right: 0;
   box-sizing: border-box;
-  background-image: radial-gradient(circle farthest-corner at 60% 40%,#07e3a1,#0b6fda);
+  background-image: radial-gradient(circle farthest-corner at 50% 50%,#07e3a1,#0b6fda);
 `;
 const HeaderWrapper = styled.div`
   width: 90%;
@@ -75,17 +75,18 @@ const Header = ({onLogOut}) => {
   const user = useSelector(store => store.user.user);
   const pathname = location.pathname;
   const linkLoginObj = {pathname: '/login', state: {from: pathname}}
+  const isHidden = location.pathname === '/checkout' || location.pathname === '/login';
   return (
     <HeaderContainer>
       <HeaderWrapper>
         <LeftContainer>
-          <UserButton />
+          <UserButton $active={location.pathname === '/login'} />
           <TitleContainer to='/'>
             Rber Eats
           </TitleContainer>
         </LeftContainer>
         <RightContainer>
-          <HeaderCartButton $hidden={location.pathname === '/checkout'} />
+          <HeaderCartButton $hidden={isHidden} />
           {!user && <Nav to={linkLoginObj} $active={location.pathname === '/login'}>登入</Nav>}
           {user && <Nav as='div' $hidden={location.pathname === '/checkout'} onClick={onLogOut}>登出</Nav>}
         </RightContainer>

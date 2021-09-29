@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { store } from '../../redux/store';
 import { useDispatch } from 'react-redux';
 import { showUserCard } from '../../redux/reducers/userReducer';
 import { UserIcon } from '../UI/Icons'; 
@@ -14,21 +13,21 @@ const Button = styled.div`
   width: 50px;
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  background: white;
+  background: ${props => props.$active ? '#E7E7E7':'rgba(250, 250, 250)'};
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: 10px;
   cursor: pointer;
+  pointer-events: ${props => props.$active ? 'none':'auto'};
 `
-const UserButton = () => {
+const UserButton = ({$active}) => {
   const dispatch = useDispatch();
   const handleShowUserCard = () => {
     dispatch(showUserCard());
   }
-  // const isUserCardShowing = useSelector(store => store.user.isUserCardShowing)
   return (
-    <Button onClick={handleShowUserCard}>
+    <Button $active={$active} onClick={handleShowUserCard}>
       <UserButtonSpan>
         <UserIcon />
       </UserButtonSpan>
