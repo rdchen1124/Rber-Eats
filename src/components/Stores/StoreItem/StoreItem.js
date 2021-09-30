@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import { FavoriteIcon } from "../../UI/Icons"
 const ListItem = styled.li`
+  position: relative;
   margin-bottom: 20px;
   box-sizing: border-box;
   flex: 0 0 30%;
@@ -20,7 +22,6 @@ const StoreWrapper = styled.div`
   flex-direction: column;
 `
 const ImageContainer = styled.div`
-  position: relative;
   width: auto;
   height: 250px;
   background: gray;
@@ -59,21 +60,43 @@ const ScoreContainer = styled.div`
   justify-content: center;
   align-items: center;
 `
-const Heart = styled(ScoreContainer)`
+const FavoriteContainer = styled.div`
   position: absolute;
-  right: 5px;
-  top: 5px;
-  background: #f44336;
-  color: white;
-  font-size: 20px;
+  right: 30px;
+  top: 25px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 const StoreItem = ({id, img, name, score}) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  }
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  }
+  const handleIconClick = (e) => {
+    e.stopPropagation();
+    console.log('Icon is clicked!!');
+  }
   return (
     <ListItem>
+      <FavoriteContainer 
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleIconClick}>
+        <FavoriteIcon
+          fill={isHovered ? "#D0D0D0":"white"}
+          type="hollow"
+          isHovered={isHovered}
+        />
+      </FavoriteContainer>
       <StoreLink to={`/store/${id}`}>
         <StoreWrapper>
           <ImageContainer>
-            <Heart>&lt;3</Heart>
             {img}
           </ImageContainer>
           <DescriptionContainer>
