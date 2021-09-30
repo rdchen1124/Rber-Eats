@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
+import { FavoriteIcon } from '../../components/UI/Icons';
 const StoreOverviewWrapper = styled.div`
-  width: 100%;
+  width: 95%;
   height: 250px;
   margin: 0 auto;
-  padding: 25px 10px;
+  padding: 25px;
+  box-sizing: border-box;
 `
 const StoreOverviewContainer = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -17,6 +20,7 @@ const StoreOverviewContainer = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: start;
+  box-sizing: border-box;
 `
 const StoreName = styled.div`
   padding-left: 20px;
@@ -29,12 +33,43 @@ const StoreInfo = styled.div`
   color: white;
   font-size: 28px;
 `
+const FavoriteContainer = styled.div`
+  position: absolute;
+  right: 30px;
+  bottom: 25px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 const StoreOverview = ({id, name, score}) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  }
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  }
+  const handleIconClick = (e) => {
+    e.stopPropagation();
+    console.log('Icon is clicked!!');
+  }
   return (
     <StoreOverviewWrapper>
       <StoreOverviewContainer>
         <StoreName>{name}</StoreName>
         <StoreInfo>評分: {score}</StoreInfo>
+        <FavoriteContainer
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onClick={handleIconClick}>
+          <FavoriteIcon
+            fill={isHovered ? "#D0D0D0":"white"}
+            type="hollow"
+            isHovered={isHovered}
+          />
+        </FavoriteContainer>
       </StoreOverviewContainer>
     </StoreOverviewWrapper>
   )
