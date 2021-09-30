@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 const Root = styled.div`
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   margin-top: 100px;
 `

@@ -6,7 +6,7 @@ import Stores from '../../components/Stores';
 import mealsBanner from '../../assets/veestro_banner.jpg';
 const BannerWrapper = styled.div`
   position: relative;
-  width: 1000px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -20,8 +20,8 @@ const BannerTitle = styled.div`
   color: white;
 `
 const BannerImage = styled.img`
-  width: 1000px;
-  height: 350px;
+  width: 100vw;
+  height: 25vw;
 `
 const Home = () => {
   return (
