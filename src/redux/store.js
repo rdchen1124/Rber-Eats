@@ -17,7 +17,8 @@ const lastTotal = lastItems.reduce((total, item)=>{
 const preloadedState = {
   user: {
     user: lastUser,
-    isUserCardShowing: false
+    isUserCardShowing: false,
+    favorites: []
   },
   cart: {
     isCartShowing: false,

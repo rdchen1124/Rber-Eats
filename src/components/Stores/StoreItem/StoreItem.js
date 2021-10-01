@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { toggleFavorites } from "../../../redux/reducers/userReducer"
 import { FavoriteIcon } from "../../UI/Icons"
 const ListItem = styled.li`
   position: relative;
@@ -71,7 +73,9 @@ const FavoriteContainer = styled.div`
   align-items: center;
 `
 const StoreItem = ({id, img, name, score}) => {
+  const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
+  const favorites = useSelector(store => store.user.favorites);
   const handleMouseEnter = () => {
     setIsHovered(true);
   }
@@ -80,7 +84,7 @@ const StoreItem = ({id, img, name, score}) => {
   }
   const handleIconClick = (e) => {
     e.stopPropagation();
-    console.log('Icon is clicked!!');
+    dispatch(toggleFavorites(id));
   }
   return (
     <ListItem>
@@ -90,7 +94,7 @@ const StoreItem = ({id, img, name, score}) => {
         onClick={handleIconClick}>
         <FavoriteIcon
           fill={isHovered ? "#D0D0D0":"white"}
-          type="hollow"
+          type={favorites.includes(id) ? 'solid':'hollow'}
           size="20"
           isHovered={isHovered}
         />

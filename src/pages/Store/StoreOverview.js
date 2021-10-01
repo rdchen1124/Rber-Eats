@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
+import { useDispatch, useSelector } from "react-redux"
+import { toggleFavorites } from '../../redux/reducers/userReducer';
 import { FavoriteIcon } from '../../components/UI/Icons';
 const StoreOverviewWrapper = styled.div`
   width: 95%;
@@ -44,7 +46,9 @@ const FavoriteContainer = styled.div`
   align-items: center;
 `
 const StoreOverview = ({id, name, score}) => {
+  const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
+  const favorites = useSelector(store => store.user.favorites);
   const handleMouseEnter = () => {
     setIsHovered(true);
   }
@@ -53,6 +57,7 @@ const StoreOverview = ({id, name, score}) => {
   }
   const handleIconClick = (e) => {
     e.stopPropagation();
+    dispatch(toggleFavorites(id));
     console.log('Icon is clicked!!');
   }
   return (
@@ -66,7 +71,7 @@ const StoreOverview = ({id, name, score}) => {
           onClick={handleIconClick}>
           <FavoriteIcon
             fill={isHovered ? "#D0D0D0":"white"}
-            type="hollow"
+            type={favorites.includes(id) ? "solid" : "hollow"}
             size="50"
             isHovered={isHovered}
           />
