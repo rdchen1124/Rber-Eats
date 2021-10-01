@@ -5,8 +5,8 @@ import menuReducer from './reducers/menuReducer'
 import storeReducer from './reducers/storeReducer'
 import { getAuthUser, getCart, countingItems } from '../utils'
 
-const loaclUser = getAuthUser();
-const lastUser = loaclUser ? loaclUser : '';
+const localUser = getAuthUser();
+const lastUser = localUser ? localUser : '';
 const localCart = getCart();
 const lastItems = localCart ? localCart.items : [];
 const lastCountedItems = localCart ? countingItems(localCart.items) : {}
