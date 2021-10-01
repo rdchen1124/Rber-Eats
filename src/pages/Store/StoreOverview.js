@@ -58,7 +58,6 @@ const StoreOverview = ({id, name, score}) => {
   const handleIconClick = (e) => {
     e.stopPropagation();
     dispatch(toggleFavorites(id));
-    console.log('Icon is clicked!!');
   }
   return (
     <StoreOverviewWrapper>

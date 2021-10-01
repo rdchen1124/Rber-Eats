@@ -1,5 +1,6 @@
 const USER = 'user';
 const CART = 'cart';
+const FAVORITES = 'favorites';
 
 export const setAuthUser = (name) => {
   localStorage.setItem(USER, name);
@@ -15,6 +16,14 @@ export const setCart = (cart) => {
 
 export const getCart = () => {
   return JSON.parse(localStorage.getItem(CART));
+}
+
+export const setFavorites = (favorites) => {
+  localStorage.setItem(FAVORITES, JSON.stringify(favorites));
+}
+
+export const getFavorites = () => {
+  return JSON.parse(localStorage.getItem(FAVORITES));
 }
 
 export const countingItems = (item) => {
