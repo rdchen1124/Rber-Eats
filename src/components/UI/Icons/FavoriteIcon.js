@@ -9,15 +9,15 @@ const svgType = {
     drawn: hollow_d
   }
 }
-const FavoriteIcon = ({fill, type, isHovered}) => {
+const FavoriteIcon = ({fill, type, size, isHovered}) => {
   return (
     <svg 
       aria-hidden="true"
       focusable="false"
       viewBox="0 0 24 24"
       className="c6 c7 c8 ka"
-      width="20"
-      height="20"
+      width={size}
+      height={size}
       fill={fill}
     >
       <path d={isHovered ? svgType['solid']['drawn'] : svgType[type]['drawn']} />

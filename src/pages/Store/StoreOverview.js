@@ -67,6 +67,7 @@ const StoreOverview = ({id, name, score}) => {
           <FavoriteIcon
             fill={isHovered ? "#D0D0D0":"white"}
             type="hollow"
+            size="50"
             isHovered={isHovered}
           />
         </FavoriteContainer>
