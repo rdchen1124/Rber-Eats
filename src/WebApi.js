@@ -1,11 +1,13 @@
-const base_url = 'https://react-blog-a5a6e-default-rtdb.firebaseio.com'
+const base_url = 'http://localhost:3004';//在打API前，必須先啟動 json-server
 export const addOrder = (data) => {
-  return fetch(`${base_url}/orders.json`,{
+  return fetch(`${base_url}/orders`,{
     method:'POST',
-    body: JSON.stringify({
-      order: data.order,
-      user: data.user,
-      store: data.store
-    })
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: `user=${data.user}`
+    +`&order=${JSON.stringify(data.order)}`
+    +`&info=${JSON.stringify(data.info)}`
+    +`&store=${JSON.stringify(data.store)}`
   }).then(res => res.json())
 }

@@ -203,14 +203,17 @@ const Checkout = () => {
     console.log('address', addressRef.current.value);
     console.log('phone', phoneRef.current.value);
     dispatch(addOrder({
-      order: [...items],
-      user: {
-        user: user,
+      user: user,
+      order: items,
+      info: {
         name: nameRef.current.value,
         address: addressRef.current.value,
         phone: phoneRef.current.value
       },
-      store: {...cartStore}
+      store: {
+        id: cartStore.id,
+        name: cartStore.name
+      }
     }))
     // clean cartStore, state.cart.items
     // dispatch(clearCart());
