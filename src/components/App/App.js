@@ -14,6 +14,7 @@ import Header from '../Header';
 import Home from '../../pages/Home';
 import Store from '../../pages/Store';
 import Login from '../../pages/Login';
+import Register from '../../pages/Register';
 import Checkout from '../../pages/Checkout';
 import UserCard from '../UserCard';
 import Cart from '../Cart';
@@ -71,9 +72,7 @@ function App() {
             {user ? <Redirect to='/' /> : <Login />}
           </Route>
           <Route exact path='/register'>
-            <div>
-              註冊
-            </div>
+            {user ? <Register to='/' /> : <Register />}
           </Route>
           <Route exact path='/checkout'>
             <Checkout />
