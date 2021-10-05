@@ -18,8 +18,8 @@ export const addUser = (data) => {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     body:`name=${data.name}`
-    +`password=${data.password}`
-    +`favorites=${JSON.stringify(data.favorites)}`
+    +`&password=${data.password}`
+    +`&favorites=${JSON.stringify(data.favorites)}`
   }).then(res => res.json());
 }
 export const getUser = (data) => {
