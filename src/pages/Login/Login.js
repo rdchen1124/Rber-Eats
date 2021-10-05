@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/reducers/userReducer';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import useInput from '../../hooks/useInput';
 import { setAuthUser } from '../../utils';
+import { getUser } from '../../WebApi';
 const Root = styled.div`
   margin: 100px auto 0;
   height: 600px;
@@ -46,7 +48,12 @@ const LoginFormErrorLabel = styled.label`
 const LoginFormButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 35px;
+  margin-top: 10px;
+`
+const RigesterLink = styled(Link)`
+  height: 25px;
+  text-decoration: none;
+  color: green;
 `
 const LoginFormButton = styled.button`
   height: 50px;
@@ -75,12 +82,12 @@ const Login = (props) => {
     }
   }, [history])
   const {
-    inputRef: emailRef,
-    isValid: isEmailValid,
-    hasError: emailHasError,
-    handleInputBlur: handleEmailBlur,
-    reset: resetEmail
-  } = useInput(isEMail);
+    inputRef: nameRef,
+    isValid: isNameValid,
+    hasError: nameHasError,
+    handleInputBlur: handleNameBlur,
+    reset: resetName
+  } = useInput(isEmpty);
   const {
     inputRef: passwordRef,
     isValid: isPasswordValid,
@@ -89,17 +96,26 @@ const Login = (props) => {
     reset: resetPassword
   } = useInput(isEmpty);
   let isFormValid = false;
-  isFormValid = isEmailValid && isPasswordValid;
+  isFormValid = isNameValid && isPasswordValid;
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!isEmailValid){
+    if(!isFormValid){
       return;
     }
-    resetEmail();
-    resetPassword();
-    dispatch(setUser('Ryan'));
-    setAuthUser('Ryan');
-    history.push(history.location.state.from);
+    getUser({
+      name: nameRef.current.value,
+      password: passwordRef.current.value
+    }).then(res => {
+      if(!res.length){
+        resetName();
+        resetPassword();
+      }else{
+        const user = res[0].name;
+        history.push(history.location.state.from);
+        dispatch(setUser(user));
+        setAuthUser(user);
+      }
+    })
   }
   const handleClickEnter = (e) => {
     e.key === 'Enter' && e.preventDefault();
@@ -108,15 +124,15 @@ const Login = (props) => {
     <LoginForm onKeyDown={handleClickEnter} onSubmit={handleSubmit}>
       <LoginFormTitle>很高興看到你，朋友</LoginFormTitle>
       <LoginFormInputWrapper>
-        <LoginFormLabel htmlFor='name'>使用您的電子郵件登入</LoginFormLabel>
+        <LoginFormLabel htmlFor='name'>請輸入您的帳號</LoginFormLabel>
         <LoginFormInput
-          ref={emailRef}
+          ref={nameRef}
           type='text'
           id='name'
-          onBlur={handleEmailBlur}
-          placeholder='請輸入電子郵件'
+          onBlur={handleNameBlur}
+          placeholder='請輸入使用者名稱'
         />
-        <LoginFormErrorLabel $show={emailHasError}>電子郵件格式錯誤</LoginFormErrorLabel>
+        <LoginFormErrorLabel $show={nameHasError}>使用者名稱不能為空</LoginFormErrorLabel>
       </LoginFormInputWrapper>
       <LoginFormInputWrapper>
         <LoginFormLabel htmlFor='password'>請輸入密碼以登入</LoginFormLabel>
@@ -125,11 +141,12 @@ const Login = (props) => {
           type='password'
           id='password'
           onBlur={handlePasswordBlur}
-          placeholder='請輸入 6-12 碼英數混合的密碼'
+          placeholder='請輸入您的密碼'
         />
         <LoginFormErrorLabel $show={passwordHasError}>密碼不能為空</LoginFormErrorLabel>
       </LoginFormInputWrapper>
       <LoginFormButtonWrapper>
+        <div><span>還沒有帳號嗎? </span><RigesterLink to='/register'>註冊</RigesterLink></div>
         <LoginFormButton disabled={!isFormValid}>登入</LoginFormButton>
       </LoginFormButtonWrapper>
     </LoginForm>
