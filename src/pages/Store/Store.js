@@ -7,6 +7,7 @@ import DUMMY_STORES from '../../DUMMY_STORES';
 import Meals from '../../components/Meals';
 import MealCard from '../../components/MealCard';
 import { setStore } from '../../redux/reducers/storeReducer';
+import { updateFavorites } from '../../redux/reducers/userReducer';
 import { setAuthUser } from '../../utils';
 
 const Store = () => {
@@ -20,7 +21,10 @@ const Store = () => {
   }, [dispatch, id])
   
   useEffect(()=>{
-    setAuthUser(user)
+    setAuthUser(user);
+    if(user.id !== 0){
+      dispatch(updateFavorites({userId: user.id, favorites: user.favorites}))
+    }
   }, [user])
 
   return (
