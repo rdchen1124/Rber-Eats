@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { CartItem } from "../../components/Cart";
 import useInput from "../../hooks/useInput";
-import { addOrder, setIsSubmitted, setSubmitError, clearCart } from "../../redux/reducers/cartReducer"
+import { addOrder, setIsSubmitted, setSubmitError } from "../../redux/reducers/cartReducer"
 import { setCart } from "../../utils";
 const Root = styled.div`
   width: 90%;
@@ -199,9 +199,6 @@ const Checkout = () => {
     if(!isValid){
       return;
     }
-    console.log('name', nameRef.current.value);
-    console.log('address', addressRef.current.value);
-    console.log('phone', phoneRef.current.value);
     dispatch(addOrder({
       user: user,
       order: items,
@@ -215,8 +212,6 @@ const Checkout = () => {
         name: cartStore.name
       }
     }))
-    // clean cartStore, state.cart.items
-    // dispatch(clearCart());
     resetName();
     resetAddress();
     resetPhone();

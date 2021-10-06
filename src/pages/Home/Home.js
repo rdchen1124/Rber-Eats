@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Root from '../../components/Root';
-import Discount from './Discount';
 import Stores from '../../components/Stores';
 import mealsBanner from '../../assets/veestro_banner.jpg';
 const BannerWrapper = styled.div`
