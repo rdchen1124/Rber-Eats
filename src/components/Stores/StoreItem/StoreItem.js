@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { toggleFavorites } from "../../../redux/reducers/userReducer"
 import { FavoriteIcon } from "../../UI/Icons"
@@ -74,6 +74,7 @@ const FavoriteContainer = styled.div`
 `
 const StoreItem = ({id, img, name, score}) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [isHovered, setIsHovered] = useState(false);
   const user = useSelector(store => store.user.user);
   const handleMouseEnter = () => {
@@ -84,6 +85,13 @@ const StoreItem = ({id, img, name, score}) => {
   }
   const handleIconClick = (e) => {
     e.stopPropagation();
+    if(user.id === 0) {
+      history.push({
+        pathname: '/login',
+        state: { from: history.location.pathname }
+      });
+      return;
+    }
     dispatch(toggleFavorites(id));
   }
   return (
