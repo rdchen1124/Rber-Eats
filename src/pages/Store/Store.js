@@ -7,22 +7,21 @@ import DUMMY_STORES from '../../DUMMY_STORES';
 import Meals from '../../components/Meals';
 import MealCard from '../../components/MealCard';
 import { setStore } from '../../redux/reducers/storeReducer';
-import { setFavorites } from '../../utils';
+import { setAuthUser } from '../../utils';
 
 const Store = () => {
   let { id } = useParams();
   const dispatch = useDispatch();
   const store = useSelector(store => store.store.store);
   const isMenuShowing = useSelector(store => store.menu.isMenuShowing);
-  const favorites = useSelector(store => store.user.favorites);
+  const user = useSelector(store => store.user.user);
   useEffect(()=>{
     dispatch(setStore(DUMMY_STORES.filter(shop => id === shop.id)[0]))
   }, [dispatch, id])
   
   useEffect(()=>{
-    setFavorites(favorites);
-    console.log('favorites', favorites);
-  }, [favorites])
+    setAuthUser(user)
+  }, [user])
 
   return (
     <Root>

@@ -134,7 +134,7 @@ const Cart = (props) => {
   }
   const handleCheckoutClick = (e) => {
     e.preventDefault();
-    if(user){
+    if(user.id !== 0){
       history.push('/checkout');
     }else{
       history.push({

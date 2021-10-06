@@ -48,7 +48,7 @@ const FavoriteContainer = styled.div`
 const StoreOverview = ({id, name, score}) => {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
-  const favorites = useSelector(store => store.user.favorites);
+  const user = useSelector(store => store.user.user);
   const handleMouseEnter = () => {
     setIsHovered(true);
   }
@@ -70,7 +70,7 @@ const StoreOverview = ({id, name, score}) => {
           onClick={handleIconClick}>
           <FavoriteIcon
             fill={isHovered ? "#D0D0D0":"white"}
-            type={favorites.includes(id) ? "solid" : "hollow"}
+            type={user.favorites !== undefined && user.favorites.includes(id) ? "solid" : "hollow"}
             size="50"
             isHovered={isHovered}
           />

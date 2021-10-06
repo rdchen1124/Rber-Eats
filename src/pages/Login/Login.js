@@ -66,10 +66,6 @@ const LoginFormButton = styled.button`
     background: #11CC17;
   }
 `
-const isEMail = (value) => {
-  const pattern = new RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
-  return pattern.test(value);
-}
 const isEmpty = (value) => value.trim() !== "";
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -110,10 +106,16 @@ const Login = (props) => {
         resetName();
         resetPassword();
       }else{
-        const user = res[0].name;
+        const user = res[0];
+        const formattedUser = {
+          id: user.id,
+          name: user.name,
+          favorites: JSON.parse(user.favorites)
+        }
         history.push(history.location.state.from);
-        dispatch(setUser(user));
-        setAuthUser(user);
+        dispatch(setUser(formattedUser));
+        // dispatch(setFavorites(JSON.parse(user.favorites)));
+        setAuthUser(formattedUser);
       }
     })
   }

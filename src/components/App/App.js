@@ -8,7 +8,7 @@ import {
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { hideCart } from '../../redux/reducers/cartReducer';
-import { setUser } from '../../redux/reducers/userReducer';
+import { setUser, cleanUser, clearFavorites } from '../../redux/reducers/userReducer';
 import { Transition } from "react-transition-group";
 import Header from '../Header';
 import Home from '../../pages/Home';
@@ -48,7 +48,7 @@ function App() {
   }, [isScroll, dispatch]);
   const handleLogOut = () => {
     setAuthUser('');
-    dispatch(setUser(''));
+    dispatch(cleanUser());
   }
   return (
     <RootContainer>
@@ -69,10 +69,10 @@ function App() {
             <Store />
           </Route>
           <Route path='/login'>
-            {user ? <Redirect to='/' /> : <Login />}
+            {user.id !== 0 ? <Redirect to='/' /> : <Login />}
           </Route>
           <Route exact path='/register'>
-            {user ? <Register to='/' /> : <Register />}
+            {user.id !== 0 ? <Register to='/' /> : <Register />}
           </Route>
           <Route exact path='/checkout'>
             <Checkout />

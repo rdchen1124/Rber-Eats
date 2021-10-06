@@ -87,8 +87,8 @@ const Header = ({onLogOut}) => {
         </LeftContainer>
         <RightContainer>
           <HeaderCartButton $hidden={isHidden} />
-          {!user && <Nav to={linkLoginObj} $active={location.pathname === '/login'}>登入</Nav>}
-          {user && <Nav as='div' $hidden={location.pathname === '/checkout'} onClick={onLogOut}>登出</Nav>}
+          {user.id === 0 && <Nav to={linkLoginObj} $active={location.pathname === '/login'}>登入</Nav>}
+          {user.id !== 0 && <Nav as='div' $hidden={location.pathname === '/checkout'} onClick={onLogOut}>登出</Nav>}
         </RightContainer>
       </HeaderWrapper>
     </HeaderContainer>
