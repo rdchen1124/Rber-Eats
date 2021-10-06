@@ -25,3 +25,12 @@ export const addUser = (data) => {
 export const getUser = (data) => {
   return fetch(`${base_url}/users?name=${data.name}&password=${data.password}`).then(res => res.json());
 }
+export const updateFavorites = ({favorites, userId}) => {
+  return fetch(`${base_url}/users/${userId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: `favorites=${JSON.stringify(favorites)}`
+  }).then(res => res.json());
+}
