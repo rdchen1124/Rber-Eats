@@ -35,6 +35,7 @@ const ModalOverlayContainer = styled.div`
   background: white;
   position: fixed;
   width: 20%;
+  min-width: 200px;
   top: 0;
   left: 0;
   bottom: 0;

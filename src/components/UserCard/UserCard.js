@@ -5,13 +5,15 @@ import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { hideUserCard } from '../../redux/reducers/userReducer';
 import { UserModal } from '../UI';
+import { FavoriteIcon } from '../UI/Icons';
 const LoginButton = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 5px;
   height: 50px;
-  width: 100%;
+  width: 50%;
+  margin: 0 auto;
   cursor: pointer;
   color: white;
   background:  black;
@@ -20,7 +22,45 @@ const LoginButton = styled(Link)`
   text-decoration: none;
 `;
 const LogoutButton = styled(LoginButton)`
+  margin-top: 20px;
 `;
+const FavoriteSpan = styled.span`
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const UserImage = styled.div`
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: skyblue;
+  color: white;
+`
+const ListItemContainer = styled.div`
+  height: 60px;
+  padding: 5px;
+  width: 50%;
+  min-width: 150px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  & + & {
+    margin-top: 20px;
+  }
+`
+const UserInfoContainer = styled(ListItemContainer)`
+  cursor: default;
+`
 const UserCard = ({onLogOut}) => {
   const user = useSelector(store => store.user.user);
   const dispatch = useDispatch();
@@ -40,20 +80,50 @@ const UserCard = ({onLogOut}) => {
     onLogOut();
     dispatch(hideUserCard());
   }
-  const userLoginContent = (
+  const userContent = (
     <Fragment>
+      <UserInfoContainer>
+        <UserImage>{user.name[0]}</UserImage>
+        <div>Hi, {user.name}</div>
+      </UserInfoContainer>
+      <ListItemContainer>
+        <span>Orders</span>
+        <FavoriteSpan>
+          <FavoriteIcon fill="black" type="solid" size="20"/>
+        </FavoriteSpan>
+      </ListItemContainer>
+      <ListItemContainer>
+        <span>Favorites</span>
+        <FavoriteSpan>
+          <FavoriteIcon fill="black" type="solid" size="20"/>
+        </FavoriteSpan>
+      </ListItemContainer>
+      <ListItemContainer>
+        <span>Help</span>
+        <FavoriteSpan>
+          <FavoriteIcon fill="black" type="solid" size="20"/>
+        </FavoriteSpan>
+      </ListItemContainer>
+      <ListItemContainer>
+        <span>Donate</span>
+        <FavoriteSpan>
+          <FavoriteIcon fill="black" type="solid" size="20"/>
+        </FavoriteSpan>
+      </ListItemContainer>
+      <br />
+      <hr />
       <LogoutButton as='button' onClick={handleLogoutClick}>登出</LogoutButton>
     </Fragment>
   );
-  const userLogoutContent = (
+  const guestContent = (
     <Fragment>
       <LoginButton to={linkLoginObj} onClick={handleLoginClick}>登入</LoginButton>
     </Fragment>
   );
   return (
     <UserModal>
-      {!user && userLogoutContent}
-      {user && userLoginContent}
+      {user.id === 0 && guestContent}
+      {user.id !== 0 && userContent}
     </UserModal>
   )
 }
