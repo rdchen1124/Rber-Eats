@@ -36,7 +36,7 @@ const Nav = styled(Link)`
   text-decoration: none;
   background:  ${props => props.$active ? '#E7E7E7':'rgba(250, 250, 250)'};
   border-radius: 30px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: none;
   margin-left: 15px;
   pointer-events: ${props => props.$active ? 'none':'auto'};
   visibility: ${props=>props.$hidden ? 'hidden':'visible'};
