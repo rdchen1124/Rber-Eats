@@ -62,7 +62,6 @@ export const cartSlice = createSlice({
         if(!state.items.length){
           state.cartStore = {};
         }
-        delete state.countedItems[action.payload.mealId];
       }
       else{
         state.items = state.items.map(item => {
@@ -72,6 +71,10 @@ export const cartSlice = createSlice({
           }
           return item;
         })
+      }
+      if(state.countedItems[action.payload.mealId] === 1){
+        delete state.countedItems[action.payload.mealId];
+      }else{
         state.countedItems[action.payload.mealId] -= action.payload.amount;
       }
       state.totalAmount -= extraCharges;
