@@ -5,7 +5,7 @@ import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { hideUserCard } from '../../redux/reducers/userReducer';
 import { UserModal } from '../UI';
-import { FavoriteIcon } from '../UI/Icons';
+import { FavoriteIcon, OrderIcon } from '../UI/Icons';
 const LoginButton = styled(Link)`
   display: flex;
   justify-content: center;
@@ -89,7 +89,7 @@ const UserCard = ({onLogOut}) => {
       <ListItemContainer>
         <span>Orders</span>
         <FavoriteSpan>
-          <FavoriteIcon fill="black" type="solid" size="20"/>
+          <OrderIcon fill="black"/>
         </FavoriteSpan>
       </ListItemContainer>
       <ListItemContainer>
