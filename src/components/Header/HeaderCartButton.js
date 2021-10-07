@@ -5,15 +5,18 @@ import { CartIcon } from "../UI/Icons";
 const CartButtonWrapper = styled.div`
   width: 140px;
   height: 50px;
-  background: black;
-  color: white;
-  border-radius: 15px;
+  background: white;
+  color: black;
+  border-radius: 30px;
   padding: 0px 10px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   cursor: pointer;
-  visibility: ${props => props.$hidden ? 'hidden':'visible'}
+  visibility: ${props => props.$hidden ? 'hidden':'visible'};
+  &:hover {
+    background: rgba(231, 231, 231);
+  }
 `;
 const CartButtonSpan = styled.span`
   height: 1.35rem;
@@ -22,8 +25,9 @@ const CartIconSpan = styled(CartButtonSpan)`
   width: 1.35rem;
 `;
 const CartBadgeSpan = styled(CartButtonSpan)`
-  background-color: white;
+  background: white;
   color: black;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0.2rem 1.0rem;
   border-radius: 25px;
   font-weight: bold;
