@@ -200,7 +200,7 @@ const Checkout = () => {
       return;
     }
     dispatch(addOrder({
-      user: user,
+      user: user.name,
       order: items,
       info: {
         name: nameRef.current.value,
