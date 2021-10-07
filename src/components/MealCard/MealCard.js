@@ -9,6 +9,7 @@ import {
 } from "../../redux/reducers/cartReducer";
 import MealCardForm from "./MealCardForm";
 import { setCart } from "../../utils";
+import { XIcon } from "../UI/Icons";
 const MealContainer = styled.div`
   position: relative;
   width: 100%;
@@ -35,7 +36,9 @@ const CloseButton = styled.div`
 `
 const Close = ({onClose}) => {
   return( 
-    <CloseButton onClick={onClose}>X</CloseButton>
+    <CloseButton onClick={onClose}>
+      <XIcon fill="black" size="24px"/>
+    </CloseButton>
   )
 }
 const ImageContainer = styled.div`

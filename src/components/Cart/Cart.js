@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { hideCart, setIsNeedCutlery } from "../../redux/reducers/cartReducer";
 import CartItem from "./CartItem";
 import { setCart } from "../../utils";
+import { XIcon } from "../UI/Icons";
 
 const CloseButton = styled.div`
   position: absolute;
@@ -208,7 +209,7 @@ const Cart = (props) => {
     <CartModal className={props.className}>
       <CartBodyWrapper>
         <CloseButton onClick={handleClose}>
-          x
+          <XIcon fill="black" size="16px"/>
         </CloseButton>
         {!items.length && emptyCart}
         {items.length !== 0 && cartContent}
