@@ -25,7 +25,7 @@ const CartIconSpan = styled(CartButtonSpan)`
   width: 1.35rem;
 `;
 const CartBadgeSpan = styled(CartButtonSpan)`
-  background: white;
+  // background: white;
   color: black;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0.2rem 1.0rem;

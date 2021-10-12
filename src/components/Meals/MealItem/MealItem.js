@@ -16,6 +16,7 @@ const MealWrapper = styled.div`
   border-radius: 5px;
   padding-left: 15px;
   display: flex;
+  min-width: 215px;
   &:hover {
     border: 2px solid rgba(0, 0, 0, 0.8);
   }
@@ -80,7 +81,7 @@ const PriceContainer = styled.div`
 const ImageContainer = styled.div`
   border-left: 1px solid rgba(0, 0, 0, 0.3);
   width: 40%;
-  height: 150px;
+  height: 200px;
   background: gray;
   margin-left: 10px;
   display: flex;
