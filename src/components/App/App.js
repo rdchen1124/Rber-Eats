@@ -16,8 +16,10 @@ import Store from '../../pages/Store';
 import Login from '../../pages/Login';
 import Register from '../../pages/Register';
 import Checkout from '../../pages/Checkout';
+import Orders from '../../pages/Orders';
 import UserCard from '../UserCard';
 import Cart from '../Cart';
+import Footer from '../Footer';
 import { setAuthUser } from '../../utils';
 
 const Root = styled.div`
@@ -79,7 +81,11 @@ function App() {
           <Route exact path='/checkout'>
             <Checkout />
           </Route>
+          <Route path='/orders'>
+            <Orders />
+          </Route>
         </Switch>
+        <Footer />
       </Router>
     </RootContainer>
   );
