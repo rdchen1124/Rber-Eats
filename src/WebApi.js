@@ -11,6 +11,9 @@ export const addOrder = (data) => {
     +`&store=${JSON.stringify(data.store)}`
   }).then(res => res.json());
 }
+export const getOrders = (name) => {
+  return fetch(`${base_url}/orders?user=${name}`).then(res => res.json());
+}
 export const addUser = (data) => {
   return fetch(`${base_url}/users`, {
     method:'POST',
