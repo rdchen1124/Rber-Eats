@@ -1,8 +1,7 @@
 import React, {useEffect, Fragment} from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { hideUserCard } from '../../redux/reducers/userReducer';
 import { UserModal } from '../UI';
 import { FavoriteIcon, OrderIcon } from '../UI/Icons';
@@ -42,7 +41,7 @@ const UserImage = styled.div`
   background: skyblue;
   color: white;
 `
-const ListItemContainer = styled.div`
+const ListItemContainer = styled(Link)`
   height: 60px;
   padding: 5px;
   width: 50%;
@@ -54,16 +53,29 @@ const ListItemContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
   & + & {
     margin-top: 20px;
   }
 `
-const UserInfoContainer = styled(ListItemContainer)`
+const UserInfoContainer = styled.div`
+  height: 60px;
+  padding: 5px;
+  width: 50%;
+  min-width: 150px;
+  margin: 0 auto 20px;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   cursor: default;
 `
 const UserCard = ({onLogOut}) => {
   const user = useSelector(store => store.user.user);
   const dispatch = useDispatch();
+  const history = useHistory();
   const location = useLocation();
   const pathname = location.pathname;
   const linkLoginObj = {pathname: '/login', state: {from: pathname}}
@@ -80,31 +92,34 @@ const UserCard = ({onLogOut}) => {
     onLogOut();
     dispatch(hideUserCard());
   }
+  const handleItemClick = (e) => {
+    dispatch(hideUserCard());
+  }
   const userContent = (
     <Fragment>
       <UserInfoContainer>
         <UserImage>{user.name[0]}</UserImage>
         <div>Hi, {user.name}</div>
       </UserInfoContainer>
-      <ListItemContainer>
+      <ListItemContainer to='/orders' onClick={handleItemClick}>
         <span>Orders</span>
         <FavoriteSpan>
           <OrderIcon fill="black"/>
         </FavoriteSpan>
       </ListItemContainer>
-      <ListItemContainer>
+      <ListItemContainer to='/' onClick={handleItemClick}>
         <span>Favorites</span>
         <FavoriteSpan>
           <FavoriteIcon fill="black" type="solid" size="20"/>
         </FavoriteSpan>
       </ListItemContainer>
-      <ListItemContainer>
+      <ListItemContainer to='/' onClick={handleItemClick}>
         <span>Help</span>
         <FavoriteSpan>
           <FavoriteIcon fill="black" type="solid" size="20"/>
         </FavoriteSpan>
       </ListItemContainer>
-      <ListItemContainer>
+      <ListItemContainer to='/' onClick={handleItemClick}>
         <span>Donate</span>
         <FavoriteSpan>
           <FavoriteIcon fill="black" type="solid" size="20"/>
