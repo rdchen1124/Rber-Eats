@@ -11,6 +11,7 @@ const ListItem = styled.li`
 `
 const MealWrapper = styled.div`
   position: relative;
+  height: 200px; 
   border: 2px solid;
   border-color: ${props=>props.$inCart ? '#4CAF50':'rgba(0, 0, 0, 0.3)'};
   border-radius: 5px;

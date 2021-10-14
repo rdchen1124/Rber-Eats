@@ -8,8 +8,7 @@ import { addOrder, setIsSubmitted, setSubmitError } from "../../redux/reducers/c
 import { setCart } from "../../utils";
 const Root = styled.div`
   width: 90%;
-  margin: 0 auto;
-  margin-top: 100px;
+  margin: 150px auto 50px;
   position: relative;
   height: calc(710px + 30px);
   padding: 5px;

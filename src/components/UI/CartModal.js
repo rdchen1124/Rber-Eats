@@ -1,9 +1,6 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-// import { useDispatch } from 'react-redux';
-// import { hideCart } from '../../redux/reducers/cartReducer';
-
 const ModalOverleyContainer = styled.div`
   background: white;
   position: fixed;
@@ -20,6 +17,7 @@ const ModalOverleyContainer = styled.div`
   /* Hidden init state */
   opacity: 0;
   transform: translateY(-3rem);
+  min-height: 400px;
   &.enter, &.entered {
     /* Animate in state */
     opacity: 1;
