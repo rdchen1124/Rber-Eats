@@ -3,4 +3,5 @@ import UserModal from './UserModal';
 import CartModal from './CartModal';
 import MealsCard from './MealsCard';
 import MealModal from './MealModal';
-export { StoresCard, MealsCard, UserModal, CartModal, MealModal }
+import FavoritesStoresCard from './FavoritesStoresCard';
+export { StoresCard, MealsCard, FavoritesStoresCard, UserModal, CartModal, MealModal }
