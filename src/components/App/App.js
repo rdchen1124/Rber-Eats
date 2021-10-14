@@ -17,6 +17,7 @@ import Login from '../../pages/Login';
 import Register from '../../pages/Register';
 import Checkout from '../../pages/Checkout';
 import Orders from '../../pages/Orders';
+import Favorites from '../../pages/Favorites';
 import UserCard from '../UserCard';
 import Cart from '../Cart';
 import Footer from '../Footer';
@@ -82,7 +83,10 @@ function App() {
             <Checkout />
           </Route>
           <Route path='/orders'>
-            <Orders />
+            {user.id === 0 ? <Redirect to='/' /> : <Orders />}
+          </Route>
+          <Route path='/favorites'>
+            {user.id === 0 ? <Redirect to='/' /> : <Favorites />}
           </Route>
         </Switch>
         <Footer />
