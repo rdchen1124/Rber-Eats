@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import styled from 'styled-components';
 const StyledUl = styled.ul`
   list-style: none;
@@ -6,15 +6,15 @@ const StyledUl = styled.ul`
   flex-wrap: wrap;
   margin: 0 auto;
   padding: 0;
-  justify-content:center;
+  justify-content: center;
 `
 const StoresCard = (props) => {
   return (
-    <div>
+    <Fragment>
       <StyledUl>
         {props.children}
       </StyledUl>
-    </div>
+    </Fragment>
   )
 }
 export default StoresCard;
