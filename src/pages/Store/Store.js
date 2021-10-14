@@ -1,7 +1,7 @@
-import React, {  useEffect } from 'react';
+import React, {  useEffect, Fragment } from 'react';
 import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import Root from '../../components/Root';
+import {MTRoot} from '../../components/Root';
 import StoreOverview from './StoreOverview';
 import DUMMY_STORES from '../../DUMMY_STORES';
 import Meals from '../../components/Meals';
@@ -28,14 +28,15 @@ const Store = () => {
   }, [user])
 
   return (
-    <Root>
-      { store && 
-        <StoreOverview id={id} name={store.name} score={store.score} />}
-      <main>
-        {isMenuShowing && <MealCard />}
-        <Meals id={id}/>
-      </main>
-    </Root>
+    <Fragment>
+      { store && <StoreOverview id={id} name={store.name} score={store.score} />}
+      <MTRoot>
+        <main>
+          {isMenuShowing && <MealCard />}
+          <Meals id={id}/>
+        </main>
+      </MTRoot>
+    </Fragment>
   )
 }
 export default Store;
