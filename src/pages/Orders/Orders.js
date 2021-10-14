@@ -13,10 +13,10 @@ const PageTitle = styled.div`
 `
 const OrderWrapper = styled.div`
   margin: 0 auto;
-  padding: 10px;
-  width: 1000px;
-  min-width: 800px;
-  background: rgba(231, 231, 231);
+  padding: 10px 20px 20px;
+  width: 700px;
+  min-width: 600px;
+  background: white;
   & + & {
     margin-top: 30px;
   }
@@ -41,8 +41,9 @@ const OrderItemWrapper = styled.div`
   width: 400px;
   background: white;
   margin: 0 auto;
-  height: 60px;
+  height: 50px;
   padding: 10px;
+  border: 1px solid black;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -79,10 +80,15 @@ const Orders = () => {
           info: JSON.parse(order.info)
         }
       })
-      // console.log('訂單', processedOrders);
       setLastOrders(processedOrders)
     })
   }, [])
+  useLayoutEffect(()=>{
+    document.body.style.background = 'rgba(0, 0, 0, 0.2)';
+    return ()=>{
+      document.body.style.background = 'white';
+    }
+  }, []);
   return (
     <Root>
       <PageTitle>過去的訂單</PageTitle>
