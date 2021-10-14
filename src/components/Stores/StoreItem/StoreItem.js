@@ -6,10 +6,9 @@ import { toggleFavorites } from "../../../redux/reducers/userReducer"
 import { FavoriteIcon } from "../../UI/Icons"
 const ListItem = styled.li`
   position: relative;
-  margin-bottom: 20px;
   box-sizing: border-box;
   flex: 0 0 30%;
-  margin: 10px;
+  margin: 10px 10px 20px;
   cursor: pointer;
 `
 const StoreLink = styled(Link)`
@@ -19,9 +18,12 @@ const StoreLink = styled(Link)`
 const StoreWrapper = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-  padding: 10px 15px;
+  padding: 20px 25px;
   display: flex;
   flex-direction: column;
+  &:hover {
+    border: 2px solid rgba(0, 0, 0, 1);
+  }
 `
 const ImageContainer = styled.div`
   width: auto;
