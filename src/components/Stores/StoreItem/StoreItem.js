@@ -21,6 +21,7 @@ const StoreWrapper = styled.div`
   padding: 20px 25px;
   display: flex;
   flex-direction: column;
+  background: white;
   &:hover {
     border: 2px solid rgba(0, 0, 0, 1);
   }

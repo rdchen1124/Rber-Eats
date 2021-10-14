@@ -5,10 +5,12 @@ import { useHistory } from "react-router-dom"
 import { toggleFavorites } from '../../redux/reducers/userReducer';
 import { FavoriteIcon } from '../../components/UI/Icons';
 const StoreOverviewWrapper = styled.div`
-  width: 95%;
-  height: 250px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100px;
+  height: 300px;
   margin: 0 auto;
-  padding: 25px;
   box-sizing: border-box;
 `
 const StoreOverviewContainer = styled.div`
