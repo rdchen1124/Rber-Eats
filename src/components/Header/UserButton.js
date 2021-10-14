@@ -20,6 +20,9 @@ const Button = styled.div`
   margin-left: 10px;
   cursor: pointer;
   pointer-events: ${props => props.$active ? 'none':'auto'};
+  &:hover {
+    background: rgba(231,231,231);
+  }
 `
 const UserButton = ({$active}) => {
   const dispatch = useDispatch();
