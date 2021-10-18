@@ -37,3 +37,6 @@ export const updateFavorites = ({favorites, userId}) => {
     body: `favorites=${JSON.stringify(favorites)}`
   }).then(res => res.json());
 }
+export const getStores = () => {
+  return fetch(`${base_url}/stores`).then(res => res.json());
+}

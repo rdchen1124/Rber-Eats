@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  store: {}
+  store: {},
+  stores: []
 }
 
 export const storeSlice = createSlice({
@@ -11,10 +12,13 @@ export const storeSlice = createSlice({
     setStore: (state, action) => {
       state.store = {...action.payload};
     },
+    setStores: (state, action) => {
+      state.stores = [...action.payload];
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setStore } = storeSlice.actions
+export const { setStore, setStores } = storeSlice.actions
 
 export default storeSlice.reducer

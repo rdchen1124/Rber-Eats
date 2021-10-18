@@ -9,6 +9,7 @@ const AvailableStores = () => {
   const dispatch = useDispatch();
   const StoreList = DUMMY_STORES;
   const user = useSelector(store => store.user.user);
+  const stores = useSelector(store => store.store.stores);
   useEffect(()=>{
     setAuthUser(user);
     if(user.id !== 0){
@@ -19,10 +20,10 @@ const AvailableStores = () => {
   return (
     <section>
       <StoresCard>
-        {StoreList.map(store => (
+        {stores.map(store => (
           <StoreItem
             key={store.id}
-            id={store.id}
+            id={store.store_id}
             img={store.image}
             name={store.name}
             score={store.score}

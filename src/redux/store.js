@@ -35,7 +35,8 @@ const preloadedState = {
     tempOrder: {}
   },
   store: {
-    store: {}
+    store: {},
+    stores: []
   },
   menu: {
     isMenuShowing: false,
