@@ -20,7 +20,6 @@ const StoreOverviewContainer = styled.div`
   margin: 0 auto;
   background: rgba(0, 0, 0, 0.3);
   border: none;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

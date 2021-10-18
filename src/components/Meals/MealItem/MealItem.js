@@ -18,6 +18,7 @@ const MealWrapper = styled.div`
   padding-left: 15px;
   display: flex;
   min-width: 215px;
+  background: white;
   &:hover {
     border: 2px solid rgba(0, 0, 0, 0.8);
   }

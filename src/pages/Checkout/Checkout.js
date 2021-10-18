@@ -240,12 +240,6 @@ const Checkout = () => {
     }
     setCart(cart);
   }, [items, cartStore]);
-  useLayoutEffect(()=>{
-    document.body.style.background = 'rgba(0, 0, 0, 0.2)';
-    return ()=>{
-      document.body.style.background = 'white';
-    }
-  }, []);
   const orderContent = (
     <Container>
       <Title>

@@ -75,7 +75,8 @@ const Header = ({onLogOut}) => {
   const user = useSelector(store => store.user.user);
   const pathname = location.pathname;
   const linkLoginObj = {pathname: '/login', state: {from: pathname}}
-  const isHidden = location.pathname === '/checkout' || location.pathname === '/login';
+  const isHidden = location.pathname === '/checkout' || location.pathname === '/login' || location.pathname === '/register';
+  const isActive = location.pathname === '/login' || location.pathname === '/register';
   return (
     <HeaderContainer>
       <HeaderWrapper>
@@ -87,7 +88,7 @@ const Header = ({onLogOut}) => {
         </LeftContainer>
         <RightContainer>
           <HeaderCartButton $hidden={isHidden} />
-          {user.id === 0 && <Nav to={linkLoginObj} $active={location.pathname === '/login'}>登入</Nav>}
+          {user.id === 0 && <Nav to={linkLoginObj} $active={isActive}>登入</Nav>}
           {user.id !== 0 && <Nav as='div' $hidden={location.pathname === '/checkout'} onClick={onLogOut}>登出</Nav>}
         </RightContainer>
       </HeaderWrapper>

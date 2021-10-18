@@ -83,12 +83,6 @@ const Orders = () => {
       setLastOrders(processedOrders)
     })
   }, [])
-  useLayoutEffect(()=>{
-    document.body.style.background = 'rgba(0, 0, 0, 0.2)';
-    return ()=>{
-      document.body.style.background = 'white';
-    }
-  }, []);
   return (
     <Root>
       <PageTitle>過去的訂單</PageTitle>

@@ -7,6 +7,7 @@ import { setAuthUser } from '../../utils';
 import { addUser } from '../../WebApi';
 const Root = styled.div`
   margin: 100px auto 0;
+  width: 600px;
   height: 600px;
   box-sizing: border-box;
   display: flex;
@@ -15,8 +16,12 @@ const Root = styled.div`
 `
 const RegisterForm = styled.form`
   background: white;
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
+  padding: 0 50px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 3px 3px 10px;
 `
 const RegisterFormTitle = styled.h3`
   font-size: 28px;
