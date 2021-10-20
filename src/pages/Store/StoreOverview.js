@@ -12,6 +12,7 @@ const StoreOverviewWrapper = styled.div`
   height: 300px;
   margin: 0 auto;
   box-sizing: border-box;
+  opacity: 0.9;
   background-image: url("${props=>props.$location}");
 `
 const StoreOverviewContainer = styled.div`
@@ -19,7 +20,7 @@ const StoreOverviewContainer = styled.div`
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.1);
   border: none;
   display: flex;
   flex-direction: column;
