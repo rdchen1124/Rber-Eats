@@ -3,7 +3,7 @@ import {
   HashRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
@@ -22,21 +22,25 @@ import UserCard from '../UserCard';
 import Cart from '../Cart';
 import Footer from '../Footer';
 import { setAuthUser } from '../../utils';
-
+import { getStores } from '../../WebApi';
+import { setStores } from '../../redux/reducers/storeReducer';
 const Root = styled.div`
   overflow: auto;
 `
 const RootContainer = (props) => {
   return <Root>{props.children}</Root>
 }
-
 function App() {
   const isUserCardShowing = useSelector(store => store.user.isUserCardShowing)
   const isCartShowing = useSelector(store => store.cart.isCartShowing);
   const user = useSelector(store => store.user.user);
   const [isScroll, setIsScroll] = useState(false);
   const dispatch = useDispatch();
-
+  useEffect(()=>{
+    getStores().then(data => {
+      dispatch(setStores(data));
+    });
+  }, []);
   useEffect(()=>{
     const onScroll = (e) => {
       setIsScroll(e.target.documentElement.scrollTop > 1);

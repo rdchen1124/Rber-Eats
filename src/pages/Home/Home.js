@@ -1,11 +1,8 @@
-import React, { Fragment, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { MTRoot } from '../../components/Root';
 import Stores from '../../components/Stores';
 import mealsBanner from '../../assets/veestro_banner.jpg';
-import { getStores } from '../../WebApi';
-import { setStores } from '../../redux/reducers/storeReducer';
 const BannerWrapper = styled.div`
   position: absolute;
   left: 0;
@@ -28,12 +25,6 @@ const BannerImage = styled.img`
   height: 350px;
 `
 const Home = () => {
-  const dispatch = useDispatch();
-  useEffect(()=>{
-    getStores().then(data => {
-      dispatch(setStores(data));
-    });
-  }, []);
   return (
     <Fragment>
       <BannerWrapper>
