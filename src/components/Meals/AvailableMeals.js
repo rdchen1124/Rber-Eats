@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { MealsCard } from "../UI";
 import MealItem from "./MealItem";
@@ -16,7 +15,7 @@ const AvailableMeals = (props) => {
           return  <MealItem
             key={meal.id}
             {...meal}
-            numberInCart={(cartStore.id === props.id && meal.id in countedItems) ? countedItems[meal.id] : 0 }
+            numberInCart={(cartStore.store_id === props.id && meal.id in countedItems) ? countedItems[meal.id] : 0 }
           />
         })}
       </MealsCard>

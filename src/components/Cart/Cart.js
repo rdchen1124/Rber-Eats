@@ -162,7 +162,7 @@ const Cart = (props) => {
         <CartBodyInfo>
           <CartStoreTitle>訂餐餐廳:</CartStoreTitle>
           <CartStoreName>
-            <StoreLink to={`/store/${cartStore.id}`} target="_top">
+            <StoreLink to={`/store/${cartStore.store_id}`} target="_top">
               {cartStore.name}
             </StoreLink>
           </CartStoreName>
