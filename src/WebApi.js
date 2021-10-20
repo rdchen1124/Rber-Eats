@@ -40,3 +40,6 @@ export const updateFavorites = ({favorites, userId}) => {
 export const getStores = () => {
   return fetch(`${base_url}/stores`).then(res => res.json());
 }
+export const getStore = (id) => {
+  return fetch(`${base_url}/stores?store_id=${id}`).then(res => res.json());
+}

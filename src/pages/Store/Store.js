@@ -8,6 +8,7 @@ import MealCard from '../../components/MealCard';
 import { setStore } from '../../redux/reducers/storeReducer';
 import { updateFavorites } from '../../redux/reducers/userReducer';
 import { setAuthUser } from '../../utils';
+import { getStore } from '../../WebApi';
 import STORE_IMAGES from '../../STORE_IMAGES';
 const Store = () => {
   let { id } = useParams();
@@ -17,7 +18,13 @@ const Store = () => {
   const isMenuShowing = useSelector(store => store.menu.isMenuShowing);
   const user = useSelector(store => store.user.user);
   useEffect(()=>{
-    dispatch(setStore(stores.filter(shop => id === shop.store_id)[0]))
+    if(Array.isArray(stores) && !stores.length){
+      getStore(id).then(data => {
+        dispatch(setStore(data[0]));
+      })
+    }else{
+      dispatch(setStore(stores.filter(shop => id === shop.store_id)[0]))
+    }
   }, [dispatch, id])
   
   useEffect(()=>{
