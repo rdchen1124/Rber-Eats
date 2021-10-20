@@ -13,7 +13,6 @@ const StoreOverviewWrapper = styled.div`
   margin: 0 auto;
   box-sizing: border-box;
   background-image: url("${props=>props.$location}");
-  // background-repeat: space;
 `
 const StoreOverviewContainer = styled.div`
   position: relative;
@@ -24,7 +23,7 @@ const StoreOverviewContainer = styled.div`
   border: none;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: start;
   box-sizing: border-box;
 
