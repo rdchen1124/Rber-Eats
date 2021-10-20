@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StoresCard } from '../UI';
 import StoreItem from './StoreItem';
-import DUMMY_STORES from '../../DUMMY_STORES';
 import { setAuthUser } from '../../utils';
 import { updateFavorites } from '../../redux/reducers/userReducer';
+import STORE_IMAGES from '../../STORE_IMAGES.js';
 const AvailableStores = () => {
   const dispatch = useDispatch();
-  const StoreList = DUMMY_STORES;
   const user = useSelector(store => store.user.user);
   const stores = useSelector(store => store.store.stores);
   useEffect(()=>{
@@ -27,6 +26,7 @@ const AvailableStores = () => {
             img={store.image}
             name={store.name}
             score={store.score}
+            location={STORE_IMAGES[store.image]}
           />
         ))}
       </StoresCard>

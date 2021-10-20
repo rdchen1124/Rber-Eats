@@ -5,8 +5,8 @@ import { setAuthUser } from "../../utils";
 import { updateFavorites } from "../../redux/reducers/userReducer";
 import Root from "../../components/Root";
 import { FavoritesStoresCard } from "../../components/UI";
-import DUMMY_STORES from '../../DUMMY_STORES';
 import StoreItem from "../../components/Stores/StoreItem";
+import STORE_IMAGES from "../../STORE_IMAGES";
 const EmptyContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -24,8 +24,8 @@ const ContentContainer = styled.div`
 `
 const Favorites = () => {
   const dispatch = useDispatch();
-  const StoreList = DUMMY_STORES;
   const user = useSelector(store => store.user.user);
+  const stores = useSelector(store => store.store.stores);
   useEffect(()=>{
     setAuthUser(user);
     if(user.id !== 0){
@@ -46,13 +46,14 @@ const Favorites = () => {
         {user.favorites.length > 0 && 
           <ContentContainer>
             <FavoritesStoresCard>
-              {StoreList.filter(store => user.favorites.includes(store.id)).map(store => (
+              {stores.filter(store => user.favorites.includes(store.store_id)).map(store => (
                 <StoreItem
                   key={store.id}
-                  id={store.id}
+                  id={store.store_id}
                   img={store.image}
                   name={store.name}
                   score={store.score}
+                  location={STORE_IMAGES[store.image]}
                 />
               ))}
             </FavoritesStoresCard>

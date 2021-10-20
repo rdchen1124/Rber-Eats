@@ -12,6 +12,8 @@ const StoreOverviewWrapper = styled.div`
   height: 300px;
   margin: 0 auto;
   box-sizing: border-box;
+  background-image: url("${props=>props.$location}");
+  // background-repeat: space;
 `
 const StoreOverviewContainer = styled.div`
   position: relative;
@@ -25,14 +27,15 @@ const StoreOverviewContainer = styled.div`
   justify-content: space-evenly;
   align-items: start;
   box-sizing: border-box;
+
 `
 const StoreName = styled.div`
   padding-left: 20px;
-  color: black;
+  color: white;
   font-size: 42px;
   font-weight: bold;
 `
-const StoreInfo = styled.div`
+const StoreScore = styled.div`
   padding-left: 20px;
   color: white;
   font-size: 28px;
@@ -47,7 +50,7 @@ const FavoriteContainer = styled.div`
   justify-content: center;
   align-items: center;
 `
-const StoreOverview = ({id, name, score}) => {
+const StoreOverview = ({id, name, score, location}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isHovered, setIsHovered] = useState(false);
@@ -70,10 +73,10 @@ const StoreOverview = ({id, name, score}) => {
     dispatch(toggleFavorites(id));
   }
   return (
-    <StoreOverviewWrapper>
+    <StoreOverviewWrapper $location={location}>
       <StoreOverviewContainer>
         <StoreName>{name}</StoreName>
-        <StoreInfo>評分: {score}</StoreInfo>
+        <StoreScore>評分: {score}</StoreScore>
         <FavoriteContainer
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}

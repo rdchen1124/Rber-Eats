@@ -22,11 +22,16 @@ const StoreWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
+  min-width: 250px;
   &:hover {
     border: 2px solid rgba(0, 0, 0, 1);
   }
 `
-const ImageContainer = styled.div`
+const StoreImage = styled.img`
+  width: 100%;
+  height: 100%;
+`
+const StoreImageContainer = styled.div`
   width: auto;
   height: 250px;
   background: gray;
@@ -75,7 +80,7 @@ const FavoriteContainer = styled.div`
   justify-content: center;
   align-items: center;
 `
-const StoreItem = ({id, img, name, score}) => {
+const StoreItem = ({id, img, name, score, location}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isHovered, setIsHovered] = useState(false);
@@ -112,9 +117,9 @@ const StoreItem = ({id, img, name, score}) => {
       </FavoriteContainer>
       <StoreLink to={`/store/${id}`}>
         <StoreWrapper>
-          <ImageContainer>
-            {img}
-          </ImageContainer>
+          <StoreImageContainer>
+            <StoreImage src={location} />
+          </StoreImageContainer>
           <DescriptionContainer>
             <NameContainer>
               {name}
