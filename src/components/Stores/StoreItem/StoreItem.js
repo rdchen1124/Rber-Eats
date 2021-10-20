@@ -16,7 +16,7 @@ const StoreLink = styled(Link)`
   color: white;
 `;
 const StoreWrapper = styled.div`
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   padding: 20px 25px;
   display: flex;
