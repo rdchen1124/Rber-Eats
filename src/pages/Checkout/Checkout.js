@@ -208,6 +208,7 @@ const Checkout = () => {
       },
       store: {
         id: cartStore.id,
+        store_id: cartStore.store_id,
         name: cartStore.name
       }
     }))
@@ -244,7 +245,7 @@ const Checkout = () => {
     <Container>
       <Title>
         <StoreName>{cartStore.name}</StoreName>
-        <StoreLink to={`/store/${cartStore.id}`} target="_top">新增餐點</StoreLink>
+        <StoreLink to={`/store/${cartStore.store_id}`} target="_top">新增餐點</StoreLink>
       </Title>
       <OrderTitle>您的餐點</OrderTitle>
       <OrderItemContainer>
