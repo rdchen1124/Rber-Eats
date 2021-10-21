@@ -118,7 +118,7 @@ const MealCard = () => {
     const newId = items.length ? (items[items.length-1]['id']+1):1;
     const order = {
       id: newId,
-      mealId : meal.id,
+      mealId : meal.meal_id,
       name: meal.name,
       price: meal.price,
       amount

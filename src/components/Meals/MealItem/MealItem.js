@@ -94,11 +94,12 @@ const ImageContainer = styled.div`
   font-size: 22px;
 `
 
-const MealItem = ({id, name, img, price, description, numberInCart}) => {
+const MealItem = ({id, meal_id, name, img, price, description, numberInCart}) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(setMeal({
       id,
+      meal_id,
       name,
       img,
       price,
