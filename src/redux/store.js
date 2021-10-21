@@ -36,7 +36,8 @@ const preloadedState = {
   },
   store: {
     store: {},
-    stores: []
+    stores: [],
+    meals: []
   },
   menu: {
     isMenuShowing: false,

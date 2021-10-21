@@ -1,21 +1,18 @@
 import { useSelector } from "react-redux";
 import { MealsCard } from "../UI";
 import MealItem from "./MealItem";
-import DUMMY_MEALS from "../../DUMMY_MEALS";
-
 const AvailableMeals = (props) => {
-  const MealsList = DUMMY_MEALS;
   const countedItems = useSelector(store => store.cart.countedItems);
   const cartStore = useSelector(store => store.cart.cartStore);
-
+  const meals = useSelector(store => store.store.meals);
   return (
     <section>
       <MealsCard>
-        {MealsList.map(meal => {
+        {meals.map(meal => {
           return  <MealItem
             key={meal.id}
             {...meal}
-            numberInCart={(cartStore.store_id === props.id && meal.id in countedItems) ? countedItems[meal.id] : 0 }
+            numberInCart={(cartStore.store_id === props.id && meal.meal_id in countedItems) ? countedItems[meal.meal_id] : 0 }
           />
         })}
       </MealsCard>

@@ -43,3 +43,6 @@ export const getStores = () => {
 export const getStore = (id) => {
   return fetch(`${base_url}/stores?store_id=${id}`).then(res => res.json());
 }
+export const getMeals =  (store_id) => {
+  return fetch(`${base_url}/meals?store_id=${store_id}`).then(res => res.json());
+}

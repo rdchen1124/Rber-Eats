@@ -5,10 +5,10 @@ import {MTRoot} from '../../components/Root';
 import StoreOverview from './StoreOverview';
 import Meals from '../../components/Meals';
 import MealCard from '../../components/MealCard';
-import { setStore } from '../../redux/reducers/storeReducer';
+import { setStore, setMeals } from '../../redux/reducers/storeReducer';
 import { updateFavorites } from '../../redux/reducers/userReducer';
 import { setAuthUser } from '../../utils';
-import { getStore } from '../../WebApi';
+import { getStore, getMeals } from '../../WebApi';
 import STORE_IMAGES from '../../STORE_IMAGES';
 const Store = () => {
   let { id } = useParams();
@@ -23,10 +23,10 @@ const Store = () => {
         dispatch(setStore(data[0]));
       })
     }else{
-      dispatch(setStore(stores.filter(shop => id === shop.store_id)[0]))
+      dispatch(setStore(stores.filter(shop => id === shop.store_id)[0]));
     }
+    getMeals(id).then(data => dispatch(setMeals(data)));
   }, [dispatch, id])
-  
   useEffect(()=>{
     setAuthUser(user);
     if(user.id !== 0){
