@@ -52,23 +52,22 @@ const DescriptionContainer = styled.div`
 const NameContainer = styled.div`
   height: 100%;
   width: 80%;
-  background: #4CAF50;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  border-radius: 5px;
   font-weight: bold;
-  color: white;
-  font-size:22px;
+  color: black;
+  font-size:24px;
 `
 const ScoreContainer = styled.div`
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
-  background: #008CBA;
+  background: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
+  color: black;
 `
 const FavoriteContainer = styled.div`
   position: absolute;
