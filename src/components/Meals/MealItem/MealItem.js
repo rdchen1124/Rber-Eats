@@ -47,10 +47,6 @@ const MealInfoContainer = styled.div`
 const NameContainer = styled.div`
   height: fit-content;
   width: 100%;
-  background: #4CAF50;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 5px;
   font-weight: bold;
   color: black;
@@ -60,10 +56,6 @@ const NameContainer = styled.div`
 const DescriptionContainer = styled.div`
   height: fit-content;
   width: 100%;
-  background: #F44336;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 5px;
   color: #555555;
   font-size: 18px;
@@ -74,10 +66,7 @@ const NonePriceContainer = styled.div`
 const PriceContainer = styled.div`
   height: 50px;
   width: 50px;
-  border-radius: 50%;
-  background: #008CBA;
   display: flex;
-  justify-content: center;
   align-items: center;
 `
 const ImageContainer = styled.div`
@@ -126,7 +115,7 @@ const MealItem = ({id, meal_id, name, img, price, description, numberInCart}) =>
             </DescriptionContainer>
           </NonePriceContainer>
           <PriceContainer>
-            NT{price}
+            {'$'}{price}
           </PriceContainer>
         </MealInfoContainer>
         <ImageContainer>
