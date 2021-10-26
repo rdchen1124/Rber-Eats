@@ -32,14 +32,16 @@ const StoreOverviewContainer = styled.div`
 
 `
 const StoreName = styled.div`
-  padding-left: 20px;
+  margin-left: 20px;
   color: white;
+  background: inherit;
   font-size: 42px;
   font-weight: bold;
 `
 const StoreScore = styled.div`
-  padding-left: 20px;
+  margin-left: 20px;
   color: white;
+  background: inherit;
   font-size: 28px;
 `
 const FavoriteContainer = styled.div`
