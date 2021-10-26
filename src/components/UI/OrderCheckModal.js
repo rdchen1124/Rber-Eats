@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { XIcon } from "./Icons";
 const CloseButton = styled.div`
   position: absolute;
   cursor: pointer;
@@ -19,7 +20,9 @@ const CloseButton = styled.div`
 `
 const Close = (props) => {
   return( 
-    <CloseButton onClick={props.onClose}>{props.children}</CloseButton>
+    <CloseButton onClick={props.onClose}>
+      <XIcon fill="black" size="16px"/>
+    </CloseButton>
   )
 }
 
@@ -78,7 +81,7 @@ const OrderCheckModal = (props) => {
   return (
     <CheckModalWrapper>
       <CheckModalContent>
-        <Close onClose={props.onClose}>x</Close>
+        <Close onClose={props.onClose} />
         <CheckModalHeader>是否建立新訂單?</CheckModalHeader>
         <CheckModalBody>
           您的訂單含有<StoreSpan>{props.cartStore}</StoreSpan>提供的餐點。
