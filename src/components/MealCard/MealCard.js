@@ -20,18 +20,18 @@ const MealContainer = styled.div`
 const CloseButton = styled.div`
   position: absolute;
   cursor: pointer;
-  left: 5px;
-  top: 5px;
+  left: 10px;
+  top: 10px;
   background: white;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border: none;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   &:hover {
-    background: grey;
+    background: rgba(231, 231, 231);
   }
 `
 const Close = ({onClose}) => {
@@ -43,8 +43,8 @@ const Close = ({onClose}) => {
 }
 const ImageContainer = styled.div`
   width: 100%;
-  height: 40%;
-  background: black;
+  height: 45%;
+  background: gray;
   color: white;
   font-size: 28px;
   font-weight: bold;
@@ -54,7 +54,7 @@ const ImageContainer = styled.div`
 `;
 const MealInfoContainer = styled.div`
   width: 100%;
-  height: 60%;
+  height: calc(55% - 50px - 15px);
   padding: 15px 20px;
   box-sizing: border-box;
   overflow-y: auto;
@@ -65,7 +65,7 @@ const MealName = styled.div`
   color: black;
   margin-bottom: 10px;
 `
-const MealDesctiption = styled.div`
+const MealDescription = styled.div`
   font-size: 16px;
   font-weight: normal;
   color: grey;
@@ -158,8 +158,8 @@ const MealCard = () => {
         <ImageContainer>{meal.img}</ImageContainer>
         <MealInfoContainer>
           <MealName>{meal.name}</MealName>
-          <MealDesctiption>{meal.description}</MealDesctiption>
-          <div>{meal.price}</div>
+          <MealDescription>{meal.description}</MealDescription>
+          {/* <div>{meal.price}</div> */}
         </MealInfoContainer>
         <MealFormContainer>
           <MealCardForm price={meal.price} onAddToCart={handleAddToCart} />

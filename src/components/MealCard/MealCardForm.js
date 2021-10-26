@@ -12,9 +12,10 @@ const SubmitButton = styled.button`
   color: white;
   border: none;
   border-radius: 3px;
-  height: 30px;
+  height: 50px;
   box-sizing: border-box;
   cursor: pointer;
+  padding: 10px;
 `
 const AddToCartButton = ({amount, price})=>{
   return (
@@ -22,9 +23,10 @@ const AddToCartButton = ({amount, price})=>{
   )
 }
 const FormInput = styled.input`
-  height: 30px;
+  height: 50px;
   padding: 5px 10px;
   box-sizing: border-box;
+  text-align: center;
 `
 const inputSetting = {
   id: 'amount',
