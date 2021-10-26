@@ -14,6 +14,8 @@ const StoreOverviewWrapper = styled.div`
   box-sizing: border-box;
   opacity: 0.9;
   background-image: url(${props=>props.$location});
+  background-size: cover;
+  background-position: center;
 `
 const StoreOverviewContainer = styled.div`
   position: relative;
