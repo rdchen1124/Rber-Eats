@@ -6,7 +6,7 @@ import storeReducer from './reducers/storeReducer'
 import { getAuthUser, getCart, countingItems } from '../utils'
 
 const localUser = getAuthUser();
-const lastUser = JSON.stringify(localUser) !== '{}' ? localUser : {id:0, name:'', favorites:[]};
+const lastUser = (JSON.stringify(localUser) !== '{}' && localUser !== null) ? localUser : {id:0, name:'', favorites:[]};
 const localCart = getCart();
 const lastItems = localCart ? localCart.items : [];
 const lastCountedItems = localCart ? countingItems(localCart.items) : {}
