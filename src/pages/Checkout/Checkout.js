@@ -209,7 +209,8 @@ const Checkout = () => {
       store: {
         id: cartStore.id,
         store_id: cartStore.store_id,
-        name: cartStore.name
+        name: cartStore.name,
+        totalAmount
       }
     }))
     resetName();
