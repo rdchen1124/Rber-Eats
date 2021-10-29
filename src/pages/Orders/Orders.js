@@ -16,7 +16,6 @@ const OrderWrapper = styled.div`
   margin: 0 auto;
   padding: 10px 20px 20px;
   width: 700px;
-  min-width: 600px;
   background: white;
   & + & {
     margin-top: 30px;
@@ -74,6 +73,17 @@ const OrderItemAmount = styled(OrderItemInfo)`
   color: white;
   background: black;
 `
+const AmountWrapper = styled.div`
+  font-size: 16px;
+  font-width: normal;
+  padding: 5px 10px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+`
 const Orders = () => {
   const [lastOrders, setLastOrders] = useState([]);
   const user = useSelector(store => store.user.user);
@@ -113,6 +123,10 @@ const Orders = () => {
                 )
               })}
             </ContentWrapper>
+            <AmountWrapper>
+              <div>總計:</div>
+              <div>{" $"}{lastOrder.store.totalAmount}</div>
+            </AmountWrapper>
           </OrderWrapper>
         )
       })}
