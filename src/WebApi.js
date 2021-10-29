@@ -1,4 +1,4 @@
-const base_url = 'http://localhost:3004';//在打API前，必須先啟動 json-server
+const base_url = 'http://food-json-api.rdchen.me';//在打API前，必須先啟動 json-server
 export const addOrder = (data) => {
   return fetch(`${base_url}/orders`, {
     method:'POST',
