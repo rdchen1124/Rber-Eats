@@ -1,14 +1,16 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/reducers/userReducer';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import useInput from '../../hooks/useInput';
 import { setAuthUser } from '../../utils';
 import { addUser } from '../../WebApi';
 const Root = styled.div`
   margin: 100px auto 0;
   width: 600px;
-  height: 600px;
+  height: calc(100vh - 240px);
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -50,7 +52,12 @@ const RegisterFormErrorLabel = styled.label`
 const RegisterFormButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  margin-top: 10px;
+`
+const LoginLink = styled(Link)`
+  height: 25px;
+  text-decoration: none;
+  color: green;
 `
 const RegisterFormButton = styled.button`
   height: 50px;
@@ -65,6 +72,12 @@ const RegisterFormButton = styled.button`
 `
 const isEmpty = (value) => value.trim() !== "";
 const Register = () => {
+  useEffect(()=>{
+    document.body.style.overflowY = 'hidden';
+    return ()=>{
+      document.body.style.overflowY = 'auto';
+    }
+  }, []);
   const dispatch = useDispatch();
   const history = useHistory();
   const {
@@ -134,6 +147,7 @@ const Register = () => {
         <RegisterFormErrorLabel $show={passwordHasError}>密碼不能為空</RegisterFormErrorLabel>
       </RegisterFormInputWrapper>
       <RegisterFormButtonWrapper>
+        <div><span>已註冊的使用者? </span><LoginLink to='/login'>登入</LoginLink></div>
         <RegisterFormButton disabled={!isFormValid}>註冊</RegisterFormButton>
       </RegisterFormButtonWrapper>
     </RegisterForm>

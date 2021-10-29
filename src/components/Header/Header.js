@@ -81,7 +81,7 @@ const Header = ({onLogOut}) => {
     <HeaderContainer>
       <HeaderWrapper>
         <LeftContainer>
-          <UserButton $active={location.pathname === '/login'} />
+          <UserButton $active={isActive} />
           <TitleContainer to='/'>
             Rber Eats
           </TitleContainer>

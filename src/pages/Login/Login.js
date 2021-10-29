@@ -10,7 +10,7 @@ import { getUser } from '../../WebApi';
 const Root = styled.div`
   margin: 100px auto 0;
   width: 600px;
-  height: 600px;
+  height: calc(100vh - 240px);
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -54,7 +54,7 @@ const LoginFormButtonWrapper = styled.div`
   flex-direction: column;
   margin-top: 10px;
 `
-const RigesterLink = styled(Link)`
+const RegisterLink = styled(Link)`
   height: 25px;
   text-decoration: none;
   color: green;
@@ -71,7 +71,7 @@ const LoginFormButton = styled.button`
   }
 `
 const isEmpty = (value) => value.trim() !== "";
-const Login = (props) => {
+const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(()=>{
@@ -81,6 +81,12 @@ const Login = (props) => {
       history.replace({ ...history.location, state });
     }
   }, [history])
+  useEffect(()=>{
+    document.body.style.overflowY = 'hidden';
+    return ()=>{
+      document.body.style.overflowY = 'auto';
+    }
+  }, []);
   const {
     inputRef: nameRef,
     isValid: isNameValid,
@@ -152,7 +158,7 @@ const Login = (props) => {
         <LoginFormErrorLabel $show={passwordHasError}>密碼不能為空</LoginFormErrorLabel>
       </LoginFormInputWrapper>
       <LoginFormButtonWrapper>
-        <div><span>還沒有帳號嗎? </span><RigesterLink to='/register'>註冊</RigesterLink></div>
+        <div><span>還沒有帳號嗎? </span><RegisterLink to='/register'>註冊</RegisterLink></div>
         <LoginFormButton disabled={!isFormValid}>登入</LoginFormButton>
       </LoginFormButtonWrapper>
     </LoginForm>
