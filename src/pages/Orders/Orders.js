@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { getOrders } from "../../WebApi";
 import Root from "../../components/Root";
 const PageTitle = styled.div`
@@ -31,6 +32,10 @@ const TitleWrapper = styled.div`
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `
+const StoreLink = styled(Link)`
+  text-decoration: none;
+  color: #008CBA;
+`
 const ContentWrapper = styled.div`
   margin-top: 20px;
   display: flex;
@@ -41,9 +46,9 @@ const OrderItemWrapper = styled.div`
   width: 400px;
   background: white;
   margin: 0 auto;
-  height: 50px;
+  height: 40px;
   padding: 10px;
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,12 +65,14 @@ const OrderItemInfo = styled.div`
 `
 const OrderItemAmount = styled(OrderItemInfo)`
   box-sizing: border-box;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
+  background: black;
 `
 const Orders = () => {
   const [lastOrders, setLastOrders] = useState([]);
@@ -90,7 +97,11 @@ const Orders = () => {
       {lastOrders.length > 0 && lastOrders.map((lastOrder, index) => {
         return (
           <OrderWrapper key={index}>
-            <TitleWrapper>{lastOrder.store.name}</TitleWrapper>
+            <TitleWrapper>
+              <StoreLink to={`/store/${lastOrder.store.store_id}`}>
+                {lastOrder.store.name}
+              </StoreLink>
+            </TitleWrapper>
             <ContentWrapper>
               {lastOrder.order.map(item => {
                 return(
