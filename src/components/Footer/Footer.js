@@ -25,7 +25,7 @@ const Footer = () => {
   return (
     <FooterContainer>
       <FooterWrapper>
-        © 2021 Rber Eats Co., Ltd. All rights reserved.
+        Copyright © 2021 rdchen.
       </FooterWrapper>
     </FooterContainer>
   )
