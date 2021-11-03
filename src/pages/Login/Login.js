@@ -10,7 +10,7 @@ import { getUser } from '../../WebApi';
 const Root = styled.div`
   margin: 100px auto 0;
   width: 600px;
-  height: calc(100vh - 240px);
+  height: calc(100vh - 210px);
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -58,6 +58,9 @@ const RegisterLink = styled(Link)`
   height: 25px;
   text-decoration: none;
   color: green;
+`
+const RegisterLinkWrapper = styled.div`
+  margin-bottom: 5px;
 `
 const LoginFormButton = styled.button`
   height: 50px;
@@ -158,7 +161,9 @@ const Login = () => {
         <LoginFormErrorLabel $show={passwordHasError}>密碼不能為空</LoginFormErrorLabel>
       </LoginFormInputWrapper>
       <LoginFormButtonWrapper>
-        <div><span>還沒有帳號嗎? </span><RegisterLink to='/register'>註冊</RegisterLink></div>
+        <RegisterLinkWrapper>
+          <span>還沒有帳號嗎? </span><RegisterLink to='/register'>註冊</RegisterLink>
+        </RegisterLinkWrapper>
         <LoginFormButton disabled={!isFormValid}>登入</LoginFormButton>
       </LoginFormButtonWrapper>
     </LoginForm>

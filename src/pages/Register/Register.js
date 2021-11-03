@@ -10,7 +10,7 @@ import { addUser } from '../../WebApi';
 const Root = styled.div`
   margin: 100px auto 0;
   width: 600px;
-  height: calc(100vh - 240px);
+  height: calc(100vh - 210px);
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -58,6 +58,9 @@ const LoginLink = styled(Link)`
   height: 25px;
   text-decoration: none;
   color: green;
+`
+const LoginLinkWrapper = styled.div`
+  margin-bottom: 5px;
 `
 const RegisterFormButton = styled.button`
   height: 50px;
@@ -147,7 +150,7 @@ const Register = () => {
         <RegisterFormErrorLabel $show={passwordHasError}>密碼不能為空</RegisterFormErrorLabel>
       </RegisterFormInputWrapper>
       <RegisterFormButtonWrapper>
-        <div><span>已註冊的使用者? </span><LoginLink to='/login'>登入</LoginLink></div>
+        <LoginLinkWrapper><span>已註冊的使用者? </span><LoginLink to='/login'>登入</LoginLink></LoginLinkWrapper>
         <RegisterFormButton disabled={!isFormValid}>註冊</RegisterFormButton>
       </RegisterFormButtonWrapper>
     </RegisterForm>
