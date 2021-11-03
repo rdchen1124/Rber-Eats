@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 const FooterContainer = styled.div`
-  height: 140px;
+  height: 110px;
   margin: 0 auto;
   position: absolute;
   left: 0;
@@ -13,7 +13,7 @@ const FooterContainer = styled.div`
 const FooterWrapper = styled.div`
   width: 90%;
   margin: 0 auto;
-  height: 100px;
+  height: 70px;
   padding: 20px;
   display: flex;
   justify-content: center;

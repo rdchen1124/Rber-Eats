@@ -4,7 +4,7 @@ import AvailableMeals from "./AvailableMeals";
 const Meals = ({id}) => {
   return (
     <Fragment>
-      <MealsNav id={id} />
+      {/* <MealsNav id={id} /> */}
       <AvailableMeals id={id} />
     </Fragment>
   )

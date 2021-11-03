@@ -4,7 +4,7 @@ import AvailableStores from './AvailableStores';
 const Stores = () => {
   return (
     <Fragment>
-      <StoresFilter />
+      {/* <StoresFilter /> */}
       <AvailableStores />
     </Fragment>
   )
