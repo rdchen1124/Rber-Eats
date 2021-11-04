@@ -7,14 +7,13 @@ import HeaderCartButton from './HeaderCartButton';
 const HeaderContainer = styled.div`
   width: 100%;
   margin: 0 auto;
-  background: #008CBA;
+  background: #00000082;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   box-sizing: border-box;
-  background-image: radial-gradient(circle farthest-corner at 50% 50%,#07e3a1,#0b6fda);
 `;
 const HeaderWrapper = styled.div`
   width: 90%;

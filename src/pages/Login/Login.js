@@ -11,6 +11,7 @@ const Root = styled.div`
   margin: 100px auto 0;
   width: 600px;
   height: calc(100vh - 210px);
+  min-height: 600px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;

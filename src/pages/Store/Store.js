@@ -1,7 +1,7 @@
 import React, {  useEffect, Fragment } from 'react';
 import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import {MTRoot} from '../../components/Root';
+import {StoreRoot} from '../../components/Root';
 import StoreOverview from './StoreOverview';
 import Meals from '../../components/Meals';
 import MealCard from '../../components/MealCard';
@@ -36,12 +36,12 @@ const Store = () => {
   return (
     <Fragment>
       { store && <StoreOverview id={id} name={store.name} score={store.score} location={STORE_IMAGES[store.image]}/>}
-      <MTRoot>
+      <StoreRoot>
         <main>
           {isMenuShowing && <MealCard />}
           <Meals id={id}/>
         </main>
-      </MTRoot>
+      </StoreRoot>
     </Fragment>
   )
 }

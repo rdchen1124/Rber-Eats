@@ -11,12 +11,12 @@ const EmptyContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 380px);
+  height: calc(100vh - 310px);
   width: 100%;
   font-weight: bold;
 `
 const ContentContainer = styled.div`
-  min-height: calc(100vh - 380px);
+  min-height: calc(100vh - 350px);
   display: flex;
   flex-direction: column;
   justify-content: center;

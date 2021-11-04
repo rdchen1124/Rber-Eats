@@ -7,8 +7,7 @@ const FooterContainer = styled.div`
   left: 0;
   right: 0;
   box-sizing: border-box;
-  // background-image: radial-gradient(circle farthest-corner at 50% 50%,#07e3a1,#0b6fda);
-  background: black;
+  background: rgba(0, 0, 0, 0.8);
 `;
 const FooterWrapper = styled.div`
   width: 90%;

@@ -1,3 +1,4 @@
-import MTRoot from './MTRoot';
+import HomeRoot from './HomeRoot';
+import StoreRoot from './StoreRoot';
 export { default } from './Root';
-export { MTRoot };
+export { HomeRoot, StoreRoot };
