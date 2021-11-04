@@ -120,7 +120,7 @@ const UserCard = ({onLogOut}) => {
         </FavoriteSpan>
       </ListItemContainer>
       <ListItemContainer to='/' onClick={handleItemClick}>
-        <span>Donate</span>
+        <span>Contact</span>
         <FavoriteSpan>
           <FavoriteIcon fill="black" type="solid" size="20"/>
         </FavoriteSpan>
