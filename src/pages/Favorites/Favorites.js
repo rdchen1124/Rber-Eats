@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setAuthUser } from "../../utils";
 import { updateFavorites } from "../../redux/reducers/userReducer";
-import Root from "../../components/Root";
+import { FavoritesRoot } from "../../components/Root";
 import { FavoritesStoresCard } from "../../components/UI";
 import StoreItem from "../../components/Stores/StoreItem";
 import STORE_IMAGES from "../../STORE_IMAGES";
@@ -16,11 +16,11 @@ const EmptyContainer = styled.div`
   font-weight: bold;
 `
 const ContentContainer = styled.div`
-  min-height: calc(100vh - 350px);
+  min-height: calc(100vh - 410px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 50px 50px 0;
+  padding: 50px;
 `
 const Favorites = () => {
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const Favorites = () => {
   }, [user.favorites])
   const emptyContent = (<EmptyContainer>it's empty of your favorites store.</EmptyContainer>)
   return (
-    <Root>
+    <FavoritesRoot>
       <section>
         {!user.favorites.length && emptyContent}
         {user.favorites.length > 0 && 
@@ -60,7 +60,7 @@ const Favorites = () => {
           </ContentContainer>
         }
       </section>
-    </Root>
+    </FavoritesRoot>
   )
 }
 export default Favorites;

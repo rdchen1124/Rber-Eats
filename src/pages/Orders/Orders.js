@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getOrders } from "../../WebApi";
-import Root from "../../components/Root";
+import {OrdersRoot} from "../../components/Root";
 const PageTitle = styled.div`
   font-size: 32px;
   font-width: bold;
@@ -101,7 +101,7 @@ const Orders = () => {
     })
   }, [])
   return (
-    <Root>
+    <OrdersRoot>
       <PageTitle>過去的訂單</PageTitle>
       {lastOrders.length===0 && <div>您沒有任何訂單</div>}
       {lastOrders.length > 0 && lastOrders.map((lastOrder, index) => {
@@ -130,7 +130,7 @@ const Orders = () => {
           </OrderWrapper>
         )
       })}
-    </Root>
+    </OrdersRoot>
   )
 }
 export default Orders;

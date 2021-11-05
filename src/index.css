@@ -11,6 +11,7 @@ body {
   background: rgb(231, 231, 231);
   background-image: url("./assets/pexels-ella-olsson.jpg");
   background-position: center;
+  background-attachment: fixed;
 }
 
 code {
