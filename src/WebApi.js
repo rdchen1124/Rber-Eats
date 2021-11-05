@@ -11,8 +11,12 @@ export const addOrder = (data) => {
     +`&store=${JSON.stringify(data.store)}`
   }).then(res => res.json());
 }
-export const getOrders = (name) => {
-  return fetch(`${base_url}/orders?user=${name}`).then(res => res.json());
+export const getOrders = (name, limit, page) => {
+  return fetch(`${base_url}/orders?user=${name}&_sort=id&_order=desc&_limit=${limit}&_page=${page}`)
+    .then(res => {
+      const headers = res.headers;
+      return { res: res.json(), headers }
+    });
 }
 export const addUser = (data) => {
   return fetch(`${base_url}/users`, {

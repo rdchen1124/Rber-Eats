@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useEffect, useState, Fragment } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -13,7 +13,7 @@ const PageTitle = styled.div`
   text-align: center;
 `
 const OrderWrapper = styled.div`
-  margin: 0 auto;
+  // margin: 0 auto;
   padding: 10px 20px 20px;
   width: 700px;
   background: white;
@@ -84,27 +84,57 @@ const AmountWrapper = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   margin-top: 20px;
 `
+const LoadMoreButtonWrapper = styled.div`
+  margin: 0 auto;
+  width: 700px;
+  text-align: center;
+`
+const LoadMoreButton = styled.button`
+  height: 50px;
+  font-size: 20px;
+  background: #11CC17;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 30px;
+  padding: 0 10px;
+  &:hover {
+    background: #4CAF50;
+  }
+`
 const Orders = () => {
   const [lastOrders, setLastOrders] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const limit = 3;
   const user = useSelector(store => store.user.user);
   useLayoutEffect(()=>{
-    getOrders(user.name).then(res => {
-      const processedOrders = res.map(order => {
-        return {
-          ...order,
-          order: JSON.parse(order.order),
-          store: JSON.parse(order.store),
-          info: JSON.parse(order.info)
-        }
+    getOrders(user.name, limit, currentPage).then(({res, headers}) => {
+      console.log('current page:', currentPage);
+      if(currentPage === 1){
+        const count = headers.get('X-Total-Count');
+        setTotalPage(Math.ceil(count/limit));
+      }
+      res.then(res => {
+        const processedOrders = res.map(order => {
+          return {
+            ...order,
+            order: JSON.parse(order.order),
+            store: JSON.parse(order.store),
+            info: JSON.parse(order.info)
+          }
+        })
+        setLastOrders([...lastOrders, ...processedOrders]);
       })
-      setLastOrders(processedOrders)
     })
-  }, [])
-  return (
-    <OrdersRoot>
-      <PageTitle>過去的訂單</PageTitle>
-      {lastOrders.length===0 && <div>您沒有任何訂單</div>}
-      {lastOrders.length > 0 && lastOrders.map((lastOrder, index) => {
+  }, [currentPage])
+  const handleClick = (e) => {
+    setCurrentPage(currentPage+1);
+  }
+  const emptyContent = (<div>您沒有任何訂單</div>)
+  const pageContent = ( 
+    <Fragment>
+      {lastOrders.map((lastOrder, index) => {
         return (
           <OrderWrapper key={index}>
             <TitleWrapper>
@@ -125,11 +155,22 @@ const Orders = () => {
             </ContentWrapper>
             <AmountWrapper>
               <div>總計:</div>
-              <div>{" $"}{lastOrder.store.totalAmount}</div>
+              <div>{"$"}{lastOrder.store.totalAmount}</div>
             </AmountWrapper>
           </OrderWrapper>
         )
       })}
+      { currentPage < totalPage && <LoadMoreButtonWrapper>
+          <LoadMoreButton onClick={handleClick}>Load More</LoadMoreButton>
+        </LoadMoreButtonWrapper>
+      }
+    </Fragment>
+  )
+  return (
+    <OrdersRoot>
+      <PageTitle>過去的訂單</PageTitle>
+      {lastOrders.length===0 && emptyContent}
+      {lastOrders.length > 0 && pageContent }
     </OrdersRoot>
   )
 }
