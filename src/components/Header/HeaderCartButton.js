@@ -3,31 +3,33 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleCartButton } from "../../redux/reducers/cartReducer";
 import { CartIcon } from "../UI/Icons";
 const CartButtonWrapper = styled.div`
-  width: 140px;
   height: 50px;
-  background: white;
-  color: black;
+  min-width: 132.8px;
+  background: rgba(0,0,0,0.9);
+  color: white;
   border-radius: 30px;
-  padding: 0px 10px;
+  padding: 0px 15px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   cursor: pointer;
   visibility: ${props => props.$hidden ? 'hidden':'visible'};
   &:hover {
-    background: rgba(231, 231, 231);
+    background: rgba(37, 37, 37);
   }
 `;
 const CartButtonSpan = styled.span`
   height: 1.35rem;
+  & + & {
+    margin-left: 10px;
+  }
 `
 const CartIconSpan = styled(CartButtonSpan)`
   width: 1.35rem;
 `;
 const CartBadgeSpan = styled(CartButtonSpan)`
-  // background: white;
-  color: black;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: white;
+  border: 1px solid rgba(250,250,250, 0.5);
   padding: 0.2rem 1.0rem;
   border-radius: 25px;
   font-weight: bold;
