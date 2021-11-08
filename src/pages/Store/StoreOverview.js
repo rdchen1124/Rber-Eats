@@ -28,7 +28,6 @@ const StoreOverviewContainer = styled.div`
   justify-content: space-around;
   align-items: start;
   box-sizing: border-box;
-
 `
 const StoreScore = styled.div`
   margin-left: 20px;
