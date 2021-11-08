@@ -30,18 +30,16 @@ const StoreOverviewContainer = styled.div`
   box-sizing: border-box;
 
 `
-const StoreName = styled.div`
-  margin-left: 20px;
-  color: white;
-  background: inherit;
-  font-size: 42px;
-  font-weight: bold;
-`
 const StoreScore = styled.div`
   margin-left: 20px;
+  padding: 0 10px;
   color: white;
-  background: inherit;
+  background: rgba(0, 0, 0, 0.6);
   font-size: 28px;
+  font-weight: bold;
+`
+const StoreName = styled(StoreScore)`
+  font-size: 42px;
 `
 const FavoriteContainer = styled.div`
   position: absolute;
