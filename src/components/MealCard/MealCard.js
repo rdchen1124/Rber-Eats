@@ -37,7 +37,7 @@ const CloseButton = styled.div`
 const Close = ({onClose}) => {
   return( 
     <CloseButton onClick={onClose}>
-      <XIcon fill="black" size="24px"/>
+      <XIcon fill="black" size="20px"/>
     </CloseButton>
   )
 }
