@@ -10,13 +10,12 @@ const Root = styled.div`
   width: 90%;
   margin: 150px auto 50px;
   position: relative;
-  height: calc(710px + 30px);
+  height: calc(710px + 30px + 50px);
   padding: 5px;
 `
 const Container = styled.div`
   position: absolute;
   width: 540px;
-  max-height: 710px;
   top: 20px;
   left: calc(50% - 270px);
   margin: 0 auto;
@@ -26,7 +25,7 @@ const Container = styled.div`
   border-radius: 15px;
   box-shadow: 3px 3px 10px;
 `
-const WarnningContainer = styled.div`
+const WarningContainer = styled.div`
   position: absolute;
   width: 540px;
   height: 360px;
@@ -48,7 +47,7 @@ const WarnningContainer = styled.div`
 `
 const Title = styled.div`
   padding: 0 20px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
 `
@@ -107,6 +106,19 @@ const OrderItemContainer = styled.div`
   max-height: 160px;
   overflow-y: scroll;
   border: 1px solid rgba(0, 0, 0, 0.1);
+`
+const OrderRemark = styled.div`
+  width: 96%;
+  height: 50px;
+  padding: 0 10px;
+  margin: 10px auto 0px;
+  background: rgba(0, 0, 0, 0.15);
+  color: black;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
 `
 const TotalAmountWrapper = styled.div`
   height: 40px;
@@ -261,9 +273,12 @@ const Checkout = () => {
           />
         )}
       </OrderItemContainer>
+      <OrderRemark>
+        <label htmlFor="cutlery">索取餐具、吸管等用品</label>
+      </OrderRemark>
       <TotalAmountWrapper>
         <TotalAmountTitle>總計:</TotalAmountTitle>
-        <TotalAmount>${totalAmount}</TotalAmount>
+        <TotalAmount>{"$"}{totalAmount}</TotalAmount>
       </TotalAmountWrapper>
       <hr />
       <OrderTitle>您的資訊</OrderTitle>
@@ -308,20 +323,20 @@ const Checkout = () => {
     </Container>
   )
   const emptyCartContent = (
-    <WarnningContainer>
+    <WarningContainer>
       <div>您的購物車沒有物品</div>
       <LinkButton onClick={handleGoBack}>回前頁</LinkButton>
       <LinkButton onClick={handleGoHome}>回首頁</LinkButton>
-    </WarnningContainer>
+    </WarningContainer>
   )
   const submittingContent = (
-    <WarnningContainer>Your order now submitting.</WarnningContainer>
+    <WarningContainer>Your order now submitting.</WarningContainer>
   )
   const submittedContent = (
-    <WarnningContainer>
+    <WarningContainer>
       <div>您的訂單已送出</div>
       <LinkButton onClick={handleGoHome}>回首頁</LinkButton>
-    </WarnningContainer>
+    </WarningContainer>
   )
   return (<Root>
     {!isSubmitted && items.length!==0 && !isSubmitting && orderContent}
