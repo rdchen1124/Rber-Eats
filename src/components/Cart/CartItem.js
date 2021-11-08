@@ -8,7 +8,7 @@ const CartItemWrapper = styled.div`
   align-items: center;
   & + & {
     margin-top: 5px;
-    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 `;
 const CartItemChild = styled.div`
@@ -75,7 +75,7 @@ const CartItem = ({id, mealId, amount, name, price}) => {
         <PlusButton onClick={handlePlusCartItem}>+</PlusButton>
       </Amount>
       <Name>{name}</Name>
-      <Price>${amount*price}</Price>
+      <Price>{"$"}{amount*price}</Price>
     </CartItemWrapper>
   )
 }

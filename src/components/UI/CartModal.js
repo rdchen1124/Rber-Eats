@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-const ModalOverleyContainer = styled.div`
+const ModalOverlayContainer = styled.div`
   background: white;
   position: fixed;
   width: 30%;
-  height: 45%;
+  min-width: 300px;
+  height: 50%;
   top: 6rem;
   right: 10rem;
   z-index: 20;
@@ -30,11 +31,11 @@ const ModalOverleyContainer = styled.div`
   }
 `;
 
-const ModalOverley = (props) => {
+const ModalOverlay = (props) => {
   return (
-    <ModalOverleyContainer className={props.className}>
+    <ModalOverlayContainer className={props.className}>
       {props.children}
-    </ModalOverleyContainer>
+    </ModalOverlayContainer>
   )
 }
 
@@ -43,11 +44,11 @@ const CartModal = (props) => {
   return (
     <Fragment>
       {ReactDOM.createPortal(
-        <ModalOverley
+        <ModalOverlay
           className={props.className}
         >
           {props.children}
-        </ModalOverley>,
+        </ModalOverlay>,
         portalElement
       )}
     </Fragment>

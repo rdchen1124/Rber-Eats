@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { CartModal } from "../UI";
@@ -28,9 +28,9 @@ const CloseButton = styled.div`
 `
 const CheckoutButton = styled.div`
   position: absolute;
-  bottom: 5px;
-  left: 5%;
-  right: 5%;
+  bottom: 10px;
+  left: 3%;
+  right: 3%;
   background: black;
   color: white;
   height: 50px;
@@ -42,7 +42,7 @@ const CheckoutButton = styled.div`
 `
 const TotalNumberSpan = styled.div`
   border: 1px solid white;
-  padding: 5px;
+  padding: 5px 10px;
 `
 const CheckoutSpan = styled.div`
 `
@@ -85,21 +85,20 @@ const StoreLink = styled(Link)`
 `;
 const CartBodyContent = styled.div`
   box-sizing: border-box;  
-  height: 75%;
+  height: 60%;
   overflow-y: auto;
-  margin-top: 30px 0;
+  padding: 10px 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 `
-const CartBodyRemark = styled.div`
+const CartBodyRemark = styled(CheckoutButton)`
+  position: absolute;
   height: 50px;
-  border: none;
   margin: 10px auto 0px;
   padding: 0 10px;
-  width: 90%;
+  bottom: 65px;
+  color: black;
   background: rgba(0, 0, 0, 0.15);
-  display: flex;
   justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
   & * {
     cursor: pointer;
   }
@@ -179,15 +178,6 @@ const Cart = (props) => {
             price={item.price} 
           />
         )}
-        <CartBodyRemark>
-          <label htmlFor="cutlery">索取餐具、吸管等用品</label>
-          <CutleryCheckInput 
-            type="checkbox"
-            id="cutlery"
-            defaultChecked={isNeedCutlery}
-            onClick={handleCutleryCheck}
-          />
-        </CartBodyRemark>
       </CartBodyContent>
     </CartBody> 
   )
@@ -196,14 +186,25 @@ const Cart = (props) => {
       您的購物車空空空空空如也
     </EmptyCartBody>
   )
-  const checkoutButton = (
-    <CheckoutButton 
-      onClick={handleCheckoutClick}
-    >
-      <TotalNumberSpan>{numberOfItems}</TotalNumberSpan>
-      <CheckoutSpan>結帳</CheckoutSpan>
-      <TotalAmountSpan>NT.{totalAmount}</TotalAmountSpan>
-    </CheckoutButton>
+  const buttonGroup = (
+    <Fragment>
+      <CartBodyRemark>
+        <label htmlFor="cutlery">索取餐具、吸管等用品</label>
+        <CutleryCheckInput 
+          type="checkbox"
+          id="cutlery"
+          defaultChecked={isNeedCutlery}
+          onClick={handleCutleryCheck}
+        />
+      </CartBodyRemark>
+      <CheckoutButton 
+        onClick={handleCheckoutClick}
+      >
+        <TotalNumberSpan>{numberOfItems}</TotalNumberSpan>
+        <CheckoutSpan>結帳</CheckoutSpan>
+        <TotalAmountSpan>NT.{totalAmount}</TotalAmountSpan>
+      </CheckoutButton>
+    </Fragment>
   )
   return (
     <CartModal className={props.className}>
@@ -213,7 +214,7 @@ const Cart = (props) => {
         </CloseButton>
         {!items.length && emptyCart}
         {items.length !== 0 && cartContent}
-        {items.length !== 0 && checkoutButton}
+        {items.length !== 0 && buttonGroup}
       </CartBodyWrapper>
     </CartModal>
   )
