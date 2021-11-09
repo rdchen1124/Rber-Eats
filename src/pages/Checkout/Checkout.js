@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -6,6 +6,7 @@ import { CartItem } from "../../components/Cart";
 import useInput from "../../hooks/useInput";
 import { addOrder, setIsSubmitted, setSubmitError } from "../../redux/reducers/cartReducer"
 import { setCart } from "../../utils";
+import { CartRemark } from "../../components/Cart";
 const Root = styled.div`
   width: 90%;
   margin: 150px auto 50px;
@@ -119,6 +120,9 @@ const OrderRemark = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
+  & * {
+    cursor: pointer;
+  }
 `
 const TotalAmountWrapper = styled.div`
   height: 40px;
@@ -176,6 +180,7 @@ const Checkout = () => {
   const user = useSelector(store => store.user.user);
   const isSubmitted = useSelector(store => store.cart.isSubmitted);
   const isSubmitting = useSelector(store => store.cart.isSubmitting);
+  const isNeedCutlery = useSelector(store => store.cart.isNeedCutlery);
   const dispatch = useDispatch();
   const history = useHistory();
   const isEmpty = (value) => value.trim() !== '';
@@ -213,6 +218,7 @@ const Checkout = () => {
     dispatch(addOrder({
       user: user.name,
       order: items,
+      remark: isNeedCutlery,
       info: {
         name: nameRef.current.value,
         address: addressRef.current.value,
@@ -274,7 +280,7 @@ const Checkout = () => {
         )}
       </OrderItemContainer>
       <OrderRemark>
-        <label htmlFor="cutlery">索取餐具、吸管等用品</label>
+        <CartRemark />
       </OrderRemark>
       <TotalAmountWrapper>
         <TotalAmountTitle>總計:</TotalAmountTitle>

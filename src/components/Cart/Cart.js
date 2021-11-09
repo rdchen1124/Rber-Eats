@@ -4,10 +4,11 @@ import { Link, useHistory } from "react-router-dom";
 import { CartModal } from "../UI";
 import styled from "styled-components"; 
 import { useDispatch } from "react-redux";
-import { hideCart, setIsNeedCutlery } from "../../redux/reducers/cartReducer";
+import { hideCart } from "../../redux/reducers/cartReducer";
 import CartItem from "./CartItem";
 import { setCart } from "../../utils";
 import { XIcon } from "../UI/Icons";
+import { CartRemark } from ".";
 
 const CloseButton = styled.div`
   position: absolute;
@@ -103,10 +104,6 @@ const CartBodyRemark = styled(CheckoutButton)`
     cursor: pointer;
   }
 `
-const CutleryCheckInput = styled.input`
-  width: 25px;
-  height: 25px;
-`
 const EmptyCartBody = styled.div`
   box-sizing: border-box;
   width: 100%;
@@ -123,7 +120,6 @@ const Cart = (props) => {
   const items = useSelector(store => store.cart.items);
   const totalAmount = useSelector(store => store.cart.totalAmount);
   const cartStore = useSelector(store => store.cart.cartStore);
-  const isNeedCutlery = useSelector(store => store.cart.isNeedCutlery);
   const user = useSelector(store => store.user.user);
   const numberOfItems = items.reduce((total, item)=>{
     return total + item.amount;
@@ -143,9 +139,6 @@ const Cart = (props) => {
       });
     }
     dispatch(hideCart());
-  }
-  const handleCutleryCheck = (e) => {
-    dispatch(setIsNeedCutlery(e.target.checked));
   }
   useEffect(()=>{
     const cart = {
@@ -189,13 +182,7 @@ const Cart = (props) => {
   const buttonGroup = (
     <Fragment>
       <CartBodyRemark>
-        <label htmlFor="cutlery">索取餐具、吸管等用品</label>
-        <CutleryCheckInput 
-          type="checkbox"
-          id="cutlery"
-          defaultChecked={isNeedCutlery}
-          onClick={handleCutleryCheck}
-        />
+        <CartRemark />
       </CartBodyRemark>
       <CheckoutButton 
         onClick={handleCheckoutClick}
