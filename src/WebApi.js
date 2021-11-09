@@ -6,6 +6,7 @@ export const addOrder = (data) => {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     body: `user=${data.user}`
+    +`&remark=${data.remark}`
     +`&order=${JSON.stringify(data.order)}`
     +`&info=${JSON.stringify(data.info)}`
     +`&store=${JSON.stringify(data.store)}`
