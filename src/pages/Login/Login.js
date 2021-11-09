@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/reducers/userReducer';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import useInput from '../../hooks/useInput';
 import { setAuthUser } from '../../utils';
 import { getUser } from '../../WebApi';
+import InputField from '../../components/InputField/InputField';
 const Root = styled.div`
   margin: 100px auto 0;
   width: 600px;
@@ -33,18 +33,7 @@ const LoginFormTitle = styled.h3`
 const LoginFormInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  & + & {
-    margin-top: 15px;
-  }
-`
-const LoginFormInput = styled.input`
-  height: 40px;
-  font-size: 18px;
-  padding: 5px 10px;
-`
-const LoginFormLabel = styled.label`
-  color: grey;
-  margin-bottom: 5px;
+  margin-bottom: 22px;
 `
 const LoginFormErrorLabel = styled.label`
   visibility : ${props => props.$show ? 'visible':'hidden'};
@@ -74,8 +63,9 @@ const LoginFormButton = styled.button`
     background: #11CC17;
   }
 `
-const isEmpty = (value) => value.trim() !== "";
+const isEmpty = (value) => value.trim() === "";
 const Login = () => {
+  const [loginError, setLoginError] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(()=>{
@@ -91,25 +81,18 @@ const Login = () => {
       document.body.style.overflowY = 'auto';
     }
   }, []);
-  const {
-    inputRef: nameRef,
-    isValid: isNameValid,
-    hasError: nameHasError,
-    handleInputBlur: handleNameBlur,
-    reset: resetName
-  } = useInput(isEmpty);
-  const {
-    inputRef: passwordRef,
-    isValid: isPasswordValid,
-    hasError: passwordHasError,
-    handleInputBlur: handlePasswordBlur,
-    reset: resetPassword
-  } = useInput(isEmpty);
-  let isFormValid = false;
-  isFormValid = isNameValid && isPasswordValid;
+  const nameRef = useRef("");
+  const passwordRef = useRef("");
+  const resetInputRefs = () => {
+    nameRef.current.value = "";
+    passwordRef.current.value = "";
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!isFormValid){
+    setLoginError("");
+    if(isEmpty(nameRef.current.value) || isEmpty(passwordRef.current.value)){
+      setLoginError("帳號或密碼不得為空");
+      resetInputRefs();
       return;
     }
     getUser({
@@ -117,8 +100,8 @@ const Login = () => {
       password: passwordRef.current.value
     }).then(res => {
       if(!res.length){
-        resetName();
-        resetPassword();
+        setLoginError("帳號或密碼錯誤，請重新輸入");
+        resetInputRefs();
       }else{
         const user = res[0];
         const formattedUser = {
@@ -128,7 +111,6 @@ const Login = () => {
         }
         history.push(history.location.state.from);
         dispatch(setUser(formattedUser));
-        // dispatch(setFavorites(JSON.parse(user.favorites)));
         setAuthUser(formattedUser);
       }
     })
@@ -136,36 +118,40 @@ const Login = () => {
   const handleClickEnter = (e) => {
     e.key === 'Enter' && e.preventDefault();
   }
+  const handleInputClick = () => {
+    if(loginError !== ""){
+      setLoginError("");
+    }
+  }
   return <Root>
     <LoginForm onKeyDown={handleClickEnter} onSubmit={handleSubmit}>
       <LoginFormTitle>很高興看到你，朋友</LoginFormTitle>
       <LoginFormInputWrapper>
-        <LoginFormLabel htmlFor='name'>請輸入您的帳號</LoginFormLabel>
-        <LoginFormInput
-          ref={nameRef}
-          type='text'
-          id='name'
-          onBlur={handleNameBlur}
+        <InputField
+          label='請輸入您的帳號'
+          name='name'
           placeholder='請輸入使用者名稱'
+          type='text'
+          onClick={handleInputClick}
+          ref={nameRef}
         />
-        <LoginFormErrorLabel $show={nameHasError}>使用者名稱不能為空</LoginFormErrorLabel>
       </LoginFormInputWrapper>
       <LoginFormInputWrapper>
-        <LoginFormLabel htmlFor='password'>請輸入密碼以登入</LoginFormLabel>
-        <LoginFormInput
-          ref={passwordRef}
-          type='password'
-          id='password'
-          onBlur={handlePasswordBlur}
+        <InputField
+          label='請輸入密碼以登入'
+          name='password'
           placeholder='請輸入您的密碼'
+          type='password'
+          onClick={handleInputClick}
+          ref={passwordRef}
         />
-        <LoginFormErrorLabel $show={passwordHasError}>密碼不能為空</LoginFormErrorLabel>
       </LoginFormInputWrapper>
       <LoginFormButtonWrapper>
         <RegisterLinkWrapper>
           <span>還沒有帳號嗎? </span><RegisterLink to='/register'>註冊</RegisterLink>
         </RegisterLinkWrapper>
-        <LoginFormButton disabled={!isFormValid}>登入</LoginFormButton>
+        <LoginFormButton>登入</LoginFormButton>
+        <LoginFormErrorLabel $show={loginError !== ""}>{loginError}</LoginFormErrorLabel>
       </LoginFormButtonWrapper>
     </LoginForm>
   </Root>
