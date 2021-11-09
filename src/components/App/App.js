@@ -84,7 +84,7 @@ function App() {
             {user.id !== 0 ? <Register to='/' /> : <Register />}
           </Route>
           <Route exact path='/checkout'>
-            <Checkout />
+            {user.id === 0 ? <Redirect to='/' /> : <Checkout />}
           </Route>
           <Route path='/orders'>
             {user.id === 0 ? <Redirect to='/' /> : <Orders />}
