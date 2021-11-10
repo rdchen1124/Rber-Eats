@@ -20,7 +20,7 @@ const Root = styled.div`
 const LoginForm = styled.form`
   background: white;
   width: 500px;
-  height: 500px;
+  height: 450px;
   padding: 0 50px;
   border: none;
   border-radius: 15px;
