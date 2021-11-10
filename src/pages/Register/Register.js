@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/reducers/userReducer';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import useInput from '../../hooks/useInput';
 import { setAuthUser } from '../../utils';
-import { addUser } from '../../WebApi';
+import { addUser, checkUserExisted } from '../../WebApi';
+import InputField from '../../components/InputField/InputField';
 const Root = styled.div`
   margin: 100px auto 0;
   width: 600px;
@@ -20,7 +20,7 @@ const Root = styled.div`
 const RegisterForm = styled.form`
   background: white;
   width: 500px;
-  height: 500px;
+  height: 450px;
   padding: 0 50px;
   border: none;
   border-radius: 15px;
@@ -33,18 +33,7 @@ const RegisterFormTitle = styled.h3`
 const RegisterFormInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  & + & {
-    margin-top: 15px;
-  }
-`
-const RegisterFormInput = styled.input`
-  height: 40px;
-  font-size: 18px;
-  padding: 5px 10px;
-`
-const RegisterFormLabel = styled.label`
-  color: grey;
-  margin-bottom: 5px;
+  margin-bottom: 22px;
 `
 const RegisterFormErrorLabel = styled.label`
   visibility : ${props => props.$show ? 'visible':'hidden'};
@@ -74,85 +63,96 @@ const RegisterFormButton = styled.button`
     background: #11CC17;
   }
 `
-const isEmpty = (value) => value.trim() !== "";
+const isEmpty = (value) => value.trim() === "";
 const Register = () => {
+  const [registerError, setRegisterError] = useState("");
   useEffect(()=>{
     document.body.style.overflowY = 'hidden';
     return ()=>{
       document.body.style.overflowY = 'auto';
     }
   }, []);
+  const nameRef = useRef("");
+  const passwordRef = useRef("");
+  const resetInputRefs = () => {
+    nameRef.current.value = "";
+    passwordRef.current.value = "";
+  }
   const dispatch = useDispatch();
   const history = useHistory();
-  const {
-    inputRef: nameRef,
-    isValid: isNameValid,
-    hasError: nameHasError,
-    handleInputBlur: handleNameBlur,
-    reset: resetName
-  } = useInput(isEmpty);
-  const {
-    inputRef: passwordRef,
-    isValid: isPasswordValid,
-    hasError: passwordHasError,
-    handleInputBlur: handlePasswordBlur,
-    reset: resetPassword
-  } = useInput(isEmpty);
-  let isFormValid = false;
-  isFormValid = isNameValid && isPasswordValid;
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!isNameValid){
+    setRegisterError("");
+    if(isEmpty(nameRef.current.value) || isEmpty(passwordRef.current.value)){
+      setRegisterError("帳號或密碼不得為空");
+      resetInputRefs();
       return;
     }
-
-		addUser({
-			name: nameRef.current.value,
-			password: passwordRef.current.value,
-			favorites: []
-		}).then(res => {
-			if(res.ok === 0){
-				console.log(res.message);
-			}else{
-				setAuthUser(nameRef.current.value);
-        dispatch(setUser(nameRef.current.value));
-				resetName();
-				resetPassword();
-				history.push('/');
-			}
-		})
+    console.log("name:", nameRef.current.value);
+    console.log("password", passwordRef.current.value);
+    checkUserExisted(nameRef.current.value).then(res => {
+      if(!res.length){ // this username is legal.
+        addUser({
+          name: nameRef.current.value,
+          password: passwordRef.current.value,
+          favorites: []
+        }).then(res => {
+          if(res.ok === 0){
+            setRegisterError(res.message);
+            resetInputRefs();
+          }else{
+            const {id, name, favorites} = res;
+            const formattedUser = {
+              id,
+              name,
+              favorites: JSON.parse(favorites)
+            }
+            setAuthUser(formattedUser);
+            dispatch(setUser(formattedUser));
+            history.push('/');
+          }
+        })
+      }else{
+        setRegisterError("這個使用者名稱已被註冊");
+        resetInputRefs();
+      }
+    })
   }
   const handleClickEnter = (e) => {
     e.key === 'Enter' && e.preventDefault();
+  }
+  const handleInputClick = () => {
+    if(registerError !== ""){
+      setRegisterError("");
+    }
   }
   return <Root>
     <RegisterForm onKeyDown={handleClickEnter} onSubmit={handleSubmit}>
       <RegisterFormTitle>歡迎您註冊本服務，朋友</RegisterFormTitle>
       <RegisterFormInputWrapper>
-        <RegisterFormLabel htmlFor='name'>挑選一個使用者名稱</RegisterFormLabel>
-        <RegisterFormInput
-          ref={nameRef}
-          type='text'
-          id='name'
-          onBlur={handleNameBlur}
+        <InputField
+          label='挑選一個使用者名稱'
+          name='name'
           placeholder='請輸入使用者名稱'
+          type='text'
+          onClick={handleInputClick}
+          ref={nameRef}
         />
-        <RegisterFormErrorLabel $show={nameHasError}>使用者名稱不能為空</RegisterFormErrorLabel>
       </RegisterFormInputWrapper>
       <RegisterFormInputWrapper>
-        <RegisterFormLabel htmlFor='password'>挑選一個適當的密碼</RegisterFormLabel>
-        <RegisterFormInput
-          ref={passwordRef}
-          type='password'
-          id='password'
-          onBlur={handlePasswordBlur}
+        <InputField
+          label='挑選一個適當的密碼'
+          name='password'
           placeholder='請輸入密碼'
+          type='password'
+          onClick={handleInputClick}
+          ref={passwordRef}
         />
-        <RegisterFormErrorLabel $show={passwordHasError}>密碼不能為空</RegisterFormErrorLabel>
       </RegisterFormInputWrapper>
       <RegisterFormButtonWrapper>
         <LoginLinkWrapper><span>已註冊的使用者? </span><LoginLink to='/login'>登入</LoginLink></LoginLinkWrapper>
-        <RegisterFormButton disabled={!isFormValid}>註冊</RegisterFormButton>
+        <RegisterFormButton>註冊</RegisterFormButton>
+        <RegisterFormErrorLabel $show={registerError !== ""}>{registerError}</RegisterFormErrorLabel>
       </RegisterFormButtonWrapper>
     </RegisterForm>
   </Root>

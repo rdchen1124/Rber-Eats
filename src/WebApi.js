@@ -33,6 +33,9 @@ export const addUser = (data) => {
 export const getUser = (data) => {
   return fetch(`${base_url}/users?name=${data.name}&password=${data.password}`).then(res => res.json());
 }
+export const checkUserExisted = (name) => {
+  return fetch(`${base_url}/users?name=${name}`).then(res => res.json());
+}
 export const updateFavorites = ({favorites, userId}) => {
   return fetch(`${base_url}/users/${userId}`, {
     method: 'PATCH',
