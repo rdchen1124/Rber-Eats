@@ -73,7 +73,7 @@ const ImageContainer = styled.div`
   border-left: 1px solid rgba(0, 0, 0, 0.3);
   width: 40%;
   height: 100%;
-  background: gray;
+  background: rgb(231 231 231);
   margin-left: 10px;
   display: flex;
   justify-content: center;
@@ -85,6 +85,7 @@ const ImageContainer = styled.div`
 const MealImage = styled.img`
   height: 100%;
   width: 100%;
+  object-fit: fill;
 `
 const MealItem = ({id, meal_id, name, img, price, description, numberInCart}) => {
   const dispatch = useDispatch();
