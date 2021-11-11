@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { hideUserCard } from '../../redux/reducers/userReducer';
 import { UserModal } from '../UI';
-import { FavoriteIcon, OrderIcon } from '../UI/Icons';
+import { FavoriteIcon, OrderIcon, HelpIcon, ContactIcon } from '../UI/Icons';
 const LoginButton = styled(Link)`
   display: flex;
   justify-content: center;
@@ -23,7 +23,7 @@ const LoginButton = styled(Link)`
 const LogoutButton = styled(LoginButton)`
   margin-top: 20px;
 `;
-const FavoriteSpan = styled.span`
+const IconSpan = styled.span`
   width: 24px;
   height: 24px;
   display: flex;
@@ -103,27 +103,27 @@ const UserCard = ({onLogOut}) => {
       </UserInfoContainer>
       <ListItemContainer to='/orders' onClick={handleItemClick}>
         <span>Orders</span>
-        <FavoriteSpan>
+        <IconSpan>
           <OrderIcon fill="black"/>
-        </FavoriteSpan>
+        </IconSpan>
       </ListItemContainer>
       <ListItemContainer to='/favorites' onClick={handleItemClick}>
         <span>Favorites</span>
-        <FavoriteSpan>
+        <IconSpan>
           <FavoriteIcon fill="black" type="solid" size="20"/>
-        </FavoriteSpan>
+        </IconSpan>
       </ListItemContainer>
       <ListItemContainer to='/' onClick={handleItemClick}>
         <span>Help</span>
-        <FavoriteSpan>
-          <FavoriteIcon fill="black" type="solid" size="20"/>
-        </FavoriteSpan>
+        <IconSpan>
+          <HelpIcon fill="black" type="solid" size="20"/>
+        </IconSpan>
       </ListItemContainer>
       <ListItemContainer to='/' onClick={handleItemClick}>
         <span>Contact</span>
-        <FavoriteSpan>
-          <FavoriteIcon fill="black" type="solid" size="20"/>
-        </FavoriteSpan>
+        <IconSpan>
+          <ContactIcon fill="black" type="solid" size="20"/>
+        </IconSpan>
       </ListItemContainer>
       <br />
       <hr />
