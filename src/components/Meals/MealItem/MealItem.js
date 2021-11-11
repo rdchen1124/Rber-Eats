@@ -12,7 +12,7 @@ const ListItem = styled.li`
 const MealWrapper = styled.div`
   position: relative;
   height: 200px;
-  min-width: 250px;
+  min-width: 400px;
   border: 2px solid;
   border-color: ${props=>props.$inCart ? '#4CAF50':'rgba(0, 0, 0, 0.3)'};
   border-radius: 5px;
