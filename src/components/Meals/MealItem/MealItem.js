@@ -11,13 +11,13 @@ const ListItem = styled.li`
 `
 const MealWrapper = styled.div`
   position: relative;
-  height: 200px; 
+  height: 200px;
+  min-width: 250px;
   border: 2px solid;
   border-color: ${props=>props.$inCart ? '#4CAF50':'rgba(0, 0, 0, 0.3)'};
   border-radius: 5px;
   padding-left: 15px;
   display: flex;
-  min-width: 215px;
   background: white;
   &:hover {
     border: 2px solid rgba(0, 0, 0, 0.8);
@@ -42,7 +42,7 @@ const MealInfoContainer = styled.div`
   justify-content: space-around;
   align-items: flex-start;
   height: auto;
-  width: 60%;
+  width: ${props => props.$hasImage ? "60%":"90%"};
 `
 const NameContainer = styled.div`
   height: fit-content;
@@ -72,7 +72,7 @@ const PriceContainer = styled.div`
 const ImageContainer = styled.div`
   border-left: 1px solid rgba(0, 0, 0, 0.3);
   width: 40%;
-  height: 200px;
+  height: 100%;
   background: gray;
   margin-left: 10px;
   display: flex;
@@ -82,7 +82,10 @@ const ImageContainer = styled.div`
   color: black;
   font-size: 22px;
 `
-
+const MealImage = styled.img`
+  height: 100%;
+  width: 100%;
+`
 const MealItem = ({id, meal_id, name, img, price, description, numberInCart}) => {
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -105,7 +108,7 @@ const MealItem = ({id, meal_id, name, img, price, description, numberInCart}) =>
     <ListItem onClick={handleClick}>
       <MealWrapper $inCart={numberInCart > 0}>
         {numberInCart > 0 && countContainer}
-        <MealInfoContainer>
+        <MealInfoContainer $hasImage={img!==""}>
           <NonePriceContainer>
             <NameContainer>
               {name}
@@ -118,9 +121,12 @@ const MealItem = ({id, meal_id, name, img, price, description, numberInCart}) =>
             {'$'}{price}
           </PriceContainer>
         </MealInfoContainer>
-        <ImageContainer>
-          {img}
-        </ImageContainer>
+        {
+          img!=="" &&
+          <ImageContainer>
+            <MealImage src={img} />
+          </ImageContainer>
+        }
       </MealWrapper>
     </ListItem>
   )

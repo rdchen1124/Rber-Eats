@@ -41,6 +41,11 @@ const Close = ({onClose}) => {
     </CloseButton>
   )
 }
+const MealImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+`
 const ImageContainer = styled.div`
   width: 100%;
   height: 45%;
@@ -54,10 +59,11 @@ const ImageContainer = styled.div`
 `;
 const MealInfoContainer = styled.div`
   width: 100%;
-  height: calc(55% - 50px - 15px);
+  height: ${props => props.$hasImage ? "calc(55% - 50px - 15px)":"calc(100% - 50px - 50px - 15px)"};
   padding: 15px 20px;
   box-sizing: border-box;
   overflow-y: auto;
+  margin-top: ${props => props.$hasImage ? "0px":"50px"};
 `;
 const MealName = styled.div`
   font-size: 36px;
@@ -65,11 +71,15 @@ const MealName = styled.div`
   color: black;
   margin-bottom: 10px;
 `
-const MealDescription = styled.div`
+const MealDescription = styled(MealName)`
   font-size: 16px;
   font-weight: normal;
   color: grey;
-  margin-bottom: 10px;
+`
+const MealPrice = styled(MealDescription)`
+  font-size: 16px;
+  font-weight: normal;
+  color: black;
 `
 const MealFormContainer = styled.div`
   position: absolute;
@@ -152,14 +162,20 @@ const MealCard = () => {
       tempStore={tempStore.name}
       onClose={handleClose}
       onCreate={handleCreateNewOrder}
+      $hasImage={meal.img!==""}
     >
       <MealContainer>
         <Close onClose={handleClose} />
-        <ImageContainer>{meal.img}</ImageContainer>
-        <MealInfoContainer>
+        {
+          meal.img !== "" &&
+          <ImageContainer>
+            <MealImage src={meal.img} />
+          </ImageContainer>
+        }
+        <MealInfoContainer $hasImage={meal.img!==""}>
           <MealName>{meal.name}</MealName>
           <MealDescription>{meal.description}</MealDescription>
-          {/* <div>{meal.price}</div> */}
+          <MealPrice>{"$"}{meal.price}</MealPrice>
         </MealInfoContainer>
         <MealFormContainer>
           <MealCardForm price={meal.price} onAddToCart={handleAddToCart} />

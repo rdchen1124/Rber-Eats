@@ -36,10 +36,10 @@ const ModalOverleyContainer = styled.div`
   background: white;
   position: fixed;
   width: auto;
-  top: 10%;
+  top: ${props => props.$hasImage ? "10%":"25%"};
   left: 30%;
   right: 30%;
-  bottom: 10%;
+  bottom: ${props => props.$hasImage ? "10%":"25%"};
   z-index: 40;
   min-width: 400px;
   animation: 300ms ${slideUp} ease-out;
@@ -47,18 +47,14 @@ const ModalOverleyContainer = styled.div`
 
 const ModalOverley = (props) => {
   return (
-    <ModalOverleyContainer>{props.children}</ModalOverleyContainer>
+    <ModalOverleyContainer $hasImage={props.$hasImage}>{props.children}</ModalOverleyContainer>
   )
 }
 
 const portalElement = document.getElementById('userOverlays');
 const MealModal = (props) => {
   const isOrderChecking = useSelector(store => store.menu.isOrderChecking);
-  // const dispatch = useDispatch();
-  // const handleClose = () => {
-  //   dispatch(hideUserCard())
-  // }
-  const modalOverley = <ModalOverley >{props.children}</ModalOverley>;
+  const modalOverley = <ModalOverley $hasImage={props.$hasImage}>{props.children}</ModalOverley>;
   const orderCheckModal = (
     <OrderCheckModal
       cartStore={props.cartStore}
