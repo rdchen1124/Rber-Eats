@@ -11,7 +11,7 @@ const LoginButton = styled(Link)`
   align-items: center;
   padding: 0 5px;
   height: 50px;
-  width: 50%;
+  width: 190px;
   margin: 0 auto;
   cursor: pointer;
   color: white;
@@ -19,6 +19,9 @@ const LoginButton = styled(Link)`
   box-sizing: border-box;
   border: none;
   text-decoration: none;
+  &:hover{
+    background: rgba(0,0,0,0.8);
+  }
 `;
 const LogoutButton = styled(LoginButton)`
   margin-top: 20px;
@@ -29,6 +32,10 @@ const IconSpan = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+`
+const TextSpan = styled.span`
+  width: 80px;
+  padding: 5px;
 `
 const UserImage = styled.div`
   width: 50px;
@@ -41,20 +48,30 @@ const UserImage = styled.div`
   background: skyblue;
   color: white;
 `
+const UserName = styled.div`
+  height: 50px;
+  max-width: 106px;
+  padding: 5px;
+  word-break:break-all;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 const ListItemContainer = styled(Link)`
   height: 60px;
   padding: 5px;
-  width: 50%;
-  min-width: 150px;
+  width: 190px;
   margin: 0 auto;
   box-sizing: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   cursor: pointer;
   text-decoration: none;
   color: black;
+  &:hover {
+    background: rgb(231 231 231);
+  }
   & + & {
     margin-top: 20px;
   }
@@ -62,11 +79,10 @@ const ListItemContainer = styled(Link)`
 const UserInfoContainer = styled.div`
   height: 60px;
   padding: 5px;
-  width: 50%;
+  width: 190px;
   min-width: 150px;
   margin: 0 auto 20px;
   box-sizing: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -75,7 +91,6 @@ const UserInfoContainer = styled.div`
 const UserCard = ({onLogOut}) => {
   const user = useSelector(store => store.user.user);
   const dispatch = useDispatch();
-  const history = useHistory();
   const location = useLocation();
   const pathname = location.pathname;
   const linkLoginObj = {pathname: '/login', state: {from: pathname}}
@@ -99,31 +114,35 @@ const UserCard = ({onLogOut}) => {
     <Fragment>
       <UserInfoContainer>
         <UserImage>{user.name[0]}</UserImage>
-        <div>Hi, {user.name}</div>
+        <UserName>{user.name}</UserName>
       </UserInfoContainer>
       <ListItemContainer to='/orders' onClick={handleItemClick}>
-        <span>Orders</span>
+        
         <IconSpan>
           <OrderIcon fill="black"/>
         </IconSpan>
+        <TextSpan>Orders</TextSpan>
       </ListItemContainer>
       <ListItemContainer to='/favorites' onClick={handleItemClick}>
-        <span>Favorites</span>
+        
         <IconSpan>
           <FavoriteIcon fill="black" type="solid" size="20"/>
         </IconSpan>
+        <TextSpan>Favorites</TextSpan>
       </ListItemContainer>
       <ListItemContainer to='/' onClick={handleItemClick}>
-        <span>Help</span>
+        
         <IconSpan>
           <HelpIcon fill="black" type="solid" size="20"/>
         </IconSpan>
+        <TextSpan>Help</TextSpan>
       </ListItemContainer>
       <ListItemContainer to='/' onClick={handleItemClick}>
-        <span>Contact</span>
+        
         <IconSpan>
           <ContactIcon fill="black" type="solid" size="20"/>
         </IconSpan>
+        <TextSpan>Contact</TextSpan>
       </ListItemContainer>
       <br />
       <hr />
