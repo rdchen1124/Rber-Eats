@@ -5,7 +5,7 @@ import { CartIcon } from "../UI/Icons";
 const CartButtonWrapper = styled.div`
   height: 50px;
   min-width: 132.8px;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,1);
   color: white;
   border-radius: 30px;
   padding: 0px 15px;
@@ -13,9 +13,12 @@ const CartButtonWrapper = styled.div`
   align-items: center;
   justify-content: space-evenly;
   cursor: pointer;
+  border: 1px solid white;
+  box-sizing: border-box;
   visibility: ${props => props.$hidden ? 'hidden':'visible'};
   &:hover {
-    background: rgba(37, 37, 37);
+    border: none;
+    background: rgba(0,0,0,0.9);
   }
 `;
 const CartButtonSpan = styled.span`

@@ -8,7 +8,7 @@ const ListItem = styled.li`
   position: relative;
   box-sizing: border-box;
   flex: 0 0 30%;
-  margin: 10px 10px 20px;
+  margin: 20px;
   cursor: pointer;
 `
 const StoreLink = styled(Link)`

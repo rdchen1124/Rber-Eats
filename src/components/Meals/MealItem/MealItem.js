@@ -72,6 +72,7 @@ const PriceContainer = styled.div`
 const ImageContainer = styled.div`
   border-left: 1px solid rgba(0, 0, 0, 0.3);
   width: 40%;
+  min-width: 200px;
   height: 100%;
   background: rgb(231 231 231);
   margin-left: 10px;
