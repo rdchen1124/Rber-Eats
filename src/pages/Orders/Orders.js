@@ -13,7 +13,6 @@ const PageTitle = styled.div`
   text-align: center;
 `
 const OrderWrapper = styled.div`
-  // margin: 0 auto;
   padding: 10px 20px 20px;
   width: 700px;
   background: white;
@@ -29,7 +28,6 @@ const TitleWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `
 const StoreLink = styled(Link)`
   text-decoration: none;
@@ -37,6 +35,10 @@ const StoreLink = styled(Link)`
 `
 const ContentWrapper = styled.div`
   margin-top: 20px;
+  height: 150px;
+  border: 1px solid rgba(0,0,0,0.2);
+  overflow-y: scroll;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -46,14 +48,10 @@ const OrderItemWrapper = styled.div`
   background: white;
   margin: 0 auto;
   height: 40px;
-  padding: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 5px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  & + & {
-    margin-top: 10px;
-  }
 `
 const OrderItemInfo = styled.div`
   box-sizing: border-box;
@@ -71,18 +69,26 @@ const OrderItemAmount = styled(OrderItemInfo)`
   justify-content: center;
   align-items: center;
   color: white;
-  background: black;
+  background: #00bffe;
 `
 const AmountWrapper = styled.div`
   font-size: 16px;
   font-width: normal;
   padding: 5px 10px;
   height: 40px;
+  width: 420px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  margin-top: 20px;
+  margin: 0 auto;
+`
+const TitleContainer = styled.div`
+  width: 50px;
+`
+const AmountContainer = styled.div`
+  width: 150px;
+  text-align: end;
+  padding-right: 18px;
 `
 const LoadMoreButtonWrapper = styled.div`
   margin: 0 auto;
@@ -154,8 +160,8 @@ const Orders = () => {
               })}
             </ContentWrapper>
             <AmountWrapper>
-              <div>總計:</div>
-              <div>{"$"}{lastOrder.store.totalAmount}</div>
+              <TitleContainer>總計:</TitleContainer>
+              <AmountContainer>{"NT."}{lastOrder.store.totalAmount}</AmountContainer>
             </AmountWrapper>
           </OrderWrapper>
         )
