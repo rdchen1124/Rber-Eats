@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# Rber Eats
+![HomePage](https://www.site-shot.com/cached_image/zaxk3EgdEeyuogJCrBEAAg)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 網站連結
+[Rber Eats](http://food-app.rdchen.me/#/)
 
-## Available Scripts
+## 說明
+本專案 (Rber Eats) 為學習 React + Redux 後，以 Uber Eats 為範本所實現的作品(SPA)，以 json-server 來建立 RESTFUL API，串接此 API 來取得 Rber Eats 所要的資料。 
+- 前端: 以 React/Redux 建立 (SPA) 實現 Uber Eats 網站功能 
+- 後端: 以 json-server 建立 RESTFUL API 供前端索取資料
+- 部署: 使用 AWS EC2 服務，將 React App 及 json-server 跑在租來的執行個體上 (OS : Ubuntu 20)
 
-In the project directory, you can run:
+## Necessary Package (SPA)
+- react (17.0.2)
+- react-redux (7.2.4)
+- react-router-dom (5.2.0)
+- styled-component (5.3.0)
 
-### `yarn start`
+## Necessary Package (RESTFUL API)
+- json-server (0.17.0)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 頁面/功能
+- **登入** (加入最愛、結帳、瀏覽訂單、瀏覽最愛都需要先登入)
+- **註冊** (註冊後即登入並跳轉回主頁面)
+- **主頁面** (瀏覽商店、將商店加入最愛)
+- **商店頁面** (瀏覽產品)
+- **結帳頁面** (調整商品數量、移除商品、連結至對應商店、填寫個人資料、送出訂單)
+- **歷史訂單頁面** (查看過去的訂單)
+- **最愛商店頁面** (顯示以加入最愛的商店)
+- **使用者面板** (登入、登出、訂單紀錄、個人喜好商店)
+- **產品面板** (添加商品、更改商品數量)
+- **購物車** (條列商品、金額、索取餐具、連結至結帳頁面)
