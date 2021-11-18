@@ -175,7 +175,7 @@ const MealCard = () => {
         <MealInfoContainer $hasImage={meal.img!==""}>
           <MealName>{meal.name}</MealName>
           <MealDescription>{meal.description}</MealDescription>
-          <MealPrice>{"$"}{meal.price}</MealPrice>
+          <MealPrice>{"NT."}{meal.price}</MealPrice>
         </MealInfoContainer>
         <MealFormContainer>
           <MealCardForm price={meal.price} onAddToCart={handleAddToCart} />

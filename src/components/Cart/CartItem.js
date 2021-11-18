@@ -75,7 +75,7 @@ const CartItem = ({id, mealId, amount, name, price}) => {
         <PlusButton onClick={handlePlusCartItem}>+</PlusButton>
       </Amount>
       <Name>{name}</Name>
-      <Price>{"$"}{amount*price}</Price>
+      <Price>{"NT."}{amount*price}</Price>
     </CartItemWrapper>
   )
 }

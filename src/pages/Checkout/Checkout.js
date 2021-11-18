@@ -89,7 +89,6 @@ const OrderForm = styled.form`
   width: 540px;
   margin: 0 auto 30px;
   padding: 0 20px;
-  // border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 `
 const OrderTitle = styled.div`
   font-size: 22px;
@@ -284,7 +283,7 @@ const Checkout = () => {
       </OrderRemark>
       <TotalAmountWrapper>
         <TotalAmountTitle>總計:</TotalAmountTitle>
-        <TotalAmount>{"$"}{totalAmount}</TotalAmount>
+        <TotalAmount>{"NT."}{totalAmount}</TotalAmount>
       </TotalAmountWrapper>
       <hr />
       <OrderTitle>您的資訊</OrderTitle>
