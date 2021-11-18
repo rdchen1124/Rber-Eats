@@ -12,7 +12,7 @@ const LoginButton = styled(Link)`
   padding: 0 5px;
   height: 50px;
   width: 190px;
-  margin: 0 auto;
+  margin: 30px auto 0;
   cursor: pointer;
   color: white;
   background:  black;
@@ -24,7 +24,7 @@ const LoginButton = styled(Link)`
   }
 `;
 const LogoutButton = styled(LoginButton)`
-  margin-top: 20px;
+  margin-top: 35px;
 `;
 const IconSpan = styled.span`
   width: 24px;
@@ -144,8 +144,6 @@ const UserCard = ({onLogOut}) => {
         </IconSpan>
         <TextSpan>Contact</TextSpan>
       </ListItemContainer>
-      <br />
-      <hr />
       <LogoutButton as='button' onClick={handleLogoutClick}>登出</LogoutButton>
     </Fragment>
   );
