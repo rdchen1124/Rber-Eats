@@ -50,7 +50,7 @@ const UserImage = styled.div`
 `
 const UserName = styled.div`
   height: 50px;
-  max-width: 106px;
+  width: 100px;
   padding: 5px;
   word-break:break-all;
   display: flex;
@@ -79,7 +79,7 @@ const ListItemContainer = styled(Link)`
 const UserInfoContainer = styled.div`
   height: 60px;
   padding: 5px;
-  width: 190px;
+  width: 170px;
   min-width: 150px;
   margin: 0 auto 20px;
   box-sizing: border-box;
