@@ -29,8 +29,8 @@ const CartCountContainer = styled.div`
   color: white;
   height: 30px;
   width: 30px;
-  right: 0px;
-  top: 0px;
+  right: -1px;
+  top: -1px;
   display: flex;
   justify-content: center;
   align-items: center;
