@@ -13,7 +13,7 @@ const PageTitle = styled.div`
   text-align: center;
 `
 const OrderWrapper = styled.div`
-  padding: 10px 20px 20px;
+  padding: 10px 20px;
   width: 700px;
   background: white;
   & + & {
@@ -108,6 +108,19 @@ const LoadMoreButton = styled.button`
     background: #4CAF50;
   }
 `
+const EmptyContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 310px);
+  width: 100%;
+  font-weight: bold;
+`
+const OrderContainer = styled.div`
+  flex-direction: column;
+  font-weight: normal;
+  height: ${props => props.$expand ? 'calc(100vh - 310px - 80px)':'auto'};
+`
 const Orders = () => {
   const [lastOrders, setLastOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -116,7 +129,6 @@ const Orders = () => {
   const user = useSelector(store => store.user.user);
   useLayoutEffect(()=>{
     getOrders(user.name, limit, currentPage).then(({res, headers}) => {
-      console.log('current page:', currentPage);
       if(currentPage === 1){
         const count = headers.get('X-Total-Count');
         setTotalPage(Math.ceil(count/limit));
@@ -137,46 +149,50 @@ const Orders = () => {
   const handleClick = (e) => {
     setCurrentPage(currentPage+1);
   }
-  const emptyContent = (<div>您沒有任何訂單</div>)
+  const emptyContent = (
+    <EmptyContainer>您沒有任何訂單</EmptyContainer>  
+  )
   const pageContent = ( 
     <Fragment>
-      {lastOrders.map((lastOrder, index) => {
-        return (
-          <OrderWrapper key={index}>
-            <TitleWrapper>
-              <StoreLink to={`/store/${lastOrder.store.store_id}`}>
-                {lastOrder.store.name}
-              </StoreLink>
-            </TitleWrapper>
-            <ContentWrapper>
-              {lastOrder.order.map(item => {
-                return(
-                  <OrderItemWrapper key={item.id}>
-                    <OrderItemAmount>{item.amount}</OrderItemAmount>
-                    <OrderItemInfo>{item.name}</OrderItemInfo>
-                    <OrderItemInfo>NT.{item.price}</OrderItemInfo>
-                  </OrderItemWrapper>
-                )
-              })}
-            </ContentWrapper>
-            <AmountWrapper>
-              <TitleContainer>總計:</TitleContainer>
-              <AmountContainer>{"NT."}{lastOrder.store.totalAmount}</AmountContainer>
-            </AmountWrapper>
-          </OrderWrapper>
-        )
-      })}
-      { currentPage < totalPage && <LoadMoreButtonWrapper>
-          <LoadMoreButton onClick={handleClick}>Load More</LoadMoreButton>
-        </LoadMoreButtonWrapper>
-      }
+      <PageTitle>過去的訂單</PageTitle>
+      <OrderContainer $expand={lastOrders.length && lastOrders.length===1}>
+        {lastOrders.map((lastOrder, index) => {
+          return (
+            <OrderWrapper key={index}>
+              <TitleWrapper>
+                <StoreLink to={`/store/${lastOrder.store.store_id}`}>
+                  {lastOrder.store.name}
+                </StoreLink>
+              </TitleWrapper>
+              <ContentWrapper>
+                {lastOrder.order.map(item => {
+                  return(
+                    <OrderItemWrapper key={item.id}>
+                      <OrderItemAmount>{item.amount}</OrderItemAmount>
+                      <OrderItemInfo>{item.name}</OrderItemInfo>
+                      <OrderItemInfo>NT.{item.price}</OrderItemInfo>
+                    </OrderItemWrapper>
+                  )
+                })}
+              </ContentWrapper>
+              <AmountWrapper>
+                <TitleContainer>總計:</TitleContainer>
+                <AmountContainer>{"NT."}{lastOrder.store.totalAmount}</AmountContainer>
+              </AmountWrapper>
+            </OrderWrapper>
+          )
+        })}
+        { currentPage < totalPage && <LoadMoreButtonWrapper>
+            <LoadMoreButton onClick={handleClick}>Load More</LoadMoreButton>
+          </LoadMoreButtonWrapper>
+        }
+      </OrderContainer>
     </Fragment>
   )
   return (
     <OrdersRoot>
-      <PageTitle>過去的訂單</PageTitle>
       {lastOrders.length===0 && emptyContent}
-      {lastOrders.length > 0 && pageContent }
+      {lastOrders.length >= 1 && pageContent }
     </OrdersRoot>
   )
 }
