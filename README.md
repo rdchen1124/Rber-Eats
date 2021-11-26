@@ -19,7 +19,18 @@
 ## Necessary Package (RESTFUL API)
 - json-server (0.17.0)
 
-## 頁面/功能
+## 功能
+
+### 登入
+![login](/public/RberEats_login.gif)
+
+### 點餐
+![order](/public/RberEats_order.gif)
+
+### 收藏的餐廳
+![favorites](/public/RberEats_favorites.gif)
+
+## 頁面
 - **登入** (加入最愛、結帳、瀏覽訂單、瀏覽最愛都需要先登入)
 ![Login Page](https://www.site-shot.com/cached_image/JwD0Lkg5EeyHgAJCrBEAAg)
 - **註冊** (註冊後即登入並跳轉回主頁面)
