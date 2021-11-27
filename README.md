@@ -1,5 +1,5 @@
 # Rber Eats
-![Home Page](https://www.site-shot.com/cached_image/zaxk3EgdEeyuogJCrBEAAg)
+![Home Page](https://snipboard.io/QJmsB0.jpg)
 
 ## 網站連結
 [Rber Eats](http://food-app.rdchen.me/#/)
