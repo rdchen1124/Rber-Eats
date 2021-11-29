@@ -19,6 +19,9 @@
 ## Necessary Package (RESTFUL API)
 - json-server (0.17.0)
 
+## 資料結構圖
+![database](/database.drawio.png)
+
 ## 功能
 
 ### 登入
