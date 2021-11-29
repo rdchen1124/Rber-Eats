@@ -35,11 +35,11 @@
 
 ## 頁面
 - **登入** (加入最愛、結帳、瀏覽訂單、瀏覽最愛都需要先登入)
-![Login Page](https://www.site-shot.com/cached_image/JwD0Lkg5EeyHgAJCrBEAAg)
+![Login Page](https://snipboard.io/Nafnlo.jpg)
 - **註冊** (註冊後即登入並跳轉回主頁面)
-![Register Page](https://www.site-shot.com/cached_image/dN4ONEg5EeyjTgJCrBEAAg)
+![Register Page](https://snipboard.io/k5eys8.jpg)
 - **主頁面** (瀏覽商店、將商店加入最愛)
-![Home Page](https://www.site-shot.com/cached_image/zaxk3EgdEeyuogJCrBEAAg)
+![Home Page](https://snipboard.io/QJmsB0.jpg)
 - **商店頁面** (瀏覽產品)
 ![Store Page - McDonald](https://snipboard.io/AxGm9O.jpg)
 - **結帳頁面** (調整商品數量、移除商品、連結至對應商店、填寫個人資料、送出訂單)
