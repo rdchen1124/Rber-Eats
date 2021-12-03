@@ -1,7 +1,7 @@
 import React, {useEffect, Fragment} from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { hideUserCard } from '../../redux/reducers/userReducer';
 import { UserModal } from '../UI';
 import { FavoriteIcon, OrderIcon, HelpIcon, ContactIcon } from '../UI/Icons';
@@ -117,21 +117,18 @@ const UserCard = ({onLogOut}) => {
         <UserName>{user.name}</UserName>
       </UserInfoContainer>
       <ListItemContainer to='/orders' onClick={handleItemClick}>
-        
         <IconSpan>
           <OrderIcon fill="black"/>
         </IconSpan>
         <TextSpan>Orders</TextSpan>
       </ListItemContainer>
       <ListItemContainer to='/favorites' onClick={handleItemClick}>
-        
         <IconSpan>
           <FavoriteIcon fill="black" type="solid" size="20"/>
         </IconSpan>
         <TextSpan>Favorites</TextSpan>
       </ListItemContainer>
-      <ListItemContainer to='/' onClick={handleItemClick}>
-        
+      <ListItemContainer as='a' href='https://github.com/rdchen1124/Rber-Eats' target="_blank">
         <IconSpan>
           <HelpIcon fill="black" type="solid" size="20"/>
         </IconSpan>
