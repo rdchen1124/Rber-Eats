@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { Link, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { toggleFavorites } from "../../../redux/reducers/userReducer"
 import { FavoriteIcon } from "../../UI/Icons"
@@ -11,10 +11,6 @@ const ListItem = styled.li`
   margin: 20px;
   cursor: pointer;
 `
-const StoreLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-`;
 const StoreWrapper = styled.div`
   border: 2px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px;
@@ -79,7 +75,7 @@ const FavoriteContainer = styled.div`
   justify-content: center;
   align-items: center;
 `
-const StoreItem = ({id, img, name, score, location}) => {
+const StoreItem = ({id, name, score, location}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isHovered, setIsHovered] = useState(false);
@@ -101,34 +97,35 @@ const StoreItem = ({id, img, name, score, location}) => {
     }
     dispatch(toggleFavorites(id));
   }
+  const handleStoreClick = () => {
+    history.push(`/store/${id}`);
+  }
   return (
     <ListItem>
-      <FavoriteContainer 
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={handleIconClick}>
-        <FavoriteIcon
-          fill={isHovered ? "#D0D0D0":"white"}
-          type={user.favorites !== undefined && user.favorites.includes(id) ? "solid" : "hollow"}
-          size="20"
-          isHovered={isHovered}
-        />
-      </FavoriteContainer>
-      <StoreLink to={`/store/${id}`}>
-        <StoreWrapper>
-          <StoreImageContainer>
-            <StoreImage src={location} />
-          </StoreImageContainer>
-          <DescriptionContainer>
-            <NameContainer>
-              {name}
-            </NameContainer>
-            <ScoreContainer>
-              {score}
-            </ScoreContainer>
-          </DescriptionContainer>
-        </StoreWrapper>
-      </StoreLink>
+      <StoreWrapper onClick={handleStoreClick}>
+        <FavoriteContainer 
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onClick={handleIconClick}>
+          <FavoriteIcon
+            fill={isHovered ? "#D0D0D0":"white"}
+            type={user.favorites !== undefined && user.favorites.includes(id) ? "solid" : "hollow"}
+            size="20"
+            isHovered={isHovered}
+          />
+        </FavoriteContainer>
+        <StoreImageContainer>
+          <StoreImage src={location} />
+        </StoreImageContainer>
+        <DescriptionContainer>
+          <NameContainer>
+            {name}
+          </NameContainer>
+          <ScoreContainer>
+            {score}
+          </ScoreContainer>
+        </DescriptionContainer>
+      </StoreWrapper>
     </ListItem>
   )
 }
