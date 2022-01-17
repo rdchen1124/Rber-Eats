@@ -1,4 +1,4 @@
-const base_url = 'http://food-json-api.rdchen.me';//在打API前，必須先啟動 json-server
+const base_url = 'http://food-app-api.rdchen.me';// 此為實際的 Rber-Eats-api 官方版本
 export const addOrder = (data) => {
   return fetch(`${base_url}/orders`, {
     method:'POST',
