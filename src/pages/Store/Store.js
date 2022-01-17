@@ -20,10 +20,10 @@ const Store = () => {
   useEffect(()=>{
     if(Array.isArray(stores) && !stores.length){
       getStore(id).then(data => {
-        dispatch(setStore(data[0]));
+        dispatch(setStore(data));
       })
     }else{
-      dispatch(setStore(stores.filter(shop => id === shop.store_id)[0]));
+      dispatch(setStore(stores.filter(store => +id === store.id)[0]));
     }
     getMeals(id).then(data => dispatch(setMeals(data)));
   }, [dispatch, id])
