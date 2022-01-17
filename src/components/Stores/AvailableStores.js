@@ -22,7 +22,7 @@ const AvailableStores = () => {
         {stores.map(store => (
           <StoreItem
             key={store.id}
-            id={store.store_id}
+            id={store.id}
             img={store.image}
             name={store.name}
             score={store.score}
