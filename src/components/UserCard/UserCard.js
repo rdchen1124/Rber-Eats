@@ -113,8 +113,8 @@ const UserCard = ({onLogOut}) => {
   const userContent = (
     <Fragment>
       <UserInfoContainer>
-        <UserImage>{user.name[0]}</UserImage>
-        <UserName>{user.name}</UserName>
+        <UserImage>{user.username[0]}</UserImage>
+        <UserName>{user.username}</UserName>
       </UserInfoContainer>
       <ListItemContainer to='/orders' onClick={handleItemClick}>
         <IconSpan>
