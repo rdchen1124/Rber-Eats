@@ -30,8 +30,14 @@ export const addUser = (data) => {
     +`&favorites=${JSON.stringify(data.favorites)}`
   }).then(res => res.json());
 }
-export const getUser = (data) => {
-  return fetch(`${base_url}/users?name=${data.name}&password=${data.password}`).then(res => res.json());
+export const getUser = (user) => {
+  return fetch(`${base_url}/user/login`, {
+    method: 'POST',
+    body: JSON.stringify(user),
+    headers: {
+      'content-type': 'application/json'
+    }
+  }).then(res => res.json());
 }
 export const checkUserExisted = (name) => {
   return fetch(`${base_url}/users?name=${name}`).then(res => res.json());
