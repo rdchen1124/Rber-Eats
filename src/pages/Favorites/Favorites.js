@@ -46,10 +46,10 @@ const Favorites = () => {
         {user.favorites.length > 0 && 
           <ContentContainer>
             <FavoritesStoresCard>
-              {stores.filter(store => user.favorites.includes(store.store_id)).map(store => (
+              {stores.filter(store => user.favorites.includes(store.id)).map(store => (
                 <StoreItem
                   key={store.id}
-                  id={store.store_id}
+                  id={store.id}
                   img={store.image}
                   name={store.name}
                   score={store.score}

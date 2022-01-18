@@ -43,7 +43,7 @@ export const checkUserExisted = (name) => {
   return fetch(`${base_url}/users?name=${name}`).then(res => res.json());
 }
 export const updateFavorites = ({favorites, userId}) => {
-  return fetch(`${base_url}/users/${userId}`, {
+  return fetch(`${base_url}/user/${userId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
