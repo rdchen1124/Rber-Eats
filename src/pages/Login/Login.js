@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/reducers/userReducer';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import { setAuthUser } from '../../utils';
+import { setAuthUser, setUserToken } from '../../utils';
 import { getUser } from '../../WebApi';
 import InputField from '../../components/InputField/InputField';
 const Root = styled.div`
@@ -81,37 +81,38 @@ const Login = () => {
       document.body.style.overflowY = 'auto';
     }
   }, []);
-  const nameRef = useRef("");
+  const usernameRef = useRef("");
   const passwordRef = useRef("");
   const resetInputRefs = () => {
-    nameRef.current.value = "";
+    usernameRef.current.value = "";
     passwordRef.current.value = "";
   }
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoginError("");
-    if(isEmpty(nameRef.current.value) || isEmpty(passwordRef.current.value)){
+    if(isEmpty(usernameRef.current.value) || isEmpty(passwordRef.current.value)){
       setLoginError("帳號或密碼不得為空");
       resetInputRefs();
       return;
     }
     getUser({
-      name: nameRef.current.value,
+      username: usernameRef.current.value,
       password: passwordRef.current.value
     }).then(res => {
-      if(!res.length){
+      if(!res.ok){
         setLoginError("帳號或密碼錯誤，請重新輸入");
         resetInputRefs();
       }else{
-        const user = res[0];
+        const user = res.user;
         const formattedUser = {
           id: user.id,
-          name: user.name,
+          username: user.username,
           favorites: JSON.parse(user.favorites)
         }
-        history.push(history.location.state.from);
-        dispatch(setUser(formattedUser));
+        setUserToken(user.token);
         setAuthUser(formattedUser);
+        dispatch(setUser(formattedUser));
+        history.push(history.location.state.from);
       }
     })
   }
@@ -133,7 +134,7 @@ const Login = () => {
           placeholder='請輸入使用者名稱'
           type='text'
           onClick={handleInputClick}
-          ref={nameRef}
+          ref={usernameRef}
         />
       </LoginFormInputWrapper>
       <LoginFormInputWrapper>

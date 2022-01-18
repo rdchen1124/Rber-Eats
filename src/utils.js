@@ -1,5 +1,6 @@
 const USER = 'user';
 const CART = 'cart';
+const TOKEN = 'token';
 
 export const setAuthUser = (user) => {
   localStorage.setItem(USER, JSON.stringify(user));
@@ -7,6 +8,14 @@ export const setAuthUser = (user) => {
 
 export const getAuthUser = () => {
   return JSON.parse(localStorage.getItem(USER));
+}
+
+export const setUserToken = (token) => {
+  localStorage.setItem(TOKEN, token);
+}
+
+export const getUserToken = () => {
+  return JSON.parse(localStorage.getItem(TOKEN));
 }
 
 export const setCart = (cart) => {
