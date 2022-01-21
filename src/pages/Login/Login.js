@@ -104,15 +104,16 @@ const Login = () => {
         resetInputRefs();
       }else{
         const user = res.user;
+        const token = res.token;
         const formattedUser = {
           id: user.id,
           username: user.username,
           favorites: JSON.parse(user.favorites)
         }
-        setUserToken(user.token);
-        setAuthUser(formattedUser);
-        dispatch(setUser(formattedUser));
         history.push(history.location.state.from);
+        setAuthUser(formattedUser);
+        setUserToken(token);
+        dispatch(setUser(formattedUser));
       }
     })
   }
