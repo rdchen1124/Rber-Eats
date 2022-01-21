@@ -15,7 +15,7 @@ export const setUserToken = (token) => {
 }
 
 export const getUserToken = () => {
-  return JSON.parse(localStorage.getItem(TOKEN));
+  return localStorage.getItem(TOKEN);
 }
 
 export const setCart = (cart) => {
