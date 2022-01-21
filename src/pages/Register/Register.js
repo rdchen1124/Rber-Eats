@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/reducers/userReducer';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import { setAuthUser } from '../../utils';
-import { addUser, checkUserExisted } from '../../WebApi';
+import { setAuthUser, setUserToken } from '../../utils';
+import { addUser } from '../../WebApi';
 import InputField from '../../components/InputField/InputField';
 const Root = styled.div`
   margin: 100px auto 0;
@@ -72,10 +72,10 @@ const Register = () => {
       document.body.style.overflowY = 'auto';
     }
   }, []);
-  const nameRef = useRef("");
+  const usernameRef = useRef("");
   const passwordRef = useRef("");
   const resetInputRefs = () => {
-    nameRef.current.value = "";
+    usernameRef.current.value = "";
     passwordRef.current.value = "";
   }
   const dispatch = useDispatch();
@@ -83,39 +83,32 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setRegisterError("");
-    if(isEmpty(nameRef.current.value) || isEmpty(passwordRef.current.value)){
+    if(isEmpty(usernameRef.current.value) || isEmpty(passwordRef.current.value)){
       setRegisterError("帳號或密碼不得為空");
       resetInputRefs();
       return;
     }
-    console.log("name:", nameRef.current.value);
-    console.log("password", passwordRef.current.value);
-    checkUserExisted(nameRef.current.value).then(res => {
-      if(!res.length){ // this username is legal.
-        addUser({
-          name: nameRef.current.value,
-          password: passwordRef.current.value,
-          favorites: []
-        }).then(res => {
-          if(res.ok === 0){
-            setRegisterError(res.message);
-            resetInputRefs();
-          }else{
-            const {id, name, favorites} = res;
-            const formattedUser = {
-              id,
-              name,
-              favorites: JSON.parse(favorites)
-            }
-            setAuthUser(formattedUser);
-            dispatch(setUser(formattedUser));
-            history.push('/');
-          }
-        })
-      }else{
-        setRegisterError("這個使用者名稱已被註冊");
+    const username = usernameRef.current.value;
+    const password = passwordRef.current.value;
+    addUser({
+      username: username,
+      password: password,
+      favorites: []
+    }).then(res => {
+      if(!res.ok){
+        setRegisterError(res.message);
         resetInputRefs();
+      }else{
+        // get token, user from respond.
+        const {token, user} = res;
+        setAuthUser(user);
+        setUserToken(token);
+        dispatch(setUser(user));
+        history.push('/');
       }
+    }).catch(err => {
+      setRegisterError("Error:", err.toString());
+      resetInputRefs();
     })
   }
   const handleClickEnter = (e) => {
@@ -132,11 +125,11 @@ const Register = () => {
       <RegisterFormInputWrapper>
         <InputField
           label='挑選一個使用者名稱'
-          name='name'
+          name='username'
           placeholder='請輸入使用者名稱'
           type='text'
           onClick={handleInputClick}
-          ref={nameRef}
+          ref={usernameRef}
         />
       </RegisterFormInputWrapper>
       <RegisterFormInputWrapper>
