@@ -215,20 +215,17 @@ const Checkout = () => {
       return;
     }
     dispatch(addOrder({
-      user: user.name,
-      order: items,
-      remark: isNeedCutlery,
-      info: {
+      user_info: JSON.stringify({
         name: nameRef.current.value,
         address: addressRef.current.value,
         phone: phoneRef.current.value
-      },
-      store: {
-        id: cartStore.id,
-        store_id: cartStore.store_id,
-        name: cartStore.name,
-        totalAmount
-      }
+      }),
+      order: items,
+      remark: JSON.stringify({
+        cutlery: isNeedCutlery
+      }),
+      totalAmount,
+      StoreId: cartStore.id,
     }))
     resetName();
     resetAddress();
@@ -263,7 +260,7 @@ const Checkout = () => {
     <Container>
       <Title>
         <StoreName>{cartStore.name}</StoreName>
-        <StoreLink to={`/store/${cartStore.store_id}`} target="_top">新增餐點</StoreLink>
+        <StoreLink to={`/store/${cartStore.id}`} target="_top">新增餐點</StoreLink>
       </Title>
       <OrderTitle>您的餐點</OrderTitle>
       <OrderItemContainer>
