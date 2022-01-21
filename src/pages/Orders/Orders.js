@@ -128,21 +128,13 @@ const Orders = () => {
   const limit = 3;
   const user = useSelector(store => store.user.user);
   useLayoutEffect(()=>{
-    getOrders(user.name, limit, currentPage).then(({res, headers}) => {
+    getOrders(limit, currentPage).then(({res, headers}) => {
       if(currentPage === 1){
         const count = headers.get('X-Total-Count');
         setTotalPage(Math.ceil(count/limit));
       }
-      res.then(res => {
-        const processedOrders = res.map(order => {
-          return {
-            ...order,
-            order: JSON.parse(order.order),
-            store: JSON.parse(order.store),
-            info: JSON.parse(order.info)
-          }
-        })
-        setLastOrders([...lastOrders, ...processedOrders]);
+      res.then(data => {
+        setLastOrders([...lastOrders, ...data]);
       })
     })
   }, [currentPage])
@@ -160,7 +152,7 @@ const Orders = () => {
           return (
             <OrderWrapper key={index}>
               <TitleWrapper>
-                <StoreLink to={`/store/${lastOrder.store.store_id}`}>
+                <StoreLink to={`/store/${lastOrder.store.id}`}>
                   {lastOrder.store.name}
                 </StoreLink>
               </TitleWrapper>
@@ -177,7 +169,7 @@ const Orders = () => {
               </ContentWrapper>
               <AmountWrapper>
                 <TitleContainer>總計:</TitleContainer>
-                <AmountContainer>{"NT."}{lastOrder.store.totalAmount}</AmountContainer>
+                <AmountContainer>{"NT."}{lastOrder.totalAmount}</AmountContainer>
               </AmountWrapper>
             </OrderWrapper>
           )
