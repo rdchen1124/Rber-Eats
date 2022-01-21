@@ -4,7 +4,7 @@ const initArray = [];
 const initialState = {
   user: {
     id: 0,
-    name: '',
+    username: '',
     favorites: initArray
   },
   isUserCardShowing: false,
