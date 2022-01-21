@@ -124,7 +124,7 @@ export const {
 export const addOrder = (data) => (dispatch) => {
   dispatch(setIsSubmitting(true));
   addOrderAPI(data).then(res=>{
-    if(res.ok === 0){
+    if(!res.ok){
       dispatch(setSubmitError(res.message))
     }else{
       dispatch(setIsSubmitted(true));
