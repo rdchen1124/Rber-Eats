@@ -1,33 +1,35 @@
+import {getUserToken} from './utils';
 const base_url = 'http://food-app-api.rdchen.me';// 此為實際的 Rber-Eats-api 官方版本
 export const addOrder = (data) => {
-  return fetch(`${base_url}/orders`, {
+  const token = getUserToken();
+  return fetch(`${base_url}/order`, {
     method:'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     },
-    body: `user=${data.user}`
-    +`&remark=${data.remark}`
-    +`&order=${JSON.stringify(data.order)}`
-    +`&info=${JSON.stringify(data.info)}`
-    +`&store=${JSON.stringify(data.store)}`
+    body: JSON.stringify(data)
   }).then(res => res.json());
 }
-export const getOrders = (name, limit, page) => {
-  return fetch(`${base_url}/orders?user=${name}&_sort=id&_order=desc&_limit=${limit}&_page=${page}`)
-    .then(res => {
-      const headers = res.headers;
-      return { res: res.json(), headers }
-    });
+export const getOrders = (limit, page) => {
+  const token = getUserToken();
+  return fetch(`${base_url}/order?_limit=${limit}&_page=${page}`, {
+    method:'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  }).then(res => {
+    const headers = res.headers;
+    return { res: res.json(), headers }
+  });
 }
 export const addUser = (data) => {
-  return fetch(`${base_url}/users`, {
+  return fetch(`${base_url}/user`, {
     method:'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/json',
     },
-    body:`name=${data.name}`
-    +`&password=${data.password}`
-    +`&favorites=${JSON.stringify(data.favorites)}`
+    body: JSON.stringify(data)
   }).then(res => res.json());
 }
 export const getUser = (user) => {
@@ -38,9 +40,6 @@ export const getUser = (user) => {
       'content-type': 'application/json'
     }
   }).then(res => res.json());
-}
-export const checkUserExisted = (name) => {
-  return fetch(`${base_url}/users?name=${name}`).then(res => res.json());
 }
 export const updateFavorites = ({favorites, userId}) => {
   return fetch(`${base_url}/user/${userId}`, {
